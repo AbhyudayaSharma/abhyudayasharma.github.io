@@ -39,5 +39,5 @@ jobs:
         cp -R $BUILD_DIR .
         git add -A
         git -c user.email='deploy-bot' -c user.name='deploy-bot' commit -m "Deploy $SHORT_COMMIT_HASH at $(date)"
-        git push -f -q "https://AbhyudayaSharma:$GITHUB_API_KEY@github.com/AbhyudayaSharma/abhyudayasharma.github.io" &> /dev/null
+        git push -f -q "https://AbhyudayaSharma:$GITHUB_API_KEY@github.com/AbhyudayaSharma/abhyudayasharma.github.io"
         cd "$BUILD_DIR/../"
