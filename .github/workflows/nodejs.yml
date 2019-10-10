@@ -30,20 +30,22 @@ jobs:
     - name: deploy to production
       env:
         GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_PAGES_DEPLOY_TOKEN: ${{ secrets.GITHUB_PAGES_DEPLOY_TOKEN }}
       run: |
         BUILD_DIR="$PWD/build/"
         SHORT_COMMIT_HASH=$(git log --format="%h" -n 1)
+        REPO_OWNER=${GITHUB_REPOSITORY%/*}
         cd ~
-        git clone https://github.com/AbhyudayaSharma/abhyudayasharma.github.io/ build
+        git clone https://github.com/${{ github.repository }}/ build
         cd build
         git checkout master
         rm -rf $(git ls-files)
         cp -R $BUILD_DIR/* .
         git add -A
         git -c user.email='deploy-bot' -c user.name='deploy-bot' commit -m "Deploy $SHORT_COMMIT_HASH at $(date)" --allow-empty
-        git push -f -q "https://AbhyudayaSharma:$GITHUB_TOKEN@github.com/AbhyudayaSharma/abhyudayasharma.github.io"
+        git push -f -q "https://$REPO_OWNER:$GITHUB_TOKEN@github.com/${{ github.repository }}"
         # Somehow GitHub doesn't trigger a GH pages build on a push to master, make an API call to force it
         # https://developer.github.com/v3/repos/pages/#request-a-page-build
         echo Triggering GitHub Pages build...
-        curl -X POST -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/AbhyudayaSharma/abhyudayasharma.github.io/pages/builds
+        curl -X POST -H "Authorization: token $GITHUB_PAGES_DEPLOY_TOKEN" -H "Accept: application/vnd.github.v3+json" https://api.github.com/$${ github.repository }}/pages/builds
         cd "$BUILD_DIR/../"
