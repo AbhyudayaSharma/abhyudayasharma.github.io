@@ -68,11 +68,4 @@ jobs:
         git -c user.email='deploy-bot' -c user.name='deploy-bot' commit -m "Deploy $SHORT_COMMIT_HASH at $(date)" --allow-empty
         git push -f -q "https://$REPO_OWNER:$GITHUB_PAGES_DEPLOY_TOKEN@github.com/${{ github.repository }}"
         cd "$BUILD_DIR/../"
-    - name: save build artifacts
-      run: |
-        tar -cz build/ -f build.tar.gz
-    - name: upload artifacts
-      uses: actions/upload-artifacts@master
-      with:
-        name: build-${{ github.sha }}.tar.gz
-        path: build.tar.gz
+        echo Done 🥳
