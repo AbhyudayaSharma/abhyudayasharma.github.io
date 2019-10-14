@@ -29,7 +29,7 @@ jobs:
         CI: true
     - name: deploy to production
       env:
-        GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
+        # cannot use secrets.GITHUB_TOKEN because it doesn't give permission to trigger pages build
         GITHUB_PAGES_DEPLOY_TOKEN: ${{ secrets.GITHUB_PAGES_DEPLOY_TOKEN }}
       run: |
         BUILD_DIR="$PWD/build/"
@@ -43,10 +43,5 @@ jobs:
         cp -R $BUILD_DIR/* .
         git add -A
         git -c user.email='deploy-bot' -c user.name='deploy-bot' commit -m "Deploy $SHORT_COMMIT_HASH at $(date)" --allow-empty
-        git push -f -q "https://$REPO_OWNER:$GITHUB_TOKEN@github.com/${{ github.repository }}"
-        # Somehow GitHub doesn't trigger a GH pages build on a push to master, make an API call to force it
-        # https://developer.github.com/v3/repos/pages/#request-a-page-build
-        echo Triggering GitHub Pages build...
-        curl -X POST -H "Authorization: token $GITHUB_PAGES_DEPLOY_TOKEN" -H "Accept: application/vnd.github.v3+json" \
-              https://api.github.com/repos/${{ github.repository }}/pages/builds
+        git push -f -q "https://$REPO_OWNER:$GITHUB_PAGES_DEPLOY_TOKEN@github.com/${{ github.repository }}"
         cd "$BUILD_DIR/../"
