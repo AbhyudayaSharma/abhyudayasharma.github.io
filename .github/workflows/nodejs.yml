@@ -24,6 +24,8 @@ jobs:
         npm install
         npm run build --if-present
         npm test
+    env:
+      CI: true
     
   deploy:
     runs-on: ubuntu-latest
