@@ -30,6 +30,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy to production
+    if: github.ref == 'develop'
     needs: [build]
     
     strategy:
@@ -75,4 +76,3 @@ jobs:
       with:
         name: build-${{ github.sha }}.tar.gz
         path: build.tar.gz
-      
