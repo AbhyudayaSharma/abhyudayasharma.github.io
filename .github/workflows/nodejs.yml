@@ -30,7 +30,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy to production
-    if: github.ref == 'develop'
+    if: github.ref == 'refs/heads/develop'
     needs: [build]
     
     strategy:
