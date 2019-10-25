@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://abhyudayasharma.github.io",
   "dependencies": {
+    "node-sass": "^4.13.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-scripts": "3.2.0"
