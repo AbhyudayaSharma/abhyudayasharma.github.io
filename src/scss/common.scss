@@ -1,0 +1,17 @@
+$index-background-color: #282c34;
+$index-foreground-color: #ffffff;
+
+%unselectable {
+  -moz-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  //noinspection CssUnknownProperty
+  user-drag: none;
+}
+
+.unselectable {
+  @extend %unselectable;
+}

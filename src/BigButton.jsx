@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/big-button.sass';
+import './scss/big-button.scss';
 
 class BigButton extends React.Component {
   render() {
