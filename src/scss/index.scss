@@ -1,4 +1,4 @@
-@import 'common';
+@use 'common';
 
 html {
   font-size: 62.5%;
@@ -10,7 +10,7 @@ body {
   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: $index-background-color;
+  background-color: common.$index-background-color;
 }
 
 code {
