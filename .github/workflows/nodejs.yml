@@ -24,7 +24,8 @@ jobs:
       run: |
         npm install
         npm run build --if-present
-        npm test --verbose
+        npm run lint
+        npm test -- --coverage --verbose
     env:
       CI: true
     
@@ -48,6 +49,7 @@ jobs:
       run: |
         npm install
         npm run build --if-present
+        npm run lint
         npm test
       env:
         CI: true
