@@ -1,6 +1,6 @@
 import React from 'react';
+import BigButton from './BigButton';
 import './scss/App.scss';
-import BigButton from "./BigButton";
 
 function App() {
   return (
