@@ -6,4 +6,4 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b1f3eb09f3a541d5a01786c0d3e96990)](https://www.codacy.com/manual/sharmaabhyudaya/abhyudayasharma.github.io?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AbhyudayaSharma/abhyudayasharma.github.io&amp;utm_campaign=Badge_Grade)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
-and is hosted using GitHub pages. See the website at <https://abhyudayasharma.github.io>.
+and is hosted using GitHub pages. See the website at <https://abhyudaya.dev>.
