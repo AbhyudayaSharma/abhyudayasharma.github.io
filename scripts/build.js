@@ -14,7 +14,6 @@ process.on('unhandledRejection', err => {
 // Ensure environment variables are read.
 require('../config/env');
 
-
 const path = require('path');
 const chalk = require('react-dev-utils/chalk');
 const fs = require('fs-extra');
@@ -48,7 +47,7 @@ const config = configFactory('production');
 
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
-const { checkBrowsers } = require('react-dev-utils/browsersHelper');
+const { checkBrowsers, } = require('react-dev-utils/browsersHelper');
 checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
     // First, read the current file sizes in build directory.
@@ -65,7 +64,7 @@ checkBrowsers(paths.appPath, isInteractive)
     return build(previousFileSizes);
   })
   .then(
-    ({ stats, previousFileSizes, warnings }) => {
+    ({ stats, previousFileSizes, warnings, }) => {
       if (warnings.length) {
         console.log(chalk.yellow('Compiled with warnings.\n'));
         console.log(warnings.join('\n\n'));
@@ -159,7 +158,7 @@ function build(previousFileSizes) {
         if (Object.prototype.hasOwnProperty.call(err, 'postcssNode')) {
           errMessage +=
             '\nCompileError: Begins at CSS selector ' +
-            err['postcssNode'].selector;
+            err.postcssNode.selector;
         }
 
         messages = formatWebpackMessages({
@@ -168,7 +167,7 @@ function build(previousFileSizes) {
         });
       } else {
         messages = formatWebpackMessages(
-          stats.toJson({ all: false, warnings: true, errors: true })
+          stats.toJson({ all: false, warnings: true, errors: true, })
         );
       }
       if (messages.errors.length) {

@@ -14,7 +14,6 @@ process.on('unhandledRejection', err => {
 // Ensure environment variables are read.
 require('../config/env');
 
-
 const fs = require('fs');
 const chalk = require('react-dev-utils/chalk');
 const webpack = require('webpack');
@@ -53,7 +52,7 @@ if (process.env.HOST) {
     )
   );
   console.log(
-    `If this was unintentional, check that you haven't mistakenly set it in your shell.`
+    'If this was unintentional, check that you haven\'t mistakenly set it in your shell.'
   );
   console.log(
     `Learn more here: ${chalk.yellow('https://bit.ly/CRA-advanced-config')}`
@@ -63,7 +62,7 @@ if (process.env.HOST) {
 
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
-const { checkBrowsers } = require('react-dev-utils/browsersHelper');
+const { checkBrowsers, } = require('react-dev-utils/browsersHelper');
 checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
     // We attempt to use the default port but if it is busy, we offer the user to
