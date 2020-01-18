@@ -20,7 +20,7 @@ function App() {
         This page was built and deployed from the commit&nbsp;
         <a href={`https://github.com/AbhyudayaSharma/abhyudayasharma.github.io/commit/${gitInfo.commit.hash}`}
           className='App-link selectable'>
-          {gitInfo.commit.shortHash}
+          <code>{gitInfo.commit.shortHash}</code>
         </a>
         <br/>
         Fork this repository on&nbsp;
