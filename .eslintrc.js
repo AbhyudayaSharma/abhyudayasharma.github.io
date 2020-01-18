@@ -32,7 +32,7 @@ module.exports = {
     semi: ['error', 'always'],
     'comma-dangle': ['error', {
       arrays: 'only-multiline',
-      objects: 'always',
+      objects: 'only-multiline',
       imports: 'only-multiline',
       exports: 'only-multiline',
       functions: 'never',
