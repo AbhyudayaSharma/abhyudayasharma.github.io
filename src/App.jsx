@@ -1,7 +1,7 @@
 import React from 'react';
 import BigButton from './BigButton';
 import './scss/App.scss';
-import GitInfo from './GitInfo.macro';
+import GitInfo from 'react-git-info/macro';
 
 function App() {
   return (
