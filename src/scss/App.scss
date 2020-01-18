@@ -1,14 +1,21 @@
 @use 'common';
 
+$header-flex-grow: 0.52;
+$body-flex-grow: 0.52;
+$footer-flex-grow: 0.06;
+
 .App {
   text-align: center;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
 }
 
 .App-header {
   background-color: common.$index-background-color;
-  min-height: 55vh;
   display: flex;
   flex-direction: column;
+  flex-grow: $header-flex-grow;
   align-items: center;
   justify-content: flex-end;
   font-size: calc(10px + 2vmin);
@@ -18,13 +25,28 @@
 .App-body {
   background-color: common.$index-background-color;
   color: common.$index-foreground-color;
-  height: 45vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  flex-grow: 1;
+  flex-grow: $body-flex-grow;
   flex-basis: 0;
+}
+
+.App-footer {
+  background-color: common.$index-background-color;
+  flex-grow: $footer-flex-grow;
+  color: common.$index-foreground-color;
+  align-items: baseline;
+}
+
+.App-footer {
+  position: sticky;
+  background-color: common.$index-background-color;
+}
+
+.App-link {
+  color: lightblue;
 }
 
 h1 {

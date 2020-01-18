@@ -12,6 +12,17 @@ $index-foreground-color: #ffffff;
   user-drag: none;
 }
 
+%selectable {
+  -moz-user-select: all;
+  -webkit-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+}
+
+.selectable {
+  @extend %selectable;
+}
+
 .unselectable {
   @extend %unselectable;
 }

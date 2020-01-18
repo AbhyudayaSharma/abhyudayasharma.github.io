@@ -4,6 +4,7 @@ import './scss/App.scss';
 import GitInfo from 'react-git-info/macro';
 
 function App() {
+  const gitInfo = GitInfo();
   return (
     <div className="App">
       <header className="App-header">
@@ -14,7 +15,18 @@ function App() {
       <div className="App-body">
         <BigButton text="GitHub" url="https://github.com/AbhyudayaSharma"/>
         <BigButton text="LinkedIn" url="https://www.linkedin.com/in/abhyudaya-sharma/"/>
-        {console.log(GitInfo())}
+      </div>
+      <div className='App-footer unselectable'>
+        This page was built and deployed from the commit&nbsp;
+        <a href={`https://github.com/AbhyudayaSharma/abhyudayasharma.github.io/commit/${gitInfo.commit.hash}`}
+          className='App-link selectable'>
+          {gitInfo.commit.shortHash}
+        </a>
+        <br/>
+        Fork this repository on&nbsp;
+        <a href='https://github.com/AbhyudayaSharma/abhyudayasharma.github.io' className='selectable App-link'>
+          GitHub
+        </a>
       </div>
     </div>
   );
