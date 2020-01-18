@@ -1,6 +1,7 @@
 import React from 'react';
 import BigButton from './BigButton';
 import './scss/App.scss';
+import GitInfo from 'react-git-info/macro';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <div className="App-body">
         <BigButton text="GitHub" url="https://github.com/AbhyudayaSharma"/>
         <BigButton text="LinkedIn" url="https://www.linkedin.com/in/abhyudaya-sharma/"/>
+        {console.log(GitInfo())}
       </div>
     </div>
   );
