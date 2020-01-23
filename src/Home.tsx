@@ -24,7 +24,7 @@ class Home extends Component {
     return (
       <div className="Home">
         <div className="Home-header">
-          <h1 className='unselectable'>
+          <h1 className='Home-h1'>
             {packageJson.author.name}
           </h1>
         </div>

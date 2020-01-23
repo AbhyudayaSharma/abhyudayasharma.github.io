@@ -39,7 +39,8 @@
   padding-top: 2rem;
 }
 
-h1 {
+.Home-h1 {
+  @extend %unselectable;
   font-size: calc(6rem + 1vmin);
   font-weight: lighter;
 }
