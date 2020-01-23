@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './scss/big-button.scss';
+import './scss/BigButton.scss';
 
-class BigButton extends React.Component {
+class BigButton extends Component {
   render() {
     return (
-      <a href={this.props.url} className="big-button" draggable="false" onDragStart={(e) => e.preventDefault()}>
+      <a href={this.props.url} className="BigButton" draggable="false" onDragStart={(e) => e.preventDefault()}>
         {this.props.text}
       </a>
     );
