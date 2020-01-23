@@ -18,7 +18,7 @@ const links = [
 ];
 
 class Home extends Component {
-  render() {
+  render(): JSX.Element {
     const buttons = links.map((link, index) => <BigButton key={index} {...link}/>);
 
     return (

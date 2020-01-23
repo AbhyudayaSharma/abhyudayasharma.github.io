@@ -21,5 +21,6 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  "compileOnSave": true
 }

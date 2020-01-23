@@ -7,6 +7,7 @@ import './scss/Footer.scss';
 const gitInfo = GitInfo();
 
 class Footer extends Component {
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
       <div className='Footer'>
