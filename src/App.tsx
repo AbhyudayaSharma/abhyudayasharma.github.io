@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Home';
+import Footer from './Footer';
 
 class App extends Component {
-  render() {
+  render() : JSX.Element {
     return (
       <Router>
         <Switch>
@@ -11,9 +12,7 @@ class App extends Component {
             <Home/>
           </Route>
           <Route exact path="/blog">
-            <h1>
-              Hello world!
-            </h1>
+            <Footer/>
           </Route>
         </Switch>
       </Router>

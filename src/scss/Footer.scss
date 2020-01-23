@@ -1,0 +1,13 @@
+@use 'common';
+
+.Footer {
+  color: common.$index-foreground-color;
+  text-align: center;
+}
+
+.Footer-link {
+  @extend %selectable;
+  color: lightblue;
+  text-underline: none;
+  text-decoration: none;
+}

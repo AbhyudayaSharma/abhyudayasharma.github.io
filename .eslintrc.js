@@ -20,8 +20,10 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
+  parser: '@typescript-eslint/parser',
   plugins: [
     'react',
+    '@typescript-eslint',
   ],
   rules: {
     'space-before-function-paren': ['error', {

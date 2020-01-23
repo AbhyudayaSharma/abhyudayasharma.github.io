@@ -1,6 +1,6 @@
 @use 'common';
 
-.App {
+.Home {
   text-align: center;
   display: grid;
   height: 100%;
@@ -8,7 +8,7 @@
   grid-template-columns: auto;
 }
 
-.App-header {
+.Home-header {
   background-color: common.$index-background-color;
   font-size: calc(1rem + 2vmin);
   color: common.$index-foreground-color;
@@ -18,7 +18,7 @@
   justify-content: flex-end;
 }
 
-.App-body {
+.Home-body {
   background-color: common.$index-background-color;
   color: common.$index-foreground-color;
   display: flex;
@@ -28,7 +28,7 @@
   flex-basis: 0;
 }
 
-.App-footer {
+.Home-footer {
   background-color: common.$index-background-color;
   color: common.$index-foreground-color;
   display: flex;
@@ -37,12 +37,6 @@
   justify-content: flex-end;
   padding-bottom: 1rem;
   padding-top: 2rem;
-}
-
-a.App-link {
-  color: lightblue;
-  text-underline: none;
-  text-decoration: none;
 }
 
 h1 {
