@@ -10,7 +10,7 @@ export interface BlogMetadata {
 const blogs: BlogMetadata[] = [
   {
     date: new Date(2020, 1, 25, 11, 0, 0, 0),
-    title: 'Hello world',
+    title: 'Hello World',
     path: 'HelloWorld.md',
     description: 'Test blog',
     tags: [
