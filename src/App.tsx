@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './Home';
-import Footer from './Footer';
+import BlogList from './BlogList';
 
 class App extends Component<{}, {}> {
   render(): JSX.Element {
@@ -12,7 +12,7 @@ class App extends Component<{}, {}> {
             <Home/>
           </Route>
           <Route exact path="/blog">
-            <Footer/>
+            <BlogList/>
           </Route>
         </Switch>
       </Router>
