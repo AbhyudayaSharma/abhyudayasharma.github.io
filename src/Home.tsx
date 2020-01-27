@@ -8,6 +8,10 @@ import './scss/Home.scss';
 
 const links = [
   {
+    text: 'Blog',
+    url: '/blog',
+  },
+  {
     text: 'GitHub',
     url: 'https://github.com/AbhyudayaSharma',
   },

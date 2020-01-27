@@ -1,13 +1,21 @@
+@use 'common';
+
 .BlogList {
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 5fr 1fr;
-  grid-template-rows: 1fr auto;
+  grid-auto-flow: row;
+  grid-template-rows: auto 1fr auto;
+}
+
+.BlogList-content {
+  grid-row-start: 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .BlogList-footer {
-  grid-column-start: 1;
-  grid-column-end: 7;
   display: flex;
   flex-direction: column;
   align-items: center;

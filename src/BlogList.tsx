@@ -4,6 +4,7 @@ import Blogs, { BlogMetadata } from './blog/Blogs';
 import BlogListEntry from './BlogListEntry';
 
 import './scss/BlogList.scss';
+import Header from './Header';
 
 interface BlogListState {
   blogs: BlogMetadata[];
@@ -26,11 +27,10 @@ export default class BlogList extends Component<{}, BlogListState> {
   render(): JSX.Element {
     return (
       <div className='BlogList'>
-        <div/>
-        <div>
+        <Header/>
+        <div className='BlogList-content'>
           {this.state.blogs.map((blog, index) => <BlogListEntry {...blog} key={index}/>)}
         </div>
-        <div/>
         <div className='BlogList-footer'>
           <Footer/>
         </div>

@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, SyntheticEvent } from 'react';
 import './scss/BigButton.scss';
+import { Link } from 'react-router-dom';
 
 interface Props {
   url: string;
@@ -8,12 +9,20 @@ interface Props {
 
 class BigButton extends Component<Props, {}> {
   render(): JSX.Element {
-    return (
-      <a href={this.props.url} className="BigButton" draggable="false"
-        onDragStart={(e): void => e.preventDefault()}>
-        {this.props.text}
-      </a>
-    );
+    const linkProps = {
+      draggable: false,
+      onDragStart: (e: SyntheticEvent): void => e.preventDefault(),
+      className: 'BigButton',
+    };
+
+    let link;
+    if (this.props.url.startsWith('/')) {
+      link = (<Link {...linkProps} to={this.props.url}>{this.props.text}</Link>);
+    } else {
+      link = (<a {...linkProps} href={this.props.url}>{this.props.text}</a>);
+    }
+
+    return link;
   }
 }
 

@@ -3,6 +3,13 @@ import { BlogMetadata } from './blog/Blogs';
 
 import './scss/BlogListEntry.scss';
 
+const dateOptions: Intl.DateTimeFormatOptions = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
+
 export default class BlogListEntry extends Component<BlogMetadata, {}> {
   render(): JSX.Element {
     return (
@@ -13,7 +20,7 @@ export default class BlogListEntry extends Component<BlogMetadata, {}> {
           </a>
         </h1>
         <div className='BlogListEntry-date'>
-          Published on {this.props.date.toDateString()}
+          {this.props.date.toLocaleDateString('en-US', dateOptions)}
         </div>
         <div className='BlogListEntry-tag-container'>
           {this.props.tags.map((tag, index) => <div className='BlogListEntry-tag' key={index}>{tag}</div>)}

@@ -4,7 +4,7 @@
   text-align: center;
   display: grid;
   height: 100%;
-  grid-template-rows: 53% 30% auto;
+  grid-template-rows: 7fr 5fr auto;
   grid-template-columns: auto;
 }
 
@@ -23,9 +23,11 @@
   color: common.$index-foreground-color;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
   flex-basis: 0;
+  height: fit-content;
 }
 
 .Home-footer {
@@ -41,6 +43,6 @@
 
 .Home-h1 {
   @extend %unselectable;
-  font-size: calc(6rem + 1vmin);
+  font-size: 6rem;
   font-weight: lighter;
 }
