@@ -18,6 +18,16 @@ const blogs: BlogMetadata[] = [
       'hello-world',
     ],
   },
+  {
+    date: new Date(2020, 1, 25, 11, 0, 0, 0),
+    title: 'Hello World',
+    path: 'HelloWorld.md',
+    description: 'Test blog',
+    tags: [
+      'test',
+      'hello-world',
+    ],
+  },
 ];
 
 export default class Blogs {
