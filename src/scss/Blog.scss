@@ -1,0 +1,19 @@
+@use 'common';
+
+.Blog {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr auto;
+}
+
+.Blog-text {
+  justify-self: center;
+  text-align: left;
+  width: 100%;
+  height: fit-content;
+  max-width: 68rem;
+  color: common.$index-foreground-color;
+  border: 1px solid white;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+}

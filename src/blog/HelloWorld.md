@@ -9,3 +9,5 @@ public class HelloWorld {
     }
 }
 ```
+
+![test](/images/favicon.ico)

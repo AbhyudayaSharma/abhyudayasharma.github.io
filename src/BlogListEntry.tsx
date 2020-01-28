@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BlogMetadata } from './blog/Blogs';
 
 import './scss/BlogListEntry.scss';
+import { Link } from 'react-router-dom';
 
 const dateOptions: Intl.DateTimeFormatOptions = {
   weekday: 'long',
@@ -15,9 +16,9 @@ export default class BlogListEntry extends Component<BlogMetadata, {}> {
     return (
       <div className='BlogListEntry'>
         <h1 className='BlogListEntry-h1'>
-          <a href={this.props.url}>
+          <Link to={`/blog/${this.props.path}`}>
             {this.props.title}
-          </a>
+          </Link>
         </h1>
         <div className='BlogListEntry-date'>
           {this.props.date.toLocaleDateString('en-US', dateOptions)}
