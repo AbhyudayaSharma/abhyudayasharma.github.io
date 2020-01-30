@@ -11,7 +11,7 @@ const blogs: BlogMetadata[] = [
   {
     date: new Date(2020, 1, 25, 11, 0, 0, 0),
     title: 'Hello World',
-    path: 'HelloWorld.md',
+    path: '2020/hello-world',
     description: 'Test blog',
     tags: [
       'test',
@@ -21,7 +21,7 @@ const blogs: BlogMetadata[] = [
   {
     date: new Date(2020, 1, 25, 11, 0, 0, 0),
     title: 'Hello World',
-    path: 'HelloWorld.md',
+    path: '2020/hello-world',
     description: 'Test blog',
     tags: [
       'test',
@@ -32,7 +32,7 @@ const blogs: BlogMetadata[] = [
 
 export default class Blogs {
   static async getBlogs(): Promise<BlogMetadata[]> {
-    const promises = blogs.map(blog => import(`./${blog.path}`));
+    const promises = blogs.map(blog => import(`./${blog.path}.md`));
     const urls = await Promise.all(promises);
     return blogs.map((blog, index) => {
       return {

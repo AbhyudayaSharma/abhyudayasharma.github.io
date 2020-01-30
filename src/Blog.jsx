@@ -44,11 +44,11 @@ class Blog extends Component {
 
   async updateBlog() {
     const blogs = await Blogs.getBlogs();
+    const params = this.props.match.params;
     for (const blog of blogs) {
-      if (blog.path === this.props.match.params.path) {
+      if (blog.path === `${params.year}/${params.path}`) {
         const data = await (await fetch(blog.url)).text();
         this.setState({ text: data });
-        console.log('Blog updated');
         return;
       }
     }

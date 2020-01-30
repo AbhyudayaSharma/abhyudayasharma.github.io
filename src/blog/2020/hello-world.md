@@ -10,4 +10,4 @@ public class HelloWorld {
 }
 ```
 
-![test](/images/favicon.ico)
+![test](/favicon.ico)

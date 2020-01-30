@@ -16,7 +16,7 @@ class App extends Component<{}, {}> {
           <Route exact path="/blog">
             <BlogList/>
           </Route>
-          <Route exact path="/blog/:path">
+          <Route exact path="/blog/:year/:path">
             <Blog/>
           </Route>
           <Route exact path='/404'>
