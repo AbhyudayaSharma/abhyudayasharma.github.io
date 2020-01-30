@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+// This is a JavaScript file, not TypeScript
 import React, { Component } from 'react';
 import Header from './Header';
 import Footer from './Footer';
@@ -33,6 +35,12 @@ class Blog extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    // the type definitions for react-router-dom are really bad in this case
+    // so we cannot use TypeScript. I don't want to add another dependency
+    // to prop-types for just one file. Better to disable these warnings as
+    // only withRouter(Blog) is exported
+
+    // eslint-disable-next-line react/prop-types
     if (prevProps.match.params.path !== this.props.match.params.path) {
       this.updateBlog();
     }
@@ -44,8 +52,10 @@ class Blog extends Component {
 
   async updateBlog() {
     const blogs = await Blogs.getBlogs();
+    // eslint-disable-next-line react/prop-types
     const params = this.props.match.params;
     for (const blog of blogs) {
+      // eslint-disable-next-line react/prop-types
       if (blog.path === `${params.year}/${params.path}`) {
         const data = await (await fetch(blog.url)).text();
         this.setState({ text: data });
