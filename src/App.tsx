@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Home from './Home';
 import Blog from './Blog';
 import BlogList from './BlogList';
@@ -16,11 +16,16 @@ class App extends Component<{}, {}> {
           <Route exact path="/blog">
             <BlogList/>
           </Route>
-          <Route exact path="/blog/:path"
-            render={({ match }) => <Blog match={match}/>}/>
+          <Route exact path="/blog/:path">
+            <Blog/>
+          </Route>
+          <Route exact path='/404'>
+            <Header/>
+            <h1 style={{ color: '#fff', textAlign: 'center', fontWeight: 100, fontSize: '4rem' }}>
+              404<br/>Page not found</h1>
+          </Route>
           <Route path='*'>
-            <Header />
-            <h1 style={{ color: '#fff', textAlign: 'center' }}>404<br />Page not found</h1>
+            <Redirect to='/404'/>
           </Route>
         </Switch>
       </Router>

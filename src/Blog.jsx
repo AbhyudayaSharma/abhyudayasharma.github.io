@@ -4,10 +4,10 @@ import Footer from './Footer';
 import Blogs from './blog/Blogs';
 
 import './scss/Blog.scss';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
-export default class Blog extends Component {
+class Blog extends Component {
   constructor(props) {
     super(props);
     this.state = { text: '' };
@@ -21,11 +21,6 @@ export default class Blog extends Component {
   }
 
   render() {
-    // const path = this.props.match.params.path;
-    // if (!this.props.path) {
-    //   return <Redirect to='/404'/>;
-    // }
-
     return (
       <div className='Blog'>
         <Header/>
@@ -37,18 +32,28 @@ export default class Blog extends Component {
     );
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.path !== this.props.match.params.path) {
+      this.updateBlog();
+    }
+  }
+
   componentDidMount() {
-    (async () => {
-      const blogs = await Blogs.getBlogs();
-      for (const blog of blogs) {
-        if (blog.path === this.props.match.params.path) {
-          const data = await (await fetch(blog.url)).text();
-          console.log(data);
-          this.setState({ text: data });
-          return;
-        }
+    this.updateBlog();
+  }
+
+  async updateBlog() {
+    const blogs = await Blogs.getBlogs();
+    for (const blog of blogs) {
+      if (blog.path === this.props.match.params.path) {
+        const data = await (await fetch(blog.url)).text();
+        this.setState({ text: data });
+        console.log('Blog updated');
+        return;
       }
-      this.setState({ text: null });
-    })();
+    }
+    this.setState({ text: null });
   }
 }
+
+export default withRouter(Blog);
