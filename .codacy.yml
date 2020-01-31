@@ -1,0 +1,4 @@
+---
+exclude_paths:
+  # codacy somehow considers tsconfig.json as a javascript file
+  - 'tsconfig.json'
