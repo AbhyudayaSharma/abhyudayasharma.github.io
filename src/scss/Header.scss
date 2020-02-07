@@ -7,7 +7,6 @@
   align-items: center;
   justify-items: center;
   flex-flow: wrap;
-  margin-bottom: 1rem;
   padding: 1rem;
   text-align: left;
   border-style: solid;
@@ -33,6 +32,7 @@
 .Header-h1 {
   font-size: 4rem;
   padding-bottom: 1rem;
+  padding-right: 0;
 }
 
 .Header-h2 {
@@ -57,7 +57,17 @@
 .Header-links {
   display: flex;
   flex-grow: 1;
+  flex-wrap: nowrap;
   justify-content: center;
+  padding: 1.2rem 0;
+}
+
+.Header-links h2:first-of-type {
+  padding-left: 1rem;
+}
+
+.Header-links h2:last-of-type {
+  padding-right: 1rem;
 }
 
 .Header-link-selected {

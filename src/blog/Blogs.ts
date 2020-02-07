@@ -7,24 +7,16 @@ export interface BlogMetadata {
   readonly description: string;
 }
 
+// NOTE: months in the date constructor start from 0
 const blogs: BlogMetadata[] = [
   {
-    date: new Date(2020, 1, 25, 11, 0, 0, 0),
+    date: new Date(2020, 1, 7, 12, 45, 0, 0),
     title: 'Hello World',
     path: '2020/hello-world',
-    description: 'Test blog',
+    description: 'This my first blog. Hello world!👋',
     tags: [
-      'test',
-      'hello-world',
-    ],
-  },
-  {
-    date: new Date(2020, 1, 25, 11, 0, 0, 0),
-    title: 'Hello World',
-    path: '2020/hello-world',
-    description: 'Test blog',
-    tags: [
-      'test',
+      'hello',
+      'world',
       'hello-world',
     ],
   },

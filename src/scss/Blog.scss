@@ -3,17 +3,26 @@
 .Blog {
   display: grid;
   height: 100%;
+  grid-auto-flow: row;
   grid-template-rows: auto 1fr auto;
 }
 
 .Blog-text {
-  justify-self: center;
-  text-align: left;
-  width: 100%;
-  height: fit-content;
-  max-width: 68rem;
   color: common.$index-foreground-color;
-  border: 1px solid white;
-  padding: 1rem 2rem;
-  border-radius: 2rem;
+  padding: 1rem 1rem;
+  font-size: 2rem;
+  font-weight: 100;
+  display: flex;
+  justify-content: center;
+}
+
+.Blog-text > div {
+  // flex-grow: 1 1 0;
+  width: 100%;
+  max-width: 68rem;
+}
+
+.Blog-date {
+  text-align: right;
+  font-size: 1.4rem;
 }

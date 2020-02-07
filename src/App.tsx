@@ -4,20 +4,24 @@ import Home from './Home';
 import Blog from './Blog';
 import BlogList from './BlogList';
 import Header from './Header';
+import AboutMe from './AboutMe';
 
 class App extends Component<{}, {}> {
   render(): JSX.Element {
     return (
       <Router>
         <Switch>
-          <Route exact path="/">
+          <Route exact path='/'>
             <Home />
           </Route>
-          <Route exact path="/blog">
+          <Route exact path='/blog'>
             <BlogList/>
           </Route>
-          <Route exact path="/blog/:year/:path">
+          <Route exact path='/blog/:year/:path'>
             <Blog/>
+          </Route>
+          <Route exact path='/about'>
+            <AboutMe/>
           </Route>
           <Route exact path='/404'>
             <Header/>

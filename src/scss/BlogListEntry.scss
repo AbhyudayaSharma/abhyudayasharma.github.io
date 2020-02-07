@@ -5,16 +5,25 @@ $text-color: #eeeeee;
 .BlogListEntry {
   background-color: common.$index-background-color;
   color: common.$index-foreground-color;
+  font-size: 1.5rem;
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  justify-content: center;
+}
+
+.BlogListEntry-content {
   margin: 1rem 1rem;
   padding: 0.2rem 1.5rem;
+  max-width: 68rem;
+  flex-grow: 1;
+  display: block;
   border-style: solid;
   border-radius: 1rem;
   border-color: #326c61;
   border-width: 1px;
   height: fit-content;
-  width: 100%;
-  max-width: 68rem;
-  font-size: 1.5rem;
 }
 
 .BlogListEntry-h1 {

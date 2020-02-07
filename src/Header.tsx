@@ -28,7 +28,7 @@ export default class Header extends Component<{}, {}> {
           </h2>
           <h2 className='Header-h2'>
             <NavLink exact to='/about' activeClassName='Header-link-selected'>
-              About
+              About Me
             </NavLink>
           </h2>
         </div>

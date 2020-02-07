@@ -1,13 +1,9 @@
-# Hello world
+# Hello World
 
-This is a markdown file.
+This is my first blog on this website and it exists just to test if my website
+is working as expected. Thank you for visiting this page. Real blogs are coming
+very soon.
 
-```java
-public class HelloWorld {
-    public static void main(String[] args){
-      System.out.println("Hello world");
-    }
-}
-```
+-- Abhyudaya
 
 ![test](/favicon.ico)

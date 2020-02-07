@@ -8,6 +8,5 @@
 .Footer-link {
   @extend %selectable;
   color: common.$link-color;
-  text-underline: none;
   text-decoration: none;
 }
