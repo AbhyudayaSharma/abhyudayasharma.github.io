@@ -8,6 +8,7 @@ module.exports = {
   extends: [
     'standard',
     'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
   globals: {
     Atomics: 'readonly',
@@ -20,8 +21,10 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
+  parser: '@typescript-eslint/parser',
   plugins: [
     'react',
+    '@typescript-eslint',
   ],
   rules: {
     'space-before-function-paren': ['error', {

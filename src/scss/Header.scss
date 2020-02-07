@@ -1,0 +1,79 @@
+@use 'common';
+
+.Header {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 0;
+  align-items: center;
+  justify-items: center;
+  flex-flow: wrap;
+  padding: 1rem;
+  text-align: left;
+  border-style: solid;
+  border-color: #326c61;
+  border-width: 0;
+  border-bottom-width: 1px;
+  font-size: 4rem;
+  vertical-align: bottom;
+  background-color: common.$index-background-color;
+}
+
+.Header-h1, .Header-h2 {
+  @extend %unselectable;
+  font-weight: 100;
+  margin: 0 0;
+  align-self: stretch;
+  padding: 0 2rem 0 0;
+  align-items: center;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.Header-h1 {
+  font-size: 4rem;
+  padding-bottom: 1rem;
+  padding-right: 0;
+}
+
+.Header-h2 {
+  font-size: 2.5rem;
+}
+
+.Header-h1 > a , .Header-h2 > a {
+  text-decoration: none;
+  transition: .2s;
+  color: common.$index-foreground-color;
+}
+
+.Header-h1 > a:hover, .Header-h2 > a:hover {
+  color: common.$link-color;
+}
+
+.Header-title {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.Header-links {
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: nowrap;
+  justify-content: center;
+  padding: 1.2rem 0;
+}
+
+.Header-links h2:first-of-type {
+  padding-left: 1rem;
+}
+
+.Header-links h2:last-of-type {
+  padding-right: 1rem;
+}
+
+.Header-link-selected {
+  padding: 1rem;
+  border-style: solid;
+  border-color: common.$link-color;
+  border-radius: 1rem;
+  border-width: thin;
+}

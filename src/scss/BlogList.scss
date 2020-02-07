@@ -1,0 +1,22 @@
+@use 'common';
+
+.BlogList {
+  height: 100%;
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-rows: auto 1fr auto;
+}
+
+.BlogList-content {
+  grid-row-start: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.BlogList-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
