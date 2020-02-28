@@ -23,7 +23,7 @@ jobs:
     - run: npm config set audit-level low
     - run: npm audit --json > audit-log.json 2>&1
       name: Run npm audit
-      continue-on-error: false
+      continue-on-error: true
       shell: bash
     - name: Upload audit report
       uses: actions/upload-artifacts@v1.0.0
