@@ -28,47 +28,5 @@ jobs:
         npm test -- --coverage --verbose
     env:
       CI: true
-    
-  deploy:
-    runs-on: ubuntu-latest
-    name: Deploy to production
-    if: github.ref == 'refs/heads/develop'
-    needs: [build]
-    
-    strategy:
-      matrix:
-        node-version: [12.x]
 
-    steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
-      run: |
-        npm install
-        npm run build --if-present
-        npm run lint
-        npm test
-      env:
-        CI: true
-    - name: deploy to production
-      env:
-        # cannot use secrets.GITHUB_TOKEN because it doesn't give permission to trigger pages build
-        GITHUB_PAGES_DEPLOY_TOKEN: ${{ secrets.GITHUB_PAGES_DEPLOY_TOKEN }}
-      run: |
-        BUILD_DIR="$PWD/build/"
-        SHORT_COMMIT_HASH=$(git log --format="%h" -n 1)
-        REPO_OWNER=${GITHUB_REPOSITORY%/*}
-        cd ~
-        git clone https://github.com/${{ github.repository }}/ build
-        cd build
-        git checkout master
-        rm -rf $(git ls-files)
-        cp -R $BUILD_DIR/* .
-        git add -A
-        git -c user.email='deploy-bot' -c user.name='deploy-bot' commit -m "Deploy $SHORT_COMMIT_HASH at $(date)" --allow-empty
-        git push -f -q "https://$REPO_OWNER:$GITHUB_PAGES_DEPLOY_TOKEN@github.com/${{ github.repository }}"
-        cd "$BUILD_DIR/../"
-        echo Done 🥳
+# TODO deployment script
