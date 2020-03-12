@@ -29,4 +29,21 @@ jobs:
     env:
       CI: true
 
-# TODO deployment script
+  deploy:
+    name: Deploy to GCP
+    runs-on: ubuntu-latest
+    # if: github.ref == 'refs/heads/develop' # only deploy if commited to 'develop'
+    needs: [build]
+    env:
+      GCLOUD_REGION: us-central1
+      GCLOUD_PLATFORM: managed
+    steps:
+      - continue-on-error: false
+        name: Setup Google Cloud SDK
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+      - name: gcloud test
+        run: gcloud --version
