@@ -35,6 +35,7 @@ jobs:
     # if: github.ref == 'refs/heads/develop' # only deploy if commited to 'develop'
     needs: [build]
     env:
+      GCLOUD_SERVICE: abhyudaya-dev
       GCLOUD_PROJECT: abhyudaya-dev-1
       GCLOUD_REGION: us-central1
       GCLOUD_PLATFORM: managed
@@ -67,5 +68,7 @@ jobs:
           export_default_credentials: true
       - name: deploy to Google Cloud Run
         run: |
-          gcloud run deploy "$GCLOUD_PROJECT" --image "$GCR_IMAGE" \
-            --region $GCLOUD_REGION --platform $GCLOUD_PLATFORM
+          GCR_IMAGE="gcr.io/$GCLOUD_PROJECT/$DOCKER_IMAGE_NAME:$GITHUB_SHA"
+          gcloud run deploy "$GCLOUD_SERVICE" --image "$GCR_IMAGE" \
+            --region "$GCLOUD_REGION" --platform "$GCLOUD_PLATFORM" \
+            --project "$GCLOUD_PROJECT"
