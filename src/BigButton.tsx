@@ -12,17 +12,21 @@ class BigButton extends Component<Props, {}> {
     const linkProps = {
       draggable: false,
       onDragStart: (e: SyntheticEvent): void => e.preventDefault(),
-      className: 'BigButton',
+      className: 'BigButton-btn',
     };
 
-    let link;
+    let link: JSX.Element;
     if (this.props.url.startsWith('/')) {
       link = (<Link {...linkProps} to={this.props.url}>{this.props.text}</Link>);
     } else {
       link = (<a {...linkProps} href={this.props.url}>{this.props.text}</a>);
     }
 
-    return link;
+    return (
+      <div className='BigButton'>
+        {link}
+      </div>
+    );
   }
 }
 

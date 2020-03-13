@@ -18,28 +18,31 @@
   background-color: common.$index-background-color;
 }
 
-.Header-h1, .Header-h2 {
-  @extend %unselectable;
-  font-weight: 100;
+.Header-item {
   margin: 0 0;
   align-self: stretch;
-  padding: 0 2rem 0 0;
+  padding: 0 0;
   align-items: center;
   text-align: center;
   word-break: keep-all;
 }
 
+.Header-h1, .Header-h2 {
+  @extend %unselectable;
+  font-weight: 100;
+  margin: 0 0;
+}
+
 .Header-h1 {
   font-size: 4rem;
-  padding-bottom: 1rem;
-  padding-right: 0;
+  padding: 0 1.5rem 1.5rem;
 }
 
 .Header-h2 {
   font-size: 2.5rem;
 }
 
-.Header-h1 > a , .Header-h2 > a {
+.Header-h1 > a, .Header-h2 > a {
   text-decoration: none;
   transition: .2s;
   color: common.$index-foreground-color;
@@ -62,12 +65,17 @@
   padding: 1.2rem 0;
 }
 
-.Header-links h2:first-of-type {
-  padding-left: 1rem;
+.Header-links > .Header-item {
+  padding-left:  0.7rem;
+  padding-right: 0.7rem;
 }
 
-.Header-links h2:last-of-type {
-  padding-right: 1rem;
+.Header-links > .Header-item:first-of-type {
+  padding-left: 0;
+}
+
+.Header-links > .Header-item:last-of-type {
+  padding-right: 0;
 }
 
 .Header-link-selected {
