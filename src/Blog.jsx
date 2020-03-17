@@ -34,8 +34,11 @@ class Blog extends Component {
       }
     } else {
       return (
-        <div>
-          <div>
+        <article>
+          <header>
+            <h1 className='Blog-title'>{this.state.blog.title}</h1>
+          </header>
+          <section>
             <p className='Blog-date'>
               {this.state.blog.date.toLocaleDateString('en-US', {
                 weekday: 'long',
@@ -44,11 +47,11 @@ class Blog extends Component {
                 day: 'numeric',
               })}
             </p>
-          </div>
-          <div>
+          </section>
+          <section>
             <ReactMarkdown source={this.state.blog.text} renderers={markdownRenderers}/>
-          </div>
-        </div>
+          </section>
+        </article>
       );
     }
   }
@@ -58,16 +61,14 @@ class Blog extends Component {
       <div className='Blog'>
         <Header/>
         <div className='Blog-text'>
-          <div> {/* This div is needed to center the content */}
-            {this.getMarkdown()}
-          </div>
+          {this.getMarkdown()}
         </div>
         <Footer/>
       </div>
     );
   }
 
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     // the type definitions for react-router-dom are really bad in this case
     // so we cannot use TypeScript. I don't want to add another dependency
     // to prop-types for just one file. Better to disable these warnings as
@@ -76,12 +77,14 @@ class Blog extends Component {
     // do not render the blog twice on the first load
     // eslint-disable-next-line react/prop-types
     if (prevProps.match.params.path !== this.props.match.params.path) {
-      this.updateBlog();
+      return this.updateBlog();
+    } else {
+      return Promise.resolve();
     }
   }
 
-  componentDidMount() {
-    this.updateBlog();
+  async componentDidMount() {
+    return this.updateBlog();
   }
 
   /**

@@ -30,15 +30,6 @@
   height: fit-content;
 }
 
-.Home-footer {
-  background-color: common.$index-background-color;
-  color: common.$index-foreground-color;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-}
-
 .Home-h1 {
   @extend %unselectable;
   font-size: 6rem;

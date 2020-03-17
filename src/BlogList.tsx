@@ -16,12 +16,9 @@ export default class BlogList extends Component<{}, BlogListState> {
     this.state = { blogs: [] };
   }
 
-  componentDidMount(): void {
-    Blogs.getBlogs().then(blogs => {
-      this.setState({
-        blogs: blogs,
-      });
-    });
+  async componentDidMount(): Promise<void> {
+    const blogs = await Blogs.getBlogs();
+    this.setState({ blogs: blogs });
   };
 
   render(): JSX.Element {

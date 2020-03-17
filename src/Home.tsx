@@ -35,9 +35,7 @@ class Home extends Component {
         <div className="Home-body">
           {buttons}
         </div>
-        <div className='Home-footer unselectable'>
-          <Footer/>
-        </div>
+        <Footer/>
       </div>
     );
   }

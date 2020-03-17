@@ -10,7 +10,7 @@ class Footer extends Component {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   render() {
     return (
-      <div className='Footer'>
+      <footer className='Footer'>
         <p>
           This page was built and deployed from the commit&nbsp;
           <a href={`${packageJson.repository.url}/commit/${gitInfo.commit.hash}`} className='Footer-link'>
@@ -22,7 +22,7 @@ class Footer extends Component {
             GitHub
           </a>
         </p>
-      </div>
+      </footer>
     );
   }
 }
