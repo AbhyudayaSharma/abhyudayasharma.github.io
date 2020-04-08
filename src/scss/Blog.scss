@@ -1,0 +1,32 @@
+@use 'common';
+
+.Blog {
+  display: grid;
+  height: 100%;
+  grid-auto-flow: row;
+  grid-template-rows: auto 1fr auto;
+}
+
+.Blog-text {
+  color: common.$index-foreground-color;
+  padding: 2rem 1rem;
+  font-size: 2rem;
+  font-weight: 100;
+  display: flex;
+  justify-content: center;
+}
+
+.Blog-text > * {
+  width: 100%;
+  max-width: 68rem;
+}
+
+.Blog-date {
+  font-size: 1.4rem;
+}
+
+.Blog-title {
+  font-size: 4rem;
+  font-weight: 100;
+  margin:0;
+}

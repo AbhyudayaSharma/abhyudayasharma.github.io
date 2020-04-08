@@ -1,4 +1,4 @@
-name: Website CD
+name: build
 
 on:
   push:
@@ -11,10 +11,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
-        os: [windows-latest, ubuntu-latest, macOS-latest]
+        node-version: [12.x]
+        # TODO enable Windows builds
+        os: [ubuntu-latest, macOS-latest]
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       name: Use Node.js ${{ matrix.node-version }}
       with:
@@ -23,49 +24,57 @@ jobs:
       run: |
         npm install
         npm run build --if-present
-        npm test --verbose
+        npm run lint
+        npm test -- --coverage --verbose
     env:
       CI: true
-    
-  deploy:
-    runs-on: ubuntu-latest
-    name: Deploy to production
-    if: github.ref == 'refs/heads/develop'
-    needs: [build]
-    
-    strategy:
-      matrix:
-        node-version: [10.x]
 
+  deploy:
+    name: Deploy to GCP
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop' # only deploy if commited to 'develop'
+    needs: [build]
+    env:
+      GCLOUD_SERVICE: abhyudaya-dev
+      GCLOUD_PROJECT: abhyudaya-dev-1
+      GCLOUD_REGION: us-central1
+      GCLOUD_PLATFORM: managed
+      DOCKER_IMAGE_NAME: abhyudaya.dev
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
-      run: |
-        npm install
-        npm run build --if-present
-        npm test
-      env:
-        CI: true
-    - name: deploy to production
-      env:
-        # cannot use secrets.GITHUB_TOKEN because it doesn't give permission to trigger pages build
-        GITHUB_PAGES_DEPLOY_TOKEN: ${{ secrets.GITHUB_PAGES_DEPLOY_TOKEN }}
-      run: |
-        BUILD_DIR="$PWD/build/"
-        SHORT_COMMIT_HASH=$(git log --format="%h" -n 1)
-        REPO_OWNER=${GITHUB_REPOSITORY%/*}
-        cd ~
-        git clone https://github.com/${{ github.repository }}/ build
-        cd build
-        git checkout master
-        rm -rf $(git ls-files)
-        cp -R $BUILD_DIR/* .
-        git add -A
-        git -c user.email='deploy-bot' -c user.name='deploy-bot' commit -m "Deploy $SHORT_COMMIT_HASH at $(date)" --allow-empty
-        git push -f -q "https://$REPO_OWNER:$GITHUB_PAGES_DEPLOY_TOKEN@github.com/${{ github.repository }}"
-        cd "$BUILD_DIR/../"
-        echo Done 🥳
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        name: Setup Node.js
+        with:
+          node-version: 12.x
+      - name: Run npm build
+        run: |
+          echo Running the build...
+          npm install
+          npm run build --if-present
+      - name: build docker image
+        # Google Cloud Run cannot use images from DockerHub, so push the image
+        # to Google Container Repository.
+        # TODO also push to DockerHub
+        run: |
+          echo Building docker image
+          GCR_IMAGE="gcr.io/$GCLOUD_PROJECT/$DOCKER_IMAGE_NAME:$GITHUB_SHA"
+          docker build --tag "$GCR_IMAGE" . --file ./Dockerfile
+      - continue-on-error: false
+        name: Setup Google Cloud SDK
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+      - name: Configure Docker auth for GCR
+        run: gcloud auth configure-docker
+      - name: Push docker image to Google Container Registry
+        run: |
+          GCR_IMAGE="gcr.io/$GCLOUD_PROJECT/$DOCKER_IMAGE_NAME:$GITHUB_SHA"
+          docker push "$GCR_IMAGE"
+      - name: Deploy to Google Cloud Run
+        run: |
+          GCR_IMAGE="gcr.io/$GCLOUD_PROJECT/$DOCKER_IMAGE_NAME:$GITHUB_SHA"
+          gcloud run deploy "$GCLOUD_SERVICE" --image "$GCR_IMAGE" \
+            --region "$GCLOUD_REGION" --platform "$GCLOUD_PLATFORM" \
+            --project "$GCLOUD_PROJECT"

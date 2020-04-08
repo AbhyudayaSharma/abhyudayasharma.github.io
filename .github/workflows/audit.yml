@@ -1,0 +1,32 @@
+name: NPM Audit
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # run on every Sunday at UTC 0:00
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+    - run: npm config set audit-level low
+    - run: npm audit --json > audit-log.json 2>&1
+      name: Run npm audit
+      continue-on-error: true
+      shell: bash
+    - name: Upload audit report
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: Audit Report
+        path: audit-log.json

@@ -1,6 +1,6 @@
 @use 'common';
 
-.big-button {
+.BigButton {
   @extend %unselectable;
   background-color: common.$index-background-color;
   border-color: #ffffff;
@@ -14,12 +14,16 @@
   padding: 1.5rem 1.5rem;
   transition-duration: 0.4s;
   outline: none;
-  text-decoration: none;
   cursor: pointer;
 }
 
-.big-button:hover {
+.BigButton:hover {
   background-color: common.$index-foreground-color;
   color: common.$index-background-color;
   font-size: 2.5rem;
+}
+
+.BigButton-btn {
+  color: inherit;
+  text-decoration: none;
 }

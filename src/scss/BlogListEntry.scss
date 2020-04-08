@@ -1,0 +1,72 @@
+@use 'common';
+
+$text-color: #eeeeee;
+
+.BlogListEntry {
+  background-color: common.$index-background-color;
+  color: common.$index-foreground-color;
+  font-size: 1.5rem;
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  justify-content: center;
+}
+
+.BlogListEntry-content {
+  margin: 1rem 1rem;
+  padding: 0.2rem 1.5rem;
+  max-width: 68rem;
+  flex-grow: 1;
+  display: block;
+  border-style: solid;
+  border-radius: 1rem;
+  border-color: #326c61;
+  border-width: 1px;
+  height: fit-content;
+}
+
+.BlogListEntry-h1 {
+  @extend %unselectable;
+  font-size: 2.5rem;
+  font-weight: 100;
+  margin: 0;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.BlogListEntry-h1 > a {
+  transition: 0.2s;
+}
+
+.BlogListEntry-h1 > a:hover {
+  color: common.$link-color;
+}
+
+.BlogListEntry-h1 > a {
+  text-decoration: none;
+  color: $text-color;
+}
+
+.BlogListEntry-tag-container {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.BlogListEntry-tag-container > .BlogListEntry-tag {
+  @extend %unselectable;
+  padding: 0.5rem 0.5rem;
+  border-style: solid;
+  background-color: #326c61;
+  border-radius: 0.6rem;
+  border-width: 0;
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.BlogListEntry-date {
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+  font-size: 1.4rem;
+}

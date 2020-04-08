@@ -1,5 +1,6 @@
 $index-background-color: #282c34;
 $index-foreground-color: #ffffff;
+$link-color: #ADD8E6;
 
 %unselectable {
   -moz-user-select: none;
@@ -10,6 +11,17 @@ $index-foreground-color: #ffffff;
   cursor: default;
   //noinspection CssUnknownProperty
   user-drag: none;
+}
+
+%selectable {
+  -moz-user-select: auto;
+  -webkit-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+}
+
+.selectable {
+  @extend %selectable;
 }
 
 .unselectable {
