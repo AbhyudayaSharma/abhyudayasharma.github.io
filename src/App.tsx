@@ -14,6 +14,9 @@ class App extends Component<{}, {}> {
           <Route exact path='/'>
             <Home />
           </Route>
+          <Route exact path='/index.html'>
+            <Redirect to='/'/>
+          </Route>
           <Route exact path='/blog'>
             <BlogList/>
           </Route>
