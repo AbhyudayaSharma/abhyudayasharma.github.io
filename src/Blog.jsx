@@ -30,7 +30,11 @@ class Blog extends Component {
       if (this.state.doRedirect) {
         return <Redirect to='/404'/>;
       } else {
-        return null;
+        return (
+          <div>
+            <p>Loading...</p>
+          </div>
+        );
       }
     } else {
       return (

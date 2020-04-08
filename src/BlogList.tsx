@@ -21,12 +21,24 @@ export default class BlogList extends Component<{}, BlogListState> {
     this.setState({ blogs: blogs });
   };
 
+  getBlogList(): JSX.Element | JSX.Element[] {
+    if (this.state.blogs.length) {
+      return this.state.blogs.map((blog, index) => <BlogListEntry {...blog} key={index}/>);
+    } else {
+      return (
+        <div>
+          <p className = 'BlogList-loading'>Loading...</p>
+        </div>
+      );
+    }
+  }
+
   render(): JSX.Element {
     return (
       <div className='BlogList'>
         <Header/>
         <div className='BlogList-content'>
-          {this.state.blogs.map((blog, index) => <BlogListEntry {...blog} key={index}/>)}
+          {this.getBlogList()}
         </div>
         <div className='BlogList-footer'>
           <Footer/>

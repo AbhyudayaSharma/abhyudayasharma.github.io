@@ -20,3 +20,10 @@
   align-items: center;
   justify-content: center;
 }
+
+.BlogList-loading {
+  color: common.$index-foreground-color;
+  padding-top: 4rem;
+  font-size: 2rem;
+  font-weight: 100;
+}
