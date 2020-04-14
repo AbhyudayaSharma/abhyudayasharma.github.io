@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 // This is a JavaScript file, not TypeScript
 import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
 import Header from './Header';
 import Footer from './Footer';
 import Blogs from './blog/Blogs';
@@ -12,6 +13,8 @@ import Heading from './md-renderers/Heading';
 import Code from './md-renderers/Code';
 import Image from './md-renderers/Image';
 import Link from './md-renderers/Link';
+
+import packageJson from '../package.json';
 
 const markdownRenderers = {
   heading: Heading,
@@ -43,6 +46,9 @@ class Blog extends Component {
     } else {
       return (
         <article>
+          <Helmet>
+            <title>{`${this.state.blog.title} - ${packageJson.author.name}'s blog`}</title>
+          </Helmet>
           <header>
             <h1 className='Blog-title'>{this.state.blog.title}</h1>
           </header>

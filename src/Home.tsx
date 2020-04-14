@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BigButton from './BigButton';
 import Footer from './Footer';
 import packageJson from '../package.json';
+import { Helmet } from 'react-helmet';
 
 import './scss/common.scss';
 import './scss/Home.scss';
@@ -27,6 +28,9 @@ class Home extends Component {
 
     return (
       <div className="Home">
+        <Helmet>
+          <title>{`${packageJson.author.name}'s Personal Website and Blog`}</title>
+        </Helmet>
         <div className="Home-header">
           <h1 className='Home-h1'>
             {packageJson.author.name}
