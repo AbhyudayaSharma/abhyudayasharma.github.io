@@ -10,10 +10,14 @@ import { Redirect, withRouter } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import Heading from './md-renderers/Heading';
 import Code from './md-renderers/Code';
+import Image from './md-renderers/Image';
+import Link from './md-renderers/Link';
 
 const markdownRenderers = {
   heading: Heading,
   code: Code,
+  image: Image,
+  link: Link,
 };
 
 class Blog extends Component {
@@ -96,7 +100,7 @@ class Blog extends Component {
    * @return {Promise<void>}
    */
   async updateBlog() {
-    const blogs = await Blogs.getBlogs();
+    const blogs = await Blogs.getBlogs(false);
     // eslint-disable-next-line react/prop-types
     const params = this.props.match.params;
     for (const blog of blogs) {

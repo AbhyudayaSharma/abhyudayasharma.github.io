@@ -8,8 +8,11 @@ interface HeadingProps {
 }
 
 const Heading: FunctionComponent<HeadingProps> = (props: HeadingProps) => {
-  // TODO: respect other heading levels too.
-  return <h1 className='md-h1'>{props.children}</h1>;
+  if (props.level === 1) {
+    console.warn('Heading level = 1 detected. Are you sure you want it?\n' +
+      'Blog title is already an h1 element.');
+  }
+  return <h1 className={`md-h${props.level}`}>{props.children}</h1>;
 };
 
 export default Heading;

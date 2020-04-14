@@ -4,6 +4,7 @@ export interface BlogMetadata {
   readonly date: Date;
   readonly url?: string;
   readonly path: string;
+  readonly public: boolean;
   readonly description: string;
 }
 
@@ -19,14 +20,28 @@ const blogs: BlogMetadata[] = [
       'world',
       'hello-world',
     ],
+    public: true,
+  },
+  {
+    date: new Date(2020, 3, 13, 15, 47, 0, 0),
+    title: 'A better experience for BlackBoard Collaborate Ultra',
+    path: '2020/bbcollab',
+    description: 'A better experience for BlackBoard Collaborate Ultra',
+    tags: [
+      'blackboard',
+      'collab',
+      'ultra',
+      'dark-theme',
+    ],
+    public: false,
   },
 ];
 
 export default class Blogs {
-  static async getBlogs(): Promise<BlogMetadata[]> {
-    const promises = blogs.map(blog => import(`./${blog.path}.md`));
-    const urls = await Promise.all(promises);
-    return blogs.map((blog, index) => {
+  static async getBlogs(publicOnly = true): Promise<BlogMetadata[]> {
+    const blogsToReturn = publicOnly ? blogs.filter(blog => blog.public) : blogs;
+    const urls = await Promise.all(blogsToReturn.map(blog => import(`./${blog.path}.md`)));
+    return blogsToReturn.map((blog, index) => {
       return {
         ...blog,
         url: urls[index].default,
