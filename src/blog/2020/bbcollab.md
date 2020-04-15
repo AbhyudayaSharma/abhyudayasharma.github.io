@@ -8,7 +8,7 @@ solution for making my life under the COVID-19 lock-down better.
 When the session loads, press F12 and paste the following in the console to get a nice dark theme:
 
 ```js
-$('#appshare-video,#whiteboard_container,.side-panels').each((_,v)=>$(v).css('filter','invert(1)'));document.styleSheets[0].insertRule('.bb-emoji,.notifications{filter:invert(1)}');$('body').css('background-color','#101010');
+document.styleSheets[0].insertRule('.side-panels,#appshare-video,#whiteboard-container,.bb-emoji,.notifications{filter:invert(1)}');$('body').css('background-color','#101010');
  ```
 
 This inverts the presentation screen, whiteboard, chat box, chat notifications
