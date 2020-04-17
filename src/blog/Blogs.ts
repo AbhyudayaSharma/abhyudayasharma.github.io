@@ -9,7 +9,10 @@ export interface BlogMetadata {
 }
 
 // NOTE: months in the date constructor start from 0
-const blogs: BlogMetadata[] = [
+/**
+ * Blogs sorted in reverse chronological order.
+ */
+const blogs: readonly BlogMetadata[] = [
   {
     date: new Date(2020, 1, 7, 12, 45, 0, 0),
     title: 'Hello World',
@@ -35,7 +38,7 @@ const blogs: BlogMetadata[] = [
     ],
     public: true,
   },
-];
+].sort((a, b) => b.date.getTime() - a.date.getTime()); // reverse chronological order
 
 export default class Blogs {
   static async getBlogs(publicOnly = true): Promise<BlogMetadata[]> {
