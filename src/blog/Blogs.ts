@@ -33,7 +33,7 @@ const blogs: BlogMetadata[] = [
       'ultra',
       'dark-theme',
     ],
-    public: false,
+    public: true,
   },
 ];
 
