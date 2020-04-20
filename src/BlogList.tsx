@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import Footer from './Footer';
 import Blogs, { BlogMetadata } from './blog/Blogs';
 import BlogListEntry from './BlogListEntry';
-import packageJson from '../package.json';
+import { author } from '../package.json';
 
 import './scss/BlogList.scss';
 import Header from './Header';
@@ -39,7 +39,7 @@ export default class BlogList extends Component<{}, BlogListState> {
     return (
       <div className='BlogList'>
         <Helmet>
-          <title>{`${packageJson.author.name}'s Blog`}</title>
+          <title>{`${author.name}'s Blog`}</title>
         </Helmet>
         <Header/>
         <div className='BlogList-content'>

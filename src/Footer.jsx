@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GitInfo from 'react-git-info/macro';
-import packageJson from '../package.json';
+import { repository } from '../package.json';
 
 import './scss/Footer.scss';
 
@@ -13,12 +13,12 @@ class Footer extends Component {
       <footer className='Footer'>
         <p>
           This page was built and deployed from the commit&nbsp;
-          <a href={`${packageJson.repository.url}/commit/${gitInfo.commit.hash}`} className='Footer-link'>
+          <a href={`${repository.url}/commit/${gitInfo.commit.hash}`} className='Footer-link'>
             <code>{gitInfo.commit.shortHash}</code>
           </a>
           <br/>
           Fork this repository on&nbsp;
-          <a href={packageJson.repository.url} className='Footer-link'>
+          <a href={repository.url} className='Footer-link'>
             GitHub
           </a>
         </p>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import packageJson from '../package.json';
+import { author } from '../package.json';
 
 import './scss/Header.scss';
 
@@ -12,7 +12,7 @@ export default class Header extends Component<{}, {}> {
           <div className='Header-item'>
             <h1 className='Header-h1'>
               <NavLink to='/' activeClassName='Header-link-hover'>
-                {packageJson.author.name}
+                {author.name}
               </NavLink>
             </h1>
           </div>
