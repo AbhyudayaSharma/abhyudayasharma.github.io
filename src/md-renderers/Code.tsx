@@ -11,27 +11,49 @@ interface CodeProps {
 
 interface CodeState {
   copyButtonText: string;
+  copyButtonState: CopyButtonState;
+  copyButtonTimeOutId?: NodeJS.Timeout;
+}
+
+enum CopyButtonState {
+  WAITING,
+  ACTIVE,
 }
 
 class Code extends Component<CodeProps, CodeState> {
-  private static readonly COPY_BUTTON_TEXT = 'Copy to Clipboard';
+  private static readonly COPY_BUTTON_WAITING_TEXT = 'Copy to Clipboard';
+  private static readonly COPY_BUTTON_ACTIVE_TEXT = 'Copied!';
   private static readonly COPY_TIMEOUT = 2 * 1000; // milliseconds
 
   constructor(props: CodeProps) {
     super(props);
     this.state = {
-      copyButtonText: Code.COPY_BUTTON_TEXT,
+      copyButtonState: CopyButtonState.WAITING,
+      copyButtonText: Code.COPY_BUTTON_WAITING_TEXT,
+      copyButtonTimeOutId: undefined,
     };
   }
 
   async copyButtonClicked(): Promise<void> {
     try {
       await navigator.clipboard.writeText(this.props.value);
-      this.setState({ copyButtonText: 'Copied!' });
-      setTimeout(() => {
-        // eslint-disable-next-line no-undef
-        this.setState({ copyButtonText: Code.COPY_BUTTON_TEXT });
+      if (this.state.copyButtonTimeOutId) {
+        clearTimeout(this.state.copyButtonTimeOutId);
+      }
+
+      const timeOutId = setTimeout(() => {
+        this.setState({
+          copyButtonState: CopyButtonState.WAITING,
+          copyButtonText: Code.COPY_BUTTON_WAITING_TEXT,
+          copyButtonTimeOutId: undefined,
+        });
       }, Code.COPY_TIMEOUT);
+
+      this.setState({
+        copyButtonState: CopyButtonState.ACTIVE,
+        copyButtonText: Code.COPY_BUTTON_ACTIVE_TEXT,
+        copyButtonTimeOutId: timeOutId,
+      });
     } catch (err) {
       alert('Unable to copy. Please update your browser.');
       console.error(err);
