@@ -6,13 +6,16 @@ import Header from './Header';
 import Footer from './Footer';
 import Blogs from './blog/Blogs';
 
+import 'katex/dist/katex.min.css';
 import './scss/Blog.scss';
+
 import { Redirect, withRouter } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import Heading from './md-renderers/Heading';
 import Code from './md-renderers/Code';
 import Image from './md-renderers/Image';
 import Link from './md-renderers/Link';
+import { BlockMathRenderer, InlineMathRenderer } from './md-renderers/Math';
 
 import { author } from '../package.json';
 
@@ -21,7 +24,13 @@ const markdownRenderers = {
   code: Code,
   image: Image,
   link: Link,
+  math: BlockMathRenderer,
+  inlineMath: InlineMathRenderer,
 };
+
+const markdownPlugins = [
+  require('remark-math'),
+];
 
 const BlogState = {
   LOADING: 1,
@@ -68,7 +77,8 @@ class Blog extends Component {
             </p>
           </section>
           <section>
-            <ReactMarkdown source={this.state.blog.text} renderers={markdownRenderers}/>
+            <ReactMarkdown source={this.state.blog.text} renderers={markdownRenderers}
+              plugins={markdownPlugins}/>
           </section>
         </article>
       );
