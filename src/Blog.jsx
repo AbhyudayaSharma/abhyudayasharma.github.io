@@ -23,27 +23,32 @@ const markdownRenderers = {
   link: Link,
 };
 
+const BlogState = {
+  LOADING: 1,
+  READY: 2,
+  NOT_FOUND: 3,
+  FETCH_ERROR: 4,
+};
+
 class Blog extends Component {
+  static LOADING_TEXT = 'Loading…';
+  static BLOG_FETCH_RETRY_COUNT = 3;
+
   constructor(props) {
     super(props);
     this.state = {
+      blogState: BlogState.LOADING,
       blog: undefined,
-      doRedirect: false,
     };
   }
 
   getMarkdown() {
-    if (!this.state.blog) {
-      if (this.state.doRedirect) {
-        return <Redirect to='/404'/>;
-      } else {
-        return (
-          <div>
-            <p>Loading...</p>
-          </div>
-        );
-      }
-    } else {
+    // this function should NOT modify the state of the component
+    if (this.state.blogState === BlogState.LOADING) {
+      return (<p>{Blog.LOADING_TEXT}</p>);
+    } else if (this.state.blogState === BlogState.NOT_FOUND) {
+      return <Redirect to='/404'/>;
+    } else if (this.state.blogState === BlogState.READY) {
       return (
         <article>
           <Helmet>
@@ -67,6 +72,11 @@ class Blog extends Component {
           </section>
         </article>
       );
+    } else if (this.state.blogState === BlogState.FETCH_ERROR) {
+      return (<p>Unable to load the blog. Please check your internet connection and refresh the page.</p>);
+    } else {
+      throw Error(`Invalid BlogState = ${this.state.blogState}.\n
+        Valid states = ${JSON.stringify(BlogState, null, 2)}`);
     }
   }
 
@@ -109,15 +119,37 @@ class Blog extends Component {
     const blogs = await Blogs.getBlogs(false);
     // eslint-disable-next-line react/prop-types
     const params = this.props.match.params;
+    let blogFound = false;
     for (const blog of blogs) {
       // eslint-disable-next-line react/prop-types
       if (blog.path === `${params.year}/${params.path}`) {
-        blog.text = await (await fetch(blog.url)).text();
-        this.setState({ blog: blog, doRedirect: false });
-        return;
+        let tryCount = 0;
+        blogFound = true;
+        while (!this.state.blog && tryCount < Blog.BLOG_FETCH_RETRY_COUNT) {
+          try {
+            tryCount++;
+            blog.text = await (await fetch(blog.url)).text();
+            this.setState({ blog: blog, blogState: BlogState.READY });
+            return;
+          } catch (e) {
+            console.error({
+              error: e,
+              tryCount: tryCount,
+              maxTryCount: Blog.BLOG_FETCH_RETRY_COUNT,
+              message: 'Error while fetching blog',
+            });
+          }
+        }
+        break;
       }
     }
-    this.setState({ blog: undefined, doRedirect: true });
+
+    if (!blogFound) {
+      this.setState({ blog: undefined, blogState: BlogState.NOT_FOUND });
+    } else {
+      // blog was found but we couldn't set the state, so there should've been some network error.
+      this.setState({ blog: undefined, blogState: BlogState.FETCH_ERROR });
+    }
   }
 }
 
