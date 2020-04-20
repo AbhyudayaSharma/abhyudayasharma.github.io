@@ -5,11 +5,17 @@ import Blog from './Blog';
 import BlogList from './BlogList';
 import Header from './Header';
 import AboutMe from './AboutMe';
+import { Helmet } from 'react-helmet';
+import { author } from '../package.json';
 
 class App extends Component<{}, {}> {
   render(): JSX.Element {
+    const title = `${author.name}'s Personal Website and Blog`;
     return (
       <Router>
+        <Helmet>
+          <title>{title}</title>
+        </Helmet>
         <Switch>
           <Route exact path='/'>
             <Home />
