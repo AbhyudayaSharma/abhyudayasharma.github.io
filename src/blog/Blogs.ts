@@ -1,18 +1,21 @@
-export interface BlogMetadata {
+interface IncompleteBlogMetadata {
   readonly title: string;
   readonly tags: string[];
   readonly date: Date;
-  readonly url?: string;
   readonly path: string;
   readonly public: boolean;
   readonly description: string;
+}
+
+export interface BlogMetadata extends IncompleteBlogMetadata {
+  readonly url: string;
 }
 
 // NOTE: months in the date constructor start from 0
 /**
  * Blogs sorted in reverse chronological order.
  */
-const blogs: readonly BlogMetadata[] = [
+const blogs: readonly IncompleteBlogMetadata[] = [
   {
     date: new Date(2020, 1, 7, 12, 45, 0, 0),
     title: 'Hello World',
@@ -38,7 +41,7 @@ const blogs: readonly BlogMetadata[] = [
     ],
     public: true,
   },
-].sort((a, b) => b.date.getTime() - a.date.getTime()); // reverse chronological order
+].sort((a: IncompleteBlogMetadata, b: IncompleteBlogMetadata) => b.date.getTime() - a.date.getTime()); // reverse chronological order
 
 export default class Blogs {
   static async getBlogs(publicOnly = true): Promise<BlogMetadata[]> {

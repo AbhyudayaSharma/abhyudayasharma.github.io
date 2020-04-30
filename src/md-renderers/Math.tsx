@@ -7,16 +7,16 @@ interface MathProps {
   value: string;
 }
 
-const InlineMathRenderer: FunctionComponent<MathProps> = (props: MathProps) => {
+const InlineMath: FunctionComponent<MathProps> = (props: MathProps) => {
   return (
     <Tex math = {props.value}/>
   );
 };
 
-const BlockMathRenderer: FunctionComponent<MathProps> = (props: MathProps) => {
+const BlockMath: FunctionComponent<MathProps> = (props: MathProps) => {
   return (
     <Tex math = {props.value} block />
   );
 };
 
-export { BlockMathRenderer, InlineMathRenderer };
+export { BlockMath, InlineMath };
