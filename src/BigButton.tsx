@@ -15,12 +15,9 @@ class BigButton extends Component<Props, {}> {
       className: 'BigButton-btn',
     };
 
-    let link: JSX.Element;
-    if (this.props.url.startsWith('/')) {
-      link = (<Link {...linkProps} to={this.props.url}>{this.props.text}</Link>);
-    } else {
-      link = (<a {...linkProps} href={this.props.url}>{this.props.text}</a>);
-    }
+    const link: JSX.Element = this.props.url.startsWith('/')
+      ? (<Link {...linkProps} to = {this.props.url}>{this.props.text}</Link>)
+      : (<a {...linkProps} href = {this.props.url}>{this.props.text}</a>);
 
     return (
       <div className='BigButton'>

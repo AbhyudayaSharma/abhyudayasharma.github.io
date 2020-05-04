@@ -54,8 +54,8 @@ export interface BlogState {
 }
 
 class Blog extends Component<BlogProps, BlogState> {
-  private static LOADING_TEXT = 'Loading…';
-  private static BLOG_FETCH_RETRY_COUNT = 3;
+  private static readonly LOADING_TEXT = 'Loading…';
+  private static readonly BLOG_FETCH_RETRY_COUNT = 3;
 
   constructor(props: BlogProps) {
     super(props);
@@ -65,7 +65,10 @@ class Blog extends Component<BlogProps, BlogState> {
     };
   }
 
-  getMarkdown(): JSX.Element {
+  /**
+   * Returns the content of the blog.
+   */
+  private getBlogContent(): JSX.Element {
     // this function should NOT modify the state of the component
     if (this.state.contentState === BlogContentState.LOADING) {
       return (<p>{Blog.LOADING_TEXT}</p>);
@@ -109,7 +112,7 @@ class Blog extends Component<BlogProps, BlogState> {
       <div className='Blog'>
         <Header/>
         <div className='Blog-text'>
-          {this.getMarkdown()}
+          {this.getBlogContent()}
         </div>
         <Footer/>
       </div>
@@ -132,12 +135,13 @@ class Blog extends Component<BlogProps, BlogState> {
   /**
    * Updates the rendered blog. Use when the component state or props change.
    */
-  async updateBlog(): Promise<void> {
+  private async updateBlog(): Promise<void> {
     const blogs = (await Blogs.getBlogs(false)) as BlogData[];
     const params = this.props.match.params;
+    const path = `${params.year}/${params.path}`;
     let blogFound = false;
     for (const blog of blogs) {
-      if (blog.path === `${params.year}/${params.path}`) {
+      if (blog.path === path) {
         let tryCount = 0;
         blogFound = true;
         while (!this.state.blog && tryCount < Blog.BLOG_FETCH_RETRY_COUNT) {
