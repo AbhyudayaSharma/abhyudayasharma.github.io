@@ -1,6 +1,6 @@
 @use 'common';
 
-$text-color: #eeeeee;
+$text-color: #eee;
 
 .BlogListEntry {
   background-color: common.$index-background-color;
@@ -37,15 +37,12 @@ $text-color: #eeeeee;
 
 .BlogListEntry-h1 > a {
   transition: 0.2s;
+  text-decoration: none;
+  color: $text-color;
 }
 
 .BlogListEntry-h1 > a:hover {
   color: common.$link-color;
-}
-
-.BlogListEntry-h1 > a {
-  text-decoration: none;
-  color: $text-color;
 }
 
 .BlogListEntry-tag-container {

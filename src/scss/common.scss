@@ -1,6 +1,6 @@
 $index-background-color: #282c34;
-$index-foreground-color: #ffffff;
-$link-color: #ADD8E6;
+$index-foreground-color: #fff;
+$link-color: #add8e6;
 
 %unselectable {
   -moz-user-select: none;
@@ -9,8 +9,6 @@ $link-color: #ADD8E6;
   user-select: none;
   -webkit-user-drag: none;
   cursor: default;
-  //noinspection CssUnknownProperty
-  user-drag: none;
 }
 
 %selectable {

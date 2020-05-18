@@ -1,5 +1,7 @@
 @use 'common';
 
+$md-code-color: #fff;
+
 .md-heading {
   font-weight: 100;
   text-align: left;
@@ -26,7 +28,7 @@
   @extend %unselectable;
   margin-bottom: 1rem;
   padding: 1rem 1rem;
-  color: #ffffff;
+  color: $md-code-color;
   background-color: transparent;
   outline: none;
   box-shadow: none;
@@ -38,9 +40,10 @@
   font-weight: 100;
 }
 
-.md-code-btn:hover, .md-code-btn:active {
+.md-code-btn:hover,
+.md-code-btn:active {
   color: rgb(43, 43, 43);
-  background-color: #ffffff;
+  background-color: $md-code-color;
 }
 
 .md-img {

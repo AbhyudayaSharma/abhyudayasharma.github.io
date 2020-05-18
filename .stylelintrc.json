@@ -1,0 +1,12 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "declaration-empty-line-before": "never",
+    "value-list-comma-newline-after": "always-multi-line",
+    "scss/at-rule-no-unknown": true
+  }
+}
