@@ -15,14 +15,17 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
     "react-syntax-highlighter": "^12.2.1",
-    "remark-math": "^2.0.1"
+    "remark-math": "^2.0.1",
+    "snyk": "^1.323.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --no-error-on-unmatched-pattern src/**/*.js src/**/*.jsx .eslintrc.js src/**/*.tsx src/**/*.ts"
+    "lint": "eslint --no-error-on-unmatched-pattern src/**/*.js src/**/*.jsx .eslintrc.js src/**/*.tsx src/**/*.ts",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -76,5 +79,6 @@
     "name": "Abhyudaya Sharma",
     "email": "sharmaabhyudaya@gmail.com",
     "url": "https://abhyudaya.dev"
-  }
+  },
+  "snyk": true
 }
