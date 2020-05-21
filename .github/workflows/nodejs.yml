@@ -29,7 +29,7 @@ jobs:
       if: contains(matrix.os, 'ubuntu') && contains(matrix.node-version, '12')
       run: |
         npm test -- --coverage --verbose
-        bash <(curl -Ls https://coverage.codacy.com/get.sh) --language Javascript -r coverage/lcov.info
+        bash <(curl -Ls https://coverage.codacy.com/get.sh) report --language Javascript --coverage-reports coverage/lcov.info
       env:
         CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
     env:
