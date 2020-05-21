@@ -24,7 +24,14 @@ jobs:
         npm install
         npm run build --if-present
         npm run lint
+        npm test -- --verbose
+    - name: Code coverage
+      if: contains(matrix.os, 'ubuntu') && contains(matrix.node-version, '12')
+      run: |
         npm test -- --coverage --verbose
+        bash <(curl -Ls https://coverage.codacy.com/get.sh)
+      env:
+        CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
     env:
       CI: true
 
