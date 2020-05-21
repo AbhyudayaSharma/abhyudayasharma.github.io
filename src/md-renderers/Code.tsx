@@ -66,7 +66,7 @@ class Code extends Component<CodeProps, CodeState> {
         <SyntaxHighlighter language={this.props.language} style={darcula}>
           {this.props.value}
         </SyntaxHighlighter>
-        <button className='md-code-btn' onClick={(async (): Promise<void> => this.copyButtonClicked.bind(this)())}>
+        <button className='md-code-btn' onClick={this.copyButtonClicked.bind(this)}>
           {this.state.copyButtonText}
         </button>
       </div>

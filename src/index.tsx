@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'whatwg-fetch';
+
 import './scss/index.scss';
 import App from './App';
 
