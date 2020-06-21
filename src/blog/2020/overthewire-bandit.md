@@ -81,9 +81,9 @@ find inhere/ -size 1033c -type f '!' -executable -exec cat '{}' +
 ```
 
 The command searches for files that satisfy all of these criteria:
-* non-executable — `'!' -executable`
-* size = $1033$ bytes — `-size 1033c`
-* regular files (not directories) — `-type f`
+  * non-executable — `'!' -executable`
+  * size = $1033$ bytes — `-size 1033c`
+  * regular files (not directories) — `-type f`
 
 Then it `cat`s each of these files using `-exec cat '{}' +`.
 
@@ -448,7 +448,7 @@ Password: `0ef186ac70e04ea33b4c1853d2526fa2`
 This time around the password is in git history and has not been purged. Take a look at `git log` which provides the
 commit history.
 
-```
+```text
 commit edd935d60906b33f0619605abd1689808ccdd5ee
 Author: Morla Porla <morla@overthewire.org>
 Date: Thu May 7 20:14:49 2020 +0200
