@@ -26,4 +26,4 @@ Paste the following into the console **after** the video loads.
 
 This is what it looks like:
 
-![Screenshot](https://i.imgur.com/TBwpkr7.png)
+![Screenshot](/img/bbcollab-dark.png)

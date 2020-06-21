@@ -52,3 +52,8 @@ code {
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 1rem;
 }
+
+// removes a border outside button text on Firefox
+::-moz-focus-inner {
+  border: 0;
+}

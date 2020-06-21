@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from './Header';
 import Footer from './Footer';
@@ -11,11 +11,14 @@ import { Redirect, withRouter, RouteComponentProps } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import Heading from './md-renderers/Heading';
 import Code from './md-renderers/Code';
+import InlineCode from './md-renderers/InlineCode';
 import Image from './md-renderers/Image';
 import Link from './md-renderers/Link';
 import { BlockMath, InlineMath } from './md-renderers/Math';
 
 import { author } from '../package.json';
+import Blockquote from './md-renderers/Blockquote';
+import ThematicBreak from './md-renderers/ThematicBreak';
 
 const markdownRenderers = {
   heading: Heading,
@@ -24,6 +27,9 @@ const markdownRenderers = {
   link: Link,
   math: BlockMath,
   inlineMath: InlineMath,
+  inlineCode: InlineCode,
+  blockquote: Blockquote,
+  thematicBreak: ThematicBreak,
 };
 
 const markdownPlugins = [
@@ -65,44 +71,52 @@ class Blog extends Component<BlogProps, BlogState> {
     };
   }
 
+  private generateBlogFromMarkdown(): ReactNode {
+    if (!this.state.blog) {
+      throw new Error('Blog unset when trying to render it.');
+    }
+
+    return (
+      <article>
+        <Helmet>
+          <title>{`${this.state.blog.title} - ${author.name}'s blog`}</title>
+        </Helmet>
+        <header>
+          <h1 className='Blog-title'>{this.state.blog.title}</h1>
+        </header>
+        <section>
+          <p className='Blog-date'>
+            {this.state.blog.date.toLocaleDateString('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </p>
+        </section>
+        <section>
+          <ReactMarkdown source={this.state.blog.text} renderers={markdownRenderers} plugins={markdownPlugins}/>
+        </section>
+      </article>
+    );
+  }
+
   /**
    * Returns the content of the blog.
    */
-  private getBlogContent(): JSX.Element {
+  private getBlogContent(): ReactNode {
     // this function should NOT modify the state of the component
-    if (this.state.contentState === BlogContentState.LOADING) {
-      return (<p>{Blog.LOADING_TEXT}</p>);
-    } else if (this.state.contentState === BlogContentState.NOT_FOUND) {
-      return <Redirect to='/404'/>;
-    } else if (this.state.contentState === BlogContentState.READY) {
-      return (
-        <article>
-          <Helmet>
-            <title>{`${this.state.blog?.title} - ${author.name}'s blog`}</title>
-          </Helmet>
-          <header>
-            <h1 className='Blog-title'>{this.state.blog?.title}</h1>
-          </header>
-          <section>
-            <p className='Blog-date'>
-              {this.state.blog?.date.toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </p>
-          </section>
-          <section>
-            <ReactMarkdown source={this.state.blog?.text} renderers={markdownRenderers}
-              plugins={markdownPlugins}/>
-          </section>
-        </article>
-      );
-    } else if (this.state.contentState === BlogContentState.FETCH_ERROR) {
-      return (<p>Unable to load the blog. Please check your internet connection and refresh the page.</p>);
-    } else {
-      throw Error(`Invalid BlogState = ${this.state.contentState}.\n
+    switch (this.state.contentState) {
+      case BlogContentState.LOADING:
+        return (<p>{Blog.LOADING_TEXT}</p>);
+      case BlogContentState.NOT_FOUND:
+        return <Redirect to='/404'/>;
+      case BlogContentState.FETCH_ERROR:
+        return (<p>Unable to load the blog. Please check your internet connection and refresh the page.</p>);
+      case BlogContentState.READY:
+        return this.generateBlogFromMarkdown();
+      default:
+        throw Error(`Invalid BlogState = ${this.state.contentState}.\n
         Valid states = ${JSON.stringify(BlogContentState, null, 2)}`);
     }
   }

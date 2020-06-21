@@ -32,7 +32,7 @@ const blogs: readonly IncompleteBlogMetadata[] = [
     date: new Date(2020, 3, 13, 15, 47, 0, 0),
     title: 'A better experience for BlackBoard Collaborate Ultra',
     path: '2020/bbcollab',
-    description: 'A better experience for BlackBoard Collaborate Ultra',
+    description: 'Dark theme, video playback speed control and more to improve Blackboard Collaborate Ultra.',
     tags: [
       'blackboard',
       'collab',
@@ -41,6 +41,19 @@ const blogs: readonly IncompleteBlogMetadata[] = [
     ],
     public: true,
   },
+  {
+    date: new Date(2020, 5, 21, 14, 53, 0, 0),
+    title: 'My first CTF - OverTheWire Bandit',
+    path: '2020/overthewire-bandit',
+    description: 'My solutions to the CTF and some interesting stuff I learnt.',
+    tags: [
+      'ctf',
+      'hacking',
+      'overthewire',
+      'bandit',
+    ],
+    public: true,
+  }
 ].sort((a: IncompleteBlogMetadata, b: IncompleteBlogMetadata) => b.date.getTime() - a.date.getTime()); // reverse chronological order
 
 export default class Blogs {

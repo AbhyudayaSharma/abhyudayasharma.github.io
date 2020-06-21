@@ -61,9 +61,10 @@ class Code extends Component<CodeProps, CodeState> {
   }
 
   render(): React.ReactNode {
+    const language = this.props.language;
     return (
       <div className='md-code'>
-        <SyntaxHighlighter language={this.props.language} style={darcula}>
+        <SyntaxHighlighter language={language || 'text'} style={darcula}>
           {this.props.value}
         </SyntaxHighlighter>
         <button className='md-code-btn' onClick={this.copyButtonClicked.bind(this)}>
