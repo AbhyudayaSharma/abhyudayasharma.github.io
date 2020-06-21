@@ -4,14 +4,12 @@ import '../scss/renderers.scss';
 
 interface LinkProps {
   href: string;
-  children: JSX.Element[];
 }
 
-const Link: FunctionComponent<LinkProps> = (props: LinkProps) => {
-  console.log(props);
+const Link: FunctionComponent<LinkProps> = ({ href, children }) => {
   return (
-    <a href={props.href} className='md-link'>
-      {props.children}
+    <a href={href} className='md-link'>
+      {children}
     </a>
   );
 };

@@ -29,6 +29,13 @@
   }
 }
 
+@media screen and (min-width: 1024px) {
+  .Blog-text > article {
+    max-width: 85rem;
+    width: auto !important;
+  }
+}
+
 .Blog-date {
   font-size: 1.4rem;
 }

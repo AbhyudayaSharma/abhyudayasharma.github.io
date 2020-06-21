@@ -40,6 +40,7 @@ module.exports = {
       exports: 'only-multiline',
       functions: 'never',
     }],
+    'react/prop-types': 0, // don't need proptypes because we use TypeScript
   },
   settings: {
     react: {
