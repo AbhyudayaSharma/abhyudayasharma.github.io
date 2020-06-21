@@ -81,9 +81,9 @@ find inhere/ -size 1033c -type f '!' -executable -exec cat '{}' +
 ```
 
 The command searches for files that satisfy all of these criteria:
-  * non-executable — `'!' -executable`
-  * size = $1033$ bytes — `-size 1033c`
-  * regular files (not directories) — `-type f`
+* non-executable — `'!' -executable`
+* size = $1033$ bytes — `-size 1033c`
+* regular files (not directories) — `-type f`
 
 Then it `cat`s each of these files using `-exec cat '{}' +`.
 
@@ -515,7 +515,7 @@ the only file in the master branch. `git branch -r` confirms that there are no o
 test now are tags. `git tag -l` -- lo and behold, we have a tag called `secret`. Now, we can simply use `git show secret`
 and get the tag message.
 
-```
+```text
 bandit0@bandit:/tmp/tmp.fDJRcU0jUF/repo$ git show f17132340e8ee6c159e0a4a6bc6f80e1da3b1aea
 47e603bb428404d265f59c42920d81e5
 ```
@@ -546,7 +546,7 @@ git push
 
 The push fails, but you get the password:
 
-```
+```text
 bandit0@bandit:/tmp/tmp.fDJRcU0jUF/bandit31$ git push
 Could not create directory '/home/bandit0/.ssh'.
 The authenticity of host 'localhost (127.0.0.1)' can't be established.
@@ -582,7 +582,7 @@ Password: `56a9bf19c63d650ce78e6ec0354ee45e`
 The only things in the UNIX-verse that are in all-caps are environment variables. So one of the first thing I tried was
 typing `$PATH` in the shell.
 
-```
+```text
 >> $PATH
 sh: 1: /usr/local/bin:/usr/bin:/bin:/usr/games: not found
 ```
@@ -599,7 +599,7 @@ Password: `c9c3199ddf4121b10cf581a98d51caee`
 
 **Game Over!** Bandit 34 doesn't exist yet.
 
-```
+```text
 bandit33@bandit:~$ cat README.txt
 Congratulations on solving the last level of this game!
 
