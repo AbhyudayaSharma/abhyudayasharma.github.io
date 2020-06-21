@@ -3,7 +3,6 @@ import React, { FunctionComponent } from 'react';
 import '../scss/renderers.scss';
 
 interface InlineCodeProps {
-  inline: boolean;
   value: string;
 }
 

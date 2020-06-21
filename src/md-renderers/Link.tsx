@@ -4,7 +4,6 @@ import '../scss/renderers.scss';
 
 interface LinkProps {
   href: string;
-  children: JSX.Element[];
 }
 
 const Link: FunctionComponent<LinkProps> = ({ href, children }) => {
