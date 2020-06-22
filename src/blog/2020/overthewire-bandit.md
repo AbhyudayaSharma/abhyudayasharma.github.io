@@ -81,9 +81,9 @@ find inhere/ -size 1033c -type f '!' -executable -exec cat '{}' +
 ```
 
 The command searches for files that satisfy all of these criteria:
-*  non-executable — `'!' -executable`
-*  size = $1033$ bytes — `-size 1033c`
-*  regular files (not directories) — `-type f`
+*   non-executable — `'!' -executable`
+*   size = $1033$ bytes — `-size 1033c`
+*   regular files (not directories) — `-type f`
 
 Then it `cat`s each of these files using `-exec cat '{}' +`.
 
