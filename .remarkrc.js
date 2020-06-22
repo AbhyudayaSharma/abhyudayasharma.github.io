@@ -1,7 +1,9 @@
 module.exports = {
-  plugins: [
-    'remark-preset-lint-recommended',
-    'remark-lint-no-dead-urls',
-    'remark-lint-no-duplicate-headings',
-  ],
+  plugins: {
+    'remark-preset-lint-recommended': null,
+    'remark-lint-no-dead-urls': {
+      skipOffline: true,  // needed for Codacy
+    },
+    'remark-lint-no-duplicate-headings': null,
+  },
 }
