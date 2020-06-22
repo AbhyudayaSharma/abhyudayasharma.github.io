@@ -5,7 +5,7 @@ import { createMemoryHistory } from 'history';
 import Blog from '../Blog';
 import { MemoryRouter } from 'react-router-dom';
 
-test('Renders all blogs correctly', async () => {
+test.skip('Renders all blogs correctly', async () => {
   const blogs = await Blogs.getBlogs(false);
   for (let i = 0; i < blogs.length; i++) {
     const path = `/blog/${blogs[i].path}`;
