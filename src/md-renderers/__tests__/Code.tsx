@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import Code from '../Code';
 
 describe('code block', () => {
@@ -12,6 +12,6 @@ describe('code block', () => {
     }`;
 
   it('renders without crashing', async () => {
-    shallow(<Code value={content} language={language}/>);
+    render(<Code value={content} language={language}/>);
   });
 });
