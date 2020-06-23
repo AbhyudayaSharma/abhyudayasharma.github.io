@@ -54,17 +54,14 @@ const blogs: readonly IncompleteBlogMetadata[] = [
     ],
     public: true,
   }
-].sort((a: IncompleteBlogMetadata, b: IncompleteBlogMetadata) => b.date.getTime() - a.date.getTime()); // reverse chronological order
+].sort((a, b) => b.date.getTime() - a.date.getTime()); // reverse chronological order
 
 export default class Blogs {
   static async getBlogs(publicOnly = true): Promise<BlogMetadata[]> {
     const blogsToReturn = publicOnly ? blogs.filter(blog => blog.public) : blogs;
     const urls = await Promise.all(blogsToReturn.map(blog => import(`./${blog.path}.md`)));
-    return blogsToReturn.map((blog, index) => {
-      return {
-        ...blog,
-        url: urls[index].default,
-      };
-    });
+    return blogsToReturn.map((blog, index) => ({
+      ...blog, url: urls[index].default,
+    }));
   }
 }

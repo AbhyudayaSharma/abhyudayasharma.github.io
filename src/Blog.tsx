@@ -7,7 +7,7 @@ import Blogs, { BlogMetadata } from './blog/Blogs';
 import 'katex/dist/katex.min.css';
 import './scss/Blog.scss';
 
-import { Redirect, withRouter, RouteComponentProps } from 'react-router-dom';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import Heading from './md-renderers/Heading';
 import Code from './md-renderers/Code';
@@ -61,7 +61,6 @@ export interface BlogState {
 
 class Blog extends Component<BlogProps, BlogState> {
   private static readonly LOADING_TEXT = 'Loading…';
-  private static readonly BLOG_FETCH_RETRY_COUNT = 3;
 
   constructor(props: BlogProps) {
     super(props);
@@ -94,7 +93,7 @@ class Blog extends Component<BlogProps, BlogState> {
             })}
           </p>
         </section>
-        <section>
+        <section role='document'>
           <ReactMarkdown source={this.state.blog.text} renderers={markdownRenderers} plugins={markdownPlugins}/>
         </section>
       </article>
@@ -150,38 +149,28 @@ class Blog extends Component<BlogProps, BlogState> {
    * Updates the rendered blog. Use when the component state or props change.
    */
   private async updateBlog(): Promise<void> {
-    const blogs = (await Blogs.getBlogs(false)) as BlogData[];
+    const blogs = await Blogs.getBlogs(false) as BlogData[];
     const params = this.props.match.params;
     const path = `${params.year}/${params.path}`;
-    let blogFound = false;
-    for (const blog of blogs) {
-      if (blog.path === path) {
-        let tryCount = 0;
-        blogFound = true;
-        while (!this.state.blog && tryCount < Blog.BLOG_FETCH_RETRY_COUNT) {
-          try {
-            tryCount++;
-            blog.text = await (await fetch(blog.url)).text();
-            this.setState({ blog: blog, contentState: BlogContentState.READY });
-            return;
-          } catch (e) {
-            console.error({
-              error: e,
-              tryCount: tryCount,
-              maxTryCount: Blog.BLOG_FETCH_RETRY_COUNT,
-              message: 'Error while fetching blog',
-            });
-          }
-        }
-        break;
-      }
+    const blog = blogs.find(blog => blog.path === path);
+
+    if (!blog) {
+      this.setState({ contentState: BlogContentState.NOT_FOUND });
+      return;
     }
 
-    if (!blogFound) {
-      this.setState({ blog: undefined, contentState: BlogContentState.NOT_FOUND });
-    } else {
-      // blog was found but we couldn't set the state, so there should've been some network error.
-      this.setState({ blog: undefined, contentState: BlogContentState.FETCH_ERROR });
+    try {
+      const response = await fetch(blog.url);
+      if (!response.ok) {
+        console.error({ message: 'Fetching blog failed', response });
+        this.setState({ contentState: BlogContentState.FETCH_ERROR });
+      }
+      blog.text = await response.text();
+      console.log(blog.text);
+      this.setState({ blog: blog, contentState: BlogContentState.READY });
+    } catch (e) {
+      console.error({ message: 'Fetching blog failed', error: e });
+      this.setState({ contentState: BlogContentState.FETCH_ERROR });
     }
   }
 }
