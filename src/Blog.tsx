@@ -166,7 +166,6 @@ class Blog extends Component<BlogProps, BlogState> {
         this.setState({ contentState: BlogContentState.FETCH_ERROR });
       }
       blog.text = await response.text();
-      console.log(blog.text);
       this.setState({ blog: blog, contentState: BlogContentState.READY });
     } catch (e) {
       console.error({ message: 'Fetching blog failed', error: e });
