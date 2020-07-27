@@ -26,6 +26,7 @@ jobs:
         npm run lint
         npm run lint-md
         npm test -- --verbose
+        npm run postbuild
     - name: Code coverage
       if: contains(matrix.os, 'ubuntu') && contains(matrix.node-version, '12')
       run: |
@@ -58,6 +59,7 @@ jobs:
           echo Running the build...
           npm install
           npm run build --if-present
+          npm run postbuild
       - name: build docker image
         # Google Cloud Run cannot use images from DockerHub, so push the image
         # to Google Container Repository.
