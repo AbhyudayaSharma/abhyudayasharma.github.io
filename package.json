@@ -16,7 +16,7 @@
     "react-scripts": "^3.4.3",
     "react-snap": "^1.23.0",
     "react-syntax-highlighter": "^13.5.1",
-    "remark-math": "^3.0.0",
+    "remark-math": "^3.0.1",
     "whatwg-fetch": "^3.4.0"
   },
   "scripts": {
