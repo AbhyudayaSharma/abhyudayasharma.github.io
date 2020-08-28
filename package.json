@@ -14,7 +14,6 @@
     "react-helmet": "^6.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
-    "react-snap": "^1.23.0",
     "react-syntax-highlighter": "^13.5.1",
     "remark-math": "^3.0.1",
     "whatwg-fetch": "^3.4.0"
@@ -25,8 +24,7 @@
     "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject",
     "lint": "eslint --no-error-on-unmatched-pattern src/**/*.js src/**/*.jsx .eslintrc.js src/**/*.tsx src/**/*.ts",
-    "lint-md": "remark src/blog/",
-    "postbuild": "react-snap"
+    "lint-md": "remark src/blog/"
   },
   "eslintConfig": {
     "extends": "react-app"
