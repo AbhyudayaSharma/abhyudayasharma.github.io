@@ -16,7 +16,7 @@
     "react-scripts": "^3.4.3",
     "react-syntax-highlighter": "^13.5.3",
     "remark-math": "^3.0.1",
-    "whatwg-fetch": "^3.4.0"
+    "whatwg-fetch": "^3.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
