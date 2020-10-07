@@ -1,4 +1,4 @@
-FROM nginx:1.19.2
+FROM nginx:1.19.3
 
 ENV NGINX_ROOT=/usr/share/nginx/html
 ENV NGINX_CONFIG=/etc/nginx/nginx.conf
