@@ -2,7 +2,7 @@ import React, { Component, ReactNode } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from './Header';
 import Footer from './Footer';
-import Blogs, { BlogMetadata } from './blog/Blogs';
+import Blogs, { BlogMetadata } from '../blog/Blogs';
 
 import 'katex/dist/katex.min.css';
 import './scss/Blog.scss';
@@ -16,7 +16,7 @@ import Image from './md-renderers/Image';
 import Link from './md-renderers/Link';
 import { BlockMath, InlineMath } from './md-renderers/Math';
 
-import { author } from '../package.json';
+import { author } from '../../package.json';
 import Blockquote from './md-renderers/Blockquote';
 import ThematicBreak from './md-renderers/ThematicBreak';
 

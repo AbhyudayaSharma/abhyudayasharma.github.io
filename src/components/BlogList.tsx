@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import Footer from './Footer';
-import Blogs, { BlogMetadata } from './blog/Blogs';
+import Blogs, { BlogMetadata } from '../blog/Blogs';
 import BlogListEntry from './BlogListEntry';
-import { author } from '../package.json';
+import { author } from '../../package.json';
 
 import './scss/BlogList.scss';
 import Header from './Header';
@@ -21,15 +21,15 @@ export default class BlogList extends Component<{}, BlogListState> {
   async componentDidMount(): Promise<void> {
     const blogs = await Blogs.getBlogs();
     this.setState({ blogs: blogs });
-  };
+  }
 
   getBlogList(): JSX.Element | JSX.Element[] {
     if (this.state.blogs.length) {
-      return this.state.blogs.map((blog, index) => <BlogListEntry {...blog} key={index}/>);
+      return this.state.blogs.map((blog, index) => <BlogListEntry {...blog} key={index} />);
     } else {
       return (
         <div>
-          <p className = 'BlogList-loading'>Loading...</p>
+          <p className='BlogList-loading'>Loading...</p>
         </div>
       );
     }
@@ -38,15 +38,13 @@ export default class BlogList extends Component<{}, BlogListState> {
   render(): JSX.Element {
     return (
       <div className='BlogList'>
-        <Helmet>
-          <title>{`${author.name}'s Blog`}</title>
-        </Helmet>
-        <Header/>
+        <Helmet title={`${author.name}'s Blog`} defer={false} />
+        <Header />
         <div className='BlogList-content'>
           {this.getBlogList()}
         </div>
         <div className='BlogList-footer'>
-          <Footer/>
+          <Footer />
         </div>
       </div>
     );

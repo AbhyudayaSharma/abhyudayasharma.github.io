@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GitInfo from 'react-git-info/macro';
-import { repository } from '../package.json';
+import { repository } from '../../package.json';
 
 import './scss/Footer.scss';
 

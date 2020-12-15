@@ -96,3 +96,7 @@ fabric.properties
 .idea/rGraphicsSettings.xml
 .idea/rpackages.xml
 .idea/rSettings.xml
+
+# Gatsby files
+.cache/
+public/

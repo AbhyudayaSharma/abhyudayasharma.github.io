@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import BigButton from './BigButton';
 import Footer from './Footer';
-import { author } from '../package.json';
+import { author } from '../../package.json';
 import { Helmet } from 'react-helmet';
 
-import './scss/common.scss';
 import './scss/Home.scss';
 
 const links = [
@@ -28,9 +27,7 @@ class Home extends Component {
 
     return (
       <div className="Home">
-        <Helmet>
-          <title>{`${author.name}'s Personal Website and Blog`}</title>
-        </Helmet>
+        <Helmet title={`${author.name}'s Personal Website and Blog`} defer={false}/>
         <div className="Home-header">
           <h1 className='Home-h1'>
             {author.name}

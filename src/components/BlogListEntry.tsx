@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BlogMetadata } from './blog/Blogs';
+import { BlogMetadata } from '../blog/Blogs';
 
 import './scss/BlogListEntry.scss';
 import { Link } from 'react-router-dom';
