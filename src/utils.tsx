@@ -8,11 +8,13 @@ import './scss/utils.scss';
 /**
  * Wraps a top-level component between the header and the footer.
  */
-export const wrapContent = (props: PageProps, element: JSX.Element): JSX.Element => {
+export const wrapContent = (props: PageProps, element: JSX.Element | JSX.Element[]): JSX.Element => {
   return (
     <div className='wrap-container'>
       <Header {...props} />
-      { element }
+      <div>
+        { element }
+      </div>
       <Footer />
     </div>
   );

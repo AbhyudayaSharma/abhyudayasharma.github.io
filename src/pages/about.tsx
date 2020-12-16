@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Helmet } from 'react-helmet';
 import { author } from '../../package.json';
 
-const aboutRoute: FunctionComponent = () => {
+const AboutRoute: FunctionComponent = () => {
   return (
     <div style={{ width: '100%', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
       <Helmet title={`About Me - ${author.name}`} defer={false}/>
@@ -16,4 +16,4 @@ const aboutRoute: FunctionComponent = () => {
   );
 };
 
-export default aboutRoute;
+export default AboutRoute;

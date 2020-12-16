@@ -35,7 +35,7 @@ const Header: FunctionComponent<PageProps> = (props) => (
         <div className={'Header-item'} key={index}>
           <h1 className='Header-h2'>
             {/* TODO: update logic so that it respects foo/link.url */}
-            <a href={link.url} className={props.path === `${link.url}/` ? ' Header-link-selected' : null}>
+            <a href={link.url} className={props.path === `${link.url}/` ? 'Header-link-selected' : undefined}>
               {link.title}
             </a>
           </h1>

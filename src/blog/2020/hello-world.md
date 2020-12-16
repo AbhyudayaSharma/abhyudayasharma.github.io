@@ -1,3 +1,14 @@
+---
+slug: hello-world
+title: Hello World
+description: This my first blog. Hello world!👋
+date: 2020-02-07
+tags:
+  - hello
+  - world
+  - hello-world
+public: true
+---
 This is my first blog on this website and it exists just to test if my website
 is working as expected. Thank you for visiting this page. Real blogs are coming
 very soon.

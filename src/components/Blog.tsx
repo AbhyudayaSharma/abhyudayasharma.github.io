@@ -123,7 +123,7 @@ class Blog extends Component<BlogProps, BlogState> {
   render(): JSX.Element {
     return (
       <div className='Blog'>
-        <Header/>
+        {/* <Header/> */}
         <div className='Blog-text'>
           {this.getBlogContent()}
         </div>

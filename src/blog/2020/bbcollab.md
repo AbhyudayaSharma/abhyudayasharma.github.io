@@ -1,3 +1,16 @@
+---
+slug: bbcollab
+title: A better experience for BlackBoard Collaborate Ultra
+description: Dark theme, video playback speed control and more to improve Blackboard Collaborate Ultra.
+date: 2020-04-13
+tags:
+  - 'blackboard'
+  - 'collab'
+  - 'ultra'
+  - 'dark-theme'
+public: true
+---
+
 We're having our classes on BlackBoard Collaborate Ultra. However, it has a
 somewhat incomplete dark theme. White PDFs and PowerPoint presentations do not
 look good when my other monitor is completely dark. So here is a stopgap

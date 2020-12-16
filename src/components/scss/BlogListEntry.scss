@@ -1,4 +1,4 @@
-@use 'common';
+@use '../../scss/common.scss';
 
 $text-color: #eee;
 
@@ -9,7 +9,6 @@ $text-color: #eee;
   align-self: stretch;
   display: flex;
   flex-direction: row;
-  justify-items: center;
   justify-content: center;
 }
 

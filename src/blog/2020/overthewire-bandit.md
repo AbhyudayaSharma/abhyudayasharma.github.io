@@ -1,4 +1,17 @@
-﻿Over the past month, I was able to complete my first Capture-the-Flag challenge (outside Call of Duty), [OverTheWire Bandit](https://overthewire.org/wargames/bandit/).
+---
+slug: overthewire-bandit
+title: My first CTF - OverTheWire Bandit
+description: My solutions to the CTF and some interesting stuff I learnt.
+date: 2020-06-21
+tags:
+  - ctf
+  - hacking
+  - overthewire
+  - bandit
+public: true
+---
+
+Over the past month, I was able to complete my first Capture-the-Flag challenge (outside Call of Duty), [OverTheWire Bandit](https://overthewire.org/wargames/bandit/).
 If you haven't tried it out yet, I highly recommend doing it. It will be a great learning experience. You'll
 get to learn about `ssh`, the shell, networks, Base64, Linux, `git` and much more. I have been programming and playing
 around with them for a quite a few years, yet these challenges made me think about how they can create vulnerabilities
