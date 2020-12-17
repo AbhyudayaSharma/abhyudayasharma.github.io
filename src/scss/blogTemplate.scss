@@ -1,12 +1,4 @@
-@use '../../scss/common';
-
-.Blog {
-  display: grid;
-  height: 100%;
-  max-width: 100%;
-  grid-auto-flow: row;
-  grid-template-rows: auto 1fr auto;
-}
+@use 'common';
 
 .Blog-text {
   color: common.$index-foreground-color;

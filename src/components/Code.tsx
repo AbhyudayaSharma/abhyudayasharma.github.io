@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
-import '../scss/renderers.scss';
+import '../scss/Code.scss';
 
 interface CodeProps {
   value: string;
@@ -20,7 +20,7 @@ enum CopyButtonState {
   ACTIVE,
 }
 
-class Code extends Component<CodeProps, CodeState> {
+export class Code extends Component<CodeProps, CodeState> {
   private static readonly COPY_BUTTON_WAITING_TEXT = 'Copy to Clipboard';
   private static readonly COPY_BUTTON_ACTIVE_TEXT = 'Copied!';
   private static readonly COPY_TIMEOUT = 2 * 1000; // milliseconds
@@ -63,16 +63,14 @@ class Code extends Component<CodeProps, CodeState> {
   render(): React.ReactNode {
     const language = this.props.language;
     return (
-      <div className='md-code'>
+      <div className='code-container'>
         <SyntaxHighlighter language={language || 'text'} style={darcula}>
           {this.props.value}
         </SyntaxHighlighter>
-        <button className='md-code-btn' onClick={this.copyButtonClicked.bind(this)}>
+        <button className='code-btn' onClick={this.copyButtonClicked.bind(this)}>
           {this.state.copyButtonText}
         </button>
       </div>
     );
   }
 }
-
-export default Code;

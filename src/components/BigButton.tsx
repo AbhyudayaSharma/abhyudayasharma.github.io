@@ -1,27 +1,27 @@
-import React, { Component, SyntheticEvent } from 'react';
-import './scss/BigButton.scss';
+import { Link } from 'gatsby';
+import React, { SyntheticEvent } from 'react';
+import '../scss/BigButton.scss';
 
 interface Props {
   url: string;
   text: string;
 }
+const linkProps = {
+  draggable: false,
+  onDragStart: (e: SyntheticEvent): void => e.preventDefault(),
+  className: 'BigButton',
+};
 
-class BigButton extends Component<Props, {}> {
-  render(): JSX.Element {
-    const linkProps = {
-      draggable: false,
-      onDragStart: (e: SyntheticEvent): void => e.preventDefault(),
-      className: 'BigButton-btn',
-    };
-
-    const link: JSX.Element = <a {...linkProps} href = {this.props.url}>{this.props.text}</a>;
-
+export const BigButton: React.FC<Props> = (props) => {
+  if (!props.url.startsWith('/')) {
     return (
-      <div className='BigButton'>
-        {link}
-      </div>
-    );
+      <a href={props.url} {...linkProps}>
+        {props.text}
+      </a>);
+  } else {
+    return (
+      <Link to={props.url} {...linkProps}>
+        {props.text}
+      </Link>);
   }
-}
-
-export default BigButton;
+};

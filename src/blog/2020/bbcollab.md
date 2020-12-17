@@ -8,7 +8,7 @@ tags:
   - 'collab'
   - 'ultra'
   - 'dark-theme'
-public: true
+isPublic: true
 ---
 
 We're having our classes on BlackBoard Collaborate Ultra. However, it has a

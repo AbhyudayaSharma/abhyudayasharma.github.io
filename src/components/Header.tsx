@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { PageProps } from 'gatsby';
+import { Link, PageProps } from 'gatsby';
 import { author } from '../../package.json';
 
-import './scss/Header.scss';
+import '../scss/Header.scss';
 
 const headerLinks = [
   {
@@ -19,14 +19,14 @@ const headerLinks = [
   }
 ];
 
-const Header: FunctionComponent<PageProps> = (props) => (
+export const Header: FunctionComponent<PageProps> = () => (
   <div className='Header'>
     <div className='Header-title'>
       <div className='Header-item'>
         <h1 className='Header-h1'>
-          <a href='/'>
+          <Link to='/'>
             {author.name}
-          </a>
+          </Link>
         </h1>
       </div>
     </div>
@@ -34,13 +34,10 @@ const Header: FunctionComponent<PageProps> = (props) => (
       {headerLinks.map((link, index) => (
         <div className={'Header-item'} key={index}>
           <h1 className='Header-h2'>
-            {/* TODO: update logic so that it respects foo/link.url */}
-            <a href={link.url} className={props.path === `${link.url}/` ? 'Header-link-selected' : undefined}>
+            <Link to={link.url} activeClassName='Header-link-selected'>
               {link.title}
-            </a>
+            </Link>
           </h1>
         </div>))}
     </div>
   </div>);
-
-export default Header;

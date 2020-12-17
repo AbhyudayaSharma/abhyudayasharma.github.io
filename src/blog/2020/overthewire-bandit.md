@@ -8,7 +8,7 @@ tags:
   - hacking
   - overthewire
   - bandit
-public: true
+isPublic: true
 ---
 
 Over the past month, I was able to complete my first Capture-the-Flag challenge (outside Call of Duty), [OverTheWire Bandit](https://overthewire.org/wargames/bandit/).

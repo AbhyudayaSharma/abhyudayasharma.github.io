@@ -1,6 +1,4 @@
-@use '../../scss/common';
-
-$md-code-color: #fff;
+@use 'common';
 
 .md-heading {
   font-weight: 200;
@@ -26,34 +24,6 @@ $md-code-color: #fff;
 .md-h4 {
   @extend .md-heading;
   font-size: 2.5rem;
-}
-
-.md-code {
-  margin: 0 0 0.5rem;
-  padding: 0.25rem 1rem 0.5rem;
-  background-color: rgb(43, 43, 43);
-}
-
-.md-code-btn {
-  @extend %unselectable;
-  margin-bottom: 1rem;
-  padding: 1rem 1rem;
-  color: $md-code-color;
-  background-color: transparent;
-  outline: none;
-  box-shadow: none;
-  cursor: pointer;
-  border-style: solid;
-  border-width: thin;
-  border-radius: 1rem;
-  transition: 0.4s;
-  font-weight: 100;
-}
-
-.md-code-btn:hover,
-.md-code-btn:active {
-  color: rgb(43, 43, 43);
-  background-color: $md-code-color;
 }
 
 .md-inline-code {

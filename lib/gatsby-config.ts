@@ -1,6 +1,7 @@
 import path from 'path';
+import { GatsbyConfig } from 'gatsby';
 
-export default {
+const gatsbyConfig: GatsbyConfig = {
   plugins: [
     {
       resolve: 'gatsby-plugin-sass',
@@ -65,3 +66,5 @@ export default {
     'gatsby-plugin-react-helmet',
   ]
 };
+
+export default gatsbyConfig;
