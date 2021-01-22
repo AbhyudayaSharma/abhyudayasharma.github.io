@@ -6,7 +6,7 @@ import '../scss/Footer.scss';
 
 const gitInfo = GitInfo();
 
-export const Footer: React.FC<{}> = () => {
+export const Footer: React.FC = () => {
   return (
     <footer className='Footer'>
       <p>

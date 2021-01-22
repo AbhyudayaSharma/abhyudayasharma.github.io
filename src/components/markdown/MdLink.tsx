@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Link } from 'gatsby';
 
 interface MdLinkProps {
   href: string;
 }
 
-export const MdLink: FunctionComponent<MdLinkProps> = ({ href, children }) => {
+export const MdLink: React.FC<MdLinkProps> = ({ href, children }) => {
   const className = 'md-link';
 
   if (href.startsWith('/')) {
