@@ -1,7 +1,11 @@
 import path from 'path';
+import { homepage } from '../package.json';
 import { GatsbyConfig } from 'gatsby';
 
 const gatsbyConfig: GatsbyConfig = {
+  siteMetadata: {
+    siteUrl: homepage,
+  },
   plugins: [
     {
       resolve: 'gatsby-source-filesystem',
@@ -78,6 +82,7 @@ const gatsbyConfig: GatsbyConfig = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-image',
     'gatsby-plugin-sass',
+    'gatsby-plugin-sitemap',
   ],
 };
 
