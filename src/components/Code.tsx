@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
-import 'highlight.js/styles/darkula.css';
+import 'highlight.js/styles/darcula.css';
 
 import '../scss/Code.scss';
 
