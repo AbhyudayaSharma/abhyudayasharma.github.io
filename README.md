@@ -6,5 +6,5 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b1f3eb09f3a541d5a01786c0d3e96990)](https://www.codacy.com/manual/sharmaabhyudaya/abhyudayasharma.github.io?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AbhyudayaSharma/abhyudayasharma.github.io&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/b1f3eb09f3a541d5a01786c0d3e96990)](https://www.codacy.com/manual/sharmaabhyudaya/abhyudayasharma.github.io?utm_source=github.com&utm_medium=referral&utm_content=AbhyudayaSharma/abhyudayasharma.github.io&utm_campaign=Badge_Coverage)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
-and is hosted using GitHub pages. See the website at <https://abhyudaya.dev>.
+This project is built using [Gatsby](https://www.gatsbyjs.com/)
+and is hosted using [Google Cloud Run](https://cloud.google.com/run/). See the website at <https://abhyudaya.dev>.
