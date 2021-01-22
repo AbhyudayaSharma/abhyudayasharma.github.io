@@ -7,23 +7,23 @@
   "description": "Abhyudaya Sharma's Personal Website",
   "markdown": "github",
   "dependencies": {
-    "@matejmazur/react-katex": "^3.1.3",
     "gatsby": "^2.28.2",
     "gatsby-image": "^2.7.0",
+    "gatsby-plugin-image": "^0.4.0",
     "gatsby-plugin-manifest": "^2.8.0",
-    "gatsby-plugin-offline": "^3.6.0",
     "gatsby-plugin-react-helmet": "^3.6.0",
-    "gatsby-plugin-sass": "^2.7.0",
+    "gatsby-plugin-sass": "^3.0.0",
     "gatsby-plugin-sharp": "^2.10.1",
     "gatsby-source-filesystem": "^2.7.0",
     "gatsby-transformer-remark": "^2.13.0",
     "gatsby-transformer-sharp": "^2.8.0",
+    "highlight.js": "^8.9.1",
     "katex": "^0.12.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-helmet": "^6.1.0",
     "react-syntax-highlighter": "^15.4.3",
-    "remark-math": "^4.0.0",
+    "remark-math": "^3.0.0",
     "whatwg-fetch": "^3.5.0"
   },
   "scripts": {
@@ -31,7 +31,7 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "lint": "eslint gatsby-config.js src lib --ext .js,.jsx,.ts,.tsx --config .eslintrc.json",
-    "lint-md": "remark src/blog/"
+    "lint-md": "remark --quiet README.md"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,6 +49,8 @@
     ]
   },
   "devDependencies": {
+    "@mdx-js/mdx": "^1.6.22",
+    "@mdx-js/react": "^1.6.22",
     "@testing-library/react": "^11.2.2",
     "@types/jest": "^26.0.19",
     "@types/node": "^14.14.13",
@@ -67,13 +69,16 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-standard": "^5.0.0",
+    "gatsby-plugin-mdx": "^1.7.0",
     "gatsby-plugin-ts": "^2.7.1",
+    "gatsby-remark-images": "^3.8.0",
     "jest-environment-jsdom-sixteen": "^1.0.3",
-    "npm": "^6.14.9",
+    "npm": "^7.4.2",
     "react-git-info": "^2.0.0",
     "react-markdown": "^5.0.3",
     "react-test-renderer": "^16.14.0",
     "remark-cli": "^9.0.0",
+    "remark-html-katex": "^3.0.0",
     "remark-lint-no-dead-urls": "^1.1.0",
     "remark-lint-no-duplicate-headings": "^2.0.1",
     "remark-preset-lint-recommended": "^5.0.0",

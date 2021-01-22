@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from 'react';
-import { Helmet } from 'react-helmet';
+import React from 'react';
+import { Seo } from '../components/Seo';
 import { author } from '../../package.json';
 
-const AboutRoute: FunctionComponent = () => {
+const AboutRoute: React.FC = () => {
   return (
     <div style={{ width: '100%', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
-      <Helmet title={`About Me - ${author.name}`} defer={false}/>
+      <Seo title={`About Me - ${author.name}`}/>
       <span role='img' aria-label='under construction' style={{ fontSize: '8rem', textAlign: 'center', width: '100%' }}>
         🚧
       </span>

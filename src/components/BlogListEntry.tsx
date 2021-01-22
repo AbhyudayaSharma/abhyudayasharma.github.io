@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { BlogMetadata } from '../common/BlogMetadata';
+import { BlogFrontmatter } from '../common/BlogFrontmatter';
 import { formatDate } from '../utils/utils-common';
 
 import '../scss/BlogListEntry.scss';
 
-export const BlogListEntry: React.FC<BlogMetadata> = (props) => {
+export const BlogListEntry: React.FC<BlogFrontmatter> = (props) => {
   return (
     <div className='BlogListEntry'>
       <div className='BlogListEntry-content'>

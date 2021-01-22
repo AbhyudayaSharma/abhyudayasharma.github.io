@@ -1,11 +1,6 @@
-import { BlogMetadata, UnsafeBlogMetadata } from './BlogMetadata';
+import { BlogFrontmatter } from './BlogFrontmatter';
 
 export interface BlogContent {
-  readonly metadata: BlogMetadata;
-  readonly rawMarkdownBody: string;
-}
-
-export interface UnsafeBlogContent {
-  readonly metadata: UnsafeBlogMetadata;
-  readonly rawMarkdownBody: string;
+  readonly frontmatter: BlogFrontmatter;
+  readonly body: string;
 }

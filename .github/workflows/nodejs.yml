@@ -11,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
         os: [ubuntu-latest, macOS-latest, windows-latest]
     steps:
     - uses: actions/checkout@v2
@@ -27,7 +27,7 @@ jobs:
         npm run lint-md
         npm test -- --verbose
     - name: Code coverage
-      if: contains(matrix.os, 'ubuntu') && contains(matrix.node-version, '12')
+      if: false && contains(matrix.os, 'ubuntu') && contains(matrix.node-version, '14')  # TODO: enable when tests is ready
       run: |
         npm test -- --coverage --verbose
         bash <(curl -Ls https://coverage.codacy.com/get.sh) report --coverage-reports coverage/lcov.info

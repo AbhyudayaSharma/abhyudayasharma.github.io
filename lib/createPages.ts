@@ -3,13 +3,13 @@ import path from 'path';
 import { GatsbyNode } from 'gatsby';
 import { BlogContent } from '../src/common/BlogContent';
 import { BlogFrontmatter } from '../src/common/BlogFrontmatter';
-import { convertBlogFrontmatterToBlogMetaData } from '../src/utils/utils-common';
+import { validateBlogFrontmatter } from '../src/utils/utils-common';
 
 interface BlogContentQueryData {
-  allMarkdownRemark: {
+  allMdx: {
     edges: {
       node: {
-        rawMarkdownBody: string;
+        body: string;
         frontmatter: BlogFrontmatter;
       };
     }[];
@@ -19,18 +19,18 @@ interface BlogContentQueryData {
 export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql, reporter }): Promise<void> => {
   const result = await graphql(/* GraphQL */ `
     query BlogContentQuery {
-      allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}) {
+      allMdx(sort: {fields: frontmatter___date, order: DESC}) {
         edges {
           node {
             frontmatter {
               slug
               title
-              date
+              date(formatString: "YYYY-MM-DD")
               tags
               isPublic
               description
             }
-            rawMarkdownBody
+            body
           }
         }
       }
@@ -45,14 +45,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql,
   const { createPage } = actions;
   const data = result.data as BlogContentQueryData;
   const blogTemplate = path.resolve('./src/templates/blogTemplate.tsx');
-  data.allMarkdownRemark.edges.forEach(({ node }) => {
+  data.allMdx.edges.forEach(({ node }) => {
     const context: BlogContent = {
-      metadata: convertBlogFrontmatterToBlogMetaData(node.frontmatter),
-      rawMarkdownBody: node.rawMarkdownBody,
+      frontmatter: validateBlogFrontmatter(node.frontmatter),
+      body: node.body,
     };
     createPage({
       component: blogTemplate,
-      path: context.metadata.url,
+      path: context.frontmatter.url,
       context,
     });
   });

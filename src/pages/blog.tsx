@@ -1,9 +1,9 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { PageProps, useStaticQuery, graphql } from 'gatsby';
 
+import { Seo } from '../components/Seo';
 import { wrapContent } from '../utils/utils-react';
-import { convertBlogFrontmatterToBlogMetaData } from '../utils/utils-common';
+import { validateBlogFrontmatter } from '../utils/utils-common';
 import { BlogFrontmatterQueryResult } from '../common/BlogFrontmatterQueryResult';
 import { BlogListEntry } from '../components/BlogListEntry';
 
@@ -14,14 +14,14 @@ const convertBlogFormatterQueryResultToBlogList = (result: BlogFrontmatterQueryR
     .map(edge => edge.node.frontmatter)
     .filter(frontmatter => frontmatter.isPublic)
     .map((frontmatter, index) =>
-      <BlogListEntry {...(convertBlogFrontmatterToBlogMetaData(frontmatter))} key={index} />
+      <BlogListEntry {...(validateBlogFrontmatter(frontmatter))} key={index} />
     );
 };
 
 const BlogListRoute: React.FC<PageProps> = (props) => {
   const data = useStaticQuery(graphql`
     query BlogFrontmatter {
-      allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}) {
+      allMdx(sort: {fields: frontmatter___date, order: DESC}) {
         edges {
           node {
             frontmatter {
@@ -36,10 +36,10 @@ const BlogListRoute: React.FC<PageProps> = (props) => {
         }
       }
     }`
-  ).allMarkdownRemark as BlogFrontmatterQueryResult;
+  ).allMdx as BlogFrontmatterQueryResult;
   return (
     <>
-      <Helmet title={`${author.name}'s Blog`} defer={false} />
+      <Seo title={`${author.name}'s Blog`} />
       {wrapContent(props, convertBlogFormatterQueryResultToBlogList(data))}
     </>
   );

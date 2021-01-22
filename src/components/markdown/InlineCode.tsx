@@ -1,13 +1,9 @@
 import React from 'react';
 
-export interface InlineCodeProps {
-  value: string;
-}
-
-export const InlineCode: React.FC<InlineCodeProps> = ({ value }) => {
+export const InlineCode: React.FC<{}> = ({ children }) => {
   return (
     <code className='md-inline-code'>
-      {value}
+      {children}
     </code>
   );
 };

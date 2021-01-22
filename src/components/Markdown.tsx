@@ -1,59 +1,44 @@
+import _ from 'lodash';
 import React from 'react';
 
 import 'katex/dist/katex.min.css';
 import '../scss/Markdown.scss';
 
-import ReactMarkdown from 'react-markdown';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { MDXProvider } from '@mdx-js/react';
 import { Code } from './Code';
-import { Link } from './markdown/Link';
-import { Image } from './markdown/Image';
-import { Heading } from './markdown/Heading';
+import { MdLink } from './markdown/MdLink';
+import { getHeadingComponent } from './markdown/Heading';
 import { InlineCode } from './markdown/InlineCode';
 import { Blockquote } from './markdown/Blockquote';
 import { ThematicBreak } from './markdown/ThematicBreak';
-import { BlockMath, InlineMath } from './markdown/Math';
 
-const markdownRenderers = {
-  heading: Heading,
+// TODO remove `any` by creating type definitions
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const components: Record<string, React.ComponentType<any>> = {
+  a: MdLink,
   code: Code,
-  image: Image,
-  link: Link,
-  math: BlockMath,
-  inlineMath: InlineMath,
+  pre: ({ children }) => <>{children}</>,
   inlineCode: InlineCode,
   blockquote: Blockquote,
   thematicBreak: ThematicBreak,
+  hr: ThematicBreak,
 };
 
-const markdownPlugins = [
-  require('remark-math'),
-];
+components.pre.displayName = 'Markdown >> pre';
+
+_.range(1, 6 + 1).forEach(i => { components[`h${i}`] = getHeadingComponent(i); });
 
 export interface MarkdownProps {
   markdown: string;
 }
 
 export const Markdown: React.FC<MarkdownProps> = ({ markdown }) => {
-  return <ReactMarkdown source={markdown} renderers={markdownRenderers} plugins={markdownPlugins} />;
+  return (
+    <MDXProvider components={components}>
+      <MDXRenderer>
+        {markdown}
+      </MDXRenderer>
+    </MDXProvider>
+  );
 };
-
-//         <title>{`${this.state.blog.title} - ${author.name}'s blog`}</title>
-//         Helmet>
-//           der>
-//             className='Blog-title'>{this.state.blog.title}</h1>
-//             er>
-//             on>
-//             lassName='Blog-date'>
-//           {this.state.blog.date.toLocaleDateString('en-US', {
-//             weekday: 'long',
-//             year: 'numeric',
-//             month: 'long',
-//             day: 'numeric',
-//           })}
-//         </p>
-//       </section>
-//         <section role='document'>
-//         </section>
-//     </article>
-//     );
-// }

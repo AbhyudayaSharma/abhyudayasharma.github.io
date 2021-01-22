@@ -3,7 +3,7 @@ import { BlogFrontmatter } from './BlogFrontmatter';
 export interface BlogFrontmatterQueryResult {
   readonly edges: {
     readonly node: {
-      readonly frontmatter: BlogFrontmatter;
+      readonly frontmatter: Partial<BlogFrontmatter>;
     };
   }[];
 }

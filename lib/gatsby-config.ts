@@ -4,12 +4,6 @@ import { GatsbyConfig } from 'gatsby';
 const gatsbyConfig: GatsbyConfig = {
   plugins: [
     {
-      resolve: 'gatsby-plugin-sass',
-      options: {
-        implementation: require('sass'),
-      },
-    },
-    {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
@@ -59,12 +53,32 @@ const gatsbyConfig: GatsbyConfig = {
         codegen: false,
       },
     },
+    'gatsby-remark-images',
+    {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              quality: 70,
+              maxWidth: 1024,
+              linkImagesToOriginal: true,
+            },
+          },
+        ],
+        remarkPlugins: [
+          require('remark-math'),
+          require('remark-html-katex'),
+        ],
+      },
+    },
     'gatsby-transformer-sharp',
-    'gatsby-transformer-remark',
     'gatsby-plugin-sharp',
-    'gatsby-plugin-offline',
     'gatsby-plugin-react-helmet',
-  ]
+    'gatsby-plugin-image',
+    'gatsby-plugin-sass',
+  ],
 };
 
 export default gatsbyConfig;

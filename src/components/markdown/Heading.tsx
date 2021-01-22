@@ -1,13 +1,15 @@
+import _ from 'lodash';
 import React, { FunctionComponent } from 'react';
 
-export interface HeadingProps {
-  level: number;
-}
+const MIN_HEADING_LEVEL = 1;
+const MAX_HEADING_LEVEL = 6;
 
-export const Heading: FunctionComponent<HeadingProps> = ({ level, children }) => {
-  if (level === 1) {
-    console.warn('Heading level = 1 detected. Are you sure you want it?\n' +
-      'Blog title is already an h1 element.');
+export const getHeadingComponent: (level: number) => FunctionComponent<{}> = (level) => {
+  if (!_.isInteger(level) || !_.inRange(level, MIN_HEADING_LEVEL, MAX_HEADING_LEVEL + 1)) {
+    throw new Error(`Only heading levels ${MIN_HEADING_LEVEL}-${MAX_HEADING_LEVEL} allowed. Got level = ${level}`);
   }
-  return <h1 className={`md-h${level}`}>{children}</h1>;
+  const type = `h${level}`;
+  const component: FunctionComponent<{}> = ({ children }): JSX.Element => React.createElement(type, { className: `md-${type}` }, children);
+  component.displayName = type;
+  return component;
 };

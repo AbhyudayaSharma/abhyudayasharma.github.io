@@ -1,38 +1,37 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { PageProps } from 'gatsby';
 
+import { Seo } from '../components/Seo';
 import { author } from '../../package.json';
 import { Markdown } from '../components/Markdown';
-import { UnsafeBlogContent } from '../common/BlogContent';
 import { formatDate } from '../utils/utils-common';
 import { wrapContent } from '../utils/utils-react';
+import { BlogContent } from '../common/BlogContent';
 
 import '../scss/blogTemplate.scss';
 
 interface Props extends PageProps {
-  pageContext: UnsafeBlogContent;
+  pageContext: BlogContent;
 }
 
 const BlogTemplate: React.FC<Props> = (props) => {
-  const { pageContext } = props;
-  const { rawMarkdownBody, metadata } = pageContext;
+  const { body, frontmatter } = props.pageContext;
   return wrapContent(props,
     <>
-      <Helmet title={`${metadata.title} - ${author.name}'s blog`} />
+      <Seo title={`${frontmatter.title} - ${author.name}'s blog`} metaDescription={frontmatter.description} />
       <article>
         <h1 className='Blog-title'>
-          {metadata.title}
+          {frontmatter.title}
         </h1>
         <section>
           <p className='Blog-date'>
             <time>
-              {formatDate(new Date(metadata.date))}
+              {formatDate(frontmatter.date)}
             </time>
           </p>
         </section>
         <section>
-          <Markdown markdown={rawMarkdownBody} />
+          <Markdown markdown={body} />
         </section>
       </article>
     </>, 'Blog-text');

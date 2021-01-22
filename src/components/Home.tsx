@@ -2,9 +2,9 @@ import React from 'react';
 import { BigButton } from './BigButton';
 import { Footer } from './Footer';
 import { author } from '../../package.json';
-import { Helmet } from 'react-helmet';
 
 import '../scss/Home.scss';
+import { Seo } from './Seo';
 
 const links = [
   {
@@ -23,19 +23,21 @@ const links = [
 
 const buttons = links.map((link, index) => <BigButton key={index} {...link} />);
 
-export const Home: React.FC<{}> = () => {
+export const Home: React.FC = () => {
   return (
-    <div className="Home">
-      <Helmet title={`${author.name}'s Personal Website and Blog`} defer={false} />
-      <div className="Home-header">
-        <h1 className='Home-h1'>
-          {author.name}
-        </h1>
+    <>
+      <Seo/>
+      <div className="Home">
+        <div className="Home-header">
+          <h1 className='Home-h1'>
+            {author.name}
+          </h1>
+        </div>
+        <div className="Home-body">
+          {buttons}
+        </div>
+        <Footer/>
       </div>
-      <div className="Home-body">
-        {buttons}
-      </div>
-      <Footer />
-    </div>
+    </>
   );
 };

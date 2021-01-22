@@ -6,6 +6,7 @@ interface Props {
   url: string;
   text: string;
 }
+
 const linkProps = {
   draggable: false,
   onDragStart: (e: SyntheticEvent): void => e.preventDefault(),

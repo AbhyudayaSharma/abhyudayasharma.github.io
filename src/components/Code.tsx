@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
+import 'highlight.js/styles/darkula.css';
 
 import '../scss/Code.scss';
 
 interface CodeProps {
-  value: string;
-  language: string;
+  className: string;
+  children: string;
 }
 
 interface CodeState {
@@ -36,7 +36,7 @@ export class Code extends Component<CodeProps, CodeState> {
 
   async copyButtonClicked(): Promise<void> {
     try {
-      await navigator.clipboard.writeText(this.props.value);
+      await navigator.clipboard.writeText(this.props.children);
       if (this.state.copyButtonTimeOutId) {
         clearTimeout(this.state.copyButtonTimeOutId);
       }
@@ -61,11 +61,18 @@ export class Code extends Component<CodeProps, CodeState> {
   }
 
   render(): React.ReactNode {
-    const language = this.props.language;
+    // Gatsby returns language as classname e.g.: language-python
+    const split = this.props.className.split('-');
+    split.shift();
+    const language = split.join('-').trim();
+    if (typeof this.props.children !== 'string') {
+      throw Error('`children` of Code should be a string.');
+    }
+    const code = this.props.children.trimEnd();
     return (
       <div className='code-container'>
-        <SyntaxHighlighter language={language || 'text'} style={darcula}>
-          {this.props.value}
+        <SyntaxHighlighter language={language || 'text'} useInlineStyles={false}>
+          {code}
         </SyntaxHighlighter>
         <button className='code-btn' onClick={this.copyButtonClicked.bind(this)}>
           {this.state.copyButtonText}
