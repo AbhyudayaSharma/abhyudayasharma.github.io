@@ -23,21 +23,18 @@ export const Header: FunctionComponent<PageProps> = () => (
   <div className='Header'>
     <div className='Header-title'>
       <div className='Header-item'>
-        <h1 className='Header-h1'>
-          <Link to='/'>
-            {author.name}
-          </Link>
-        </h1>
+        <Link to='/' className='Header-h1'>
+          {author.name}
+        </Link>
       </div>
     </div>
     <div className='Header-links'>
       {headerLinks.map((link, index) => (
         <div className={'Header-item'} key={index}>
-          <h1 className='Header-h2'>
-            <Link to={link.url} activeClassName='Header-link-selected'>
-              {link.title}
-            </Link>
-          </h1>
-        </div>))}
+          <Link to={link.url} activeClassName='Header-link-selected' className='Header-h2'>
+            {link.title}
+          </Link>
+        </div>
+      ))}
     </div>
   </div>);

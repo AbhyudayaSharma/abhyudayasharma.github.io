@@ -19,7 +19,6 @@
 
 .Header-item {
   margin: 0 0;
-  align-self: stretch;
   padding: 0 0;
   align-items: center;
   text-align: center;
@@ -31,6 +30,9 @@
   @extend %unselectable;
   font-weight: 100;
   margin: 0 0;
+  text-decoration: none;
+  transition: 0.2s;
+  color: common.$index-foreground-color;
 }
 
 .Header-h1 {
@@ -42,15 +44,8 @@
   font-size: 2.5rem;
 }
 
-.Header-h1 > a,
-.Header-h2 > a {
-  text-decoration: none;
-  transition: 0.2s;
-  color: common.$index-foreground-color;
-}
-
-.Header-h1 > a:hover,
-.Header-h2 > a:hover {
+.Header-h1:hover,
+.Header-h2:hover {
   color: common.$link-color;
 }
 

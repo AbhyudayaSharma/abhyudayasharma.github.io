@@ -1,12 +1,12 @@
 @use 'common';
 
 $text-color: #eee;
+$max-width: 68rem;
 
 .BlogListEntry {
   background-color: common.$index-background-color;
   color: common.$index-foreground-color;
   font-size: 1.5rem;
-  align-self: stretch;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -14,8 +14,8 @@ $text-color: #eee;
 
 .BlogListEntry-content {
   margin: 1rem 1rem;
-  padding: 0.2rem 1.5rem;
-  max-width: 68rem;
+  padding: 1rem 1.5rem;
+  max-width: $max-width;
   flex-grow: 1;
   display: block;
   border-style: solid;
@@ -25,22 +25,19 @@ $text-color: #eee;
   height: fit-content;
 }
 
-.BlogListEntry-h1 {
+.BlogListEntry-title {
   @extend %unselectable;
   font-size: 2.5rem;
   font-weight: 100;
-  margin: 0;
   padding-top: 1rem;
   padding-bottom: 0.5rem;
-}
-
-.BlogListEntry-h1 > a {
   transition: 0.2s;
   text-decoration: none;
   color: $text-color;
+  cursor: pointer;
 }
 
-.BlogListEntry-h1 > a:hover {
+.BlogListEntry-title:hover {
   color: common.$link-color;
 }
 
@@ -65,4 +62,22 @@ $text-color: #eee;
   padding-top: 0.5rem;
   padding-bottom: 1rem;
   font-size: 1.4rem;
+}
+
+.BlogListHeader {
+  @extend %unselectable;
+  background-color: common.$index-background-color;
+  color: common.$index-foreground-color;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 1rem;
+  margin-left: 0;
+}
+
+.BlogListHeader > h1 {
+  font-weight: 100;
+  font-size: 2.5rem;
+  flex-grow: 1;
+  max-width: $max-width;
+  text-align: left;
 }

@@ -83,6 +83,7 @@ const gatsbyConfig: GatsbyConfig = {
     'gatsby-plugin-image',
     'gatsby-plugin-sass',
     'gatsby-plugin-sitemap',
+    'gatsby-plugin-nprogress',
   ],
 };
 

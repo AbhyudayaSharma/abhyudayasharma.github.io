@@ -1,0 +1,64 @@
+import React from 'react';
+import { Link } from 'gatsby';
+import { BlogFrontmatter } from '../common/BlogFrontmatter';
+import { formatDate, validateBlogFrontmatter } from '../utils/utils-common';
+
+import '../scss/BlogList.scss';
+
+export interface BlogListHeaderProps {
+  value: string;
+}
+
+export interface BlogListProps {
+  header?: string;
+  publicOnly: boolean;
+  blogs: Array<Partial<BlogFrontmatter>>;
+}
+
+export const BlogListEntry: React.FC<BlogFrontmatter> = (props) => {
+  return (
+    <div className='BlogListEntry'>
+      <div className='BlogListEntry-content'>
+        <Link to={props.url} className='BlogListEntry-title'>
+          {props.title}
+        </Link>
+        <div className='BlogListEntry-date'>
+          <span role='img' aria-label='date'>📅</span>&nbsp;
+          <time>
+            {formatDate(props.date)}
+          </time>
+        </div>
+        <div className='BlogListEntry-tag-container'>
+          {props.tags.map((tag, index) => <div className='BlogListEntry-tag' key={index}>{tag}</div>)}
+        </div>
+        <p>
+          {props.description}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export const BlogListHeader: React.FC<BlogListHeaderProps> = ({ value }) => {
+  return (
+    <div className='BlogListHeader'>
+      <h1>
+        {value}
+      </h1>
+    </div>
+  );
+};
+
+export const BlogList: React.FC<BlogListProps> = ({ header, blogs, publicOnly }) => {
+  const validated = blogs.map(frontmatter => validateBlogFrontmatter(frontmatter));
+  const displayable = publicOnly ? validated.filter(frontmatter => frontmatter.isPublic) : validated;
+
+  return (
+    <>
+      {header && <BlogListHeader value={header}/>}
+      {displayable.map(
+        (frontmatter, index) => <BlogListEntry {...frontmatter} key={index} />
+      )}
+    </>
+  );
+};
