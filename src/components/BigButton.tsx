@@ -1,6 +1,6 @@
 import { Link } from 'gatsby';
 import React, { SyntheticEvent } from 'react';
-import '../scss/BigButton.scss';
+import styles from '../scss/BigButton.module.scss';
 
 interface Props {
   url: string;
@@ -10,7 +10,7 @@ interface Props {
 const linkProps = {
   draggable: false,
   onDragStart: (e: SyntheticEvent): void => e.preventDefault(),
-  className: 'BigButton',
+  className: styles.btn,
 };
 
 export const BigButton: React.FC<Props> = (props) => {

@@ -71,10 +71,7 @@ const gatsbyConfig: GatsbyConfig = {
             },
           },
         ],
-        remarkPlugins: [
-          require('remark-math'),
-          require('remark-html-katex'),
-        ],
+        remarkPlugins: [],
       },
     },
     'gatsby-transformer-sharp',

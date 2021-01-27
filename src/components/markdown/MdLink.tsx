@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'gatsby';
 
+import styles from '../../scss/markdown.module.scss';
+
 interface MdLinkProps {
   href: string;
 }
 
 export const MdLink: React.FC<MdLinkProps> = ({ href, children }) => {
-  const className = 'md-link';
+  const className = styles.link;
 
   if (href.startsWith('/')) {
     return (

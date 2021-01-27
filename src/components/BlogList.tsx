@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import { BlogFrontmatter } from '../common/BlogFrontmatter';
 import { formatDate, validateBlogFrontmatter } from '../utils/utils-common';
 
-import '../scss/BlogList.scss';
+import styles from '../scss/BlogList.module.scss';
 
 export interface BlogListHeaderProps {
   value: string;
@@ -17,19 +17,19 @@ export interface BlogListProps {
 
 export const BlogListEntry: React.FC<BlogFrontmatter> = (props) => {
   return (
-    <div className='BlogListEntry'>
-      <div className='BlogListEntry-content'>
-        <Link to={props.url} className='BlogListEntry-title'>
+    <div className={styles.entry}>
+      <div className={styles.content}>
+        <Link to={props.url} className={styles.title}>
           {props.title}
         </Link>
-        <div className='BlogListEntry-date'>
+        <div className={styles.date}>
           <span role='img' aria-label='date'>📅</span>&nbsp;
           <time>
             {formatDate(props.date)}
           </time>
         </div>
-        <div className='BlogListEntry-tag-container'>
-          {props.tags.map((tag, index) => <div className='BlogListEntry-tag' key={index}>{tag}</div>)}
+        <div className={styles.tagContainer}>
+          {props.tags.map((tag, index) => <div className={styles.tag} key={index}>{tag}</div>)}
         </div>
         <p>
           {props.description}
@@ -41,7 +41,7 @@ export const BlogListEntry: React.FC<BlogFrontmatter> = (props) => {
 
 export const BlogListHeader: React.FC<BlogListHeaderProps> = ({ value }) => {
   return (
-    <div className='BlogListHeader'>
+    <div className={styles.header}>
       <h1>
         {value}
       </h1>

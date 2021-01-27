@@ -8,7 +8,7 @@ import { formatDate } from '../utils/utils-common';
 import { wrapContent } from '../utils/utils-react';
 import { BlogContent } from '../common/BlogContent';
 
-import '../scss/blogTemplate.scss';
+import styles from '../scss/blogTemplate.module.scss';
 
 interface Props extends PageProps {
   pageContext: BlogContent;
@@ -20,11 +20,11 @@ const BlogTemplate: React.FC<Props> = (props) => {
     <>
       <Seo title={`${frontmatter.title} - ${author.name}'s blog`} metaDescription={frontmatter.description} />
       <article>
-        <h1 className='Blog-title'>
+        <h1 className={styles.title}>
           {frontmatter.title}
         </h1>
         <section>
-          <p className='Blog-date'>
+          <p className={styles.date}>
             <time>
               {formatDate(frontmatter.date)}
             </time>
@@ -34,7 +34,7 @@ const BlogTemplate: React.FC<Props> = (props) => {
           <Markdown markdown={body} />
         </section>
       </article>
-    </>, 'Blog-text');
+    </>, styles.text);
 };
 
 export default BlogTemplate;

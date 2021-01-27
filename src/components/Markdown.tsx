@@ -1,12 +1,9 @@
 import _ from 'lodash';
 import React from 'react';
-
-import 'katex/dist/katex.min.css';
-import '../scss/Markdown.scss';
+import loadable from '@loadable/component';
 
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
-import { Code } from './Code';
 import { MdLink } from './markdown/MdLink';
 import { getHeadingComponent } from './markdown/Heading';
 import { InlineCode } from './markdown/InlineCode';
@@ -17,7 +14,7 @@ import { ThematicBreak } from './markdown/ThematicBreak';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const components: Record<string, React.ComponentType<any>> = {
   a: MdLink,
-  code: Code,
+  code: loadable(() => import('./Code')),
   pre: ({ children }) => <>{children}</>,
   inlineCode: InlineCode,
   blockquote: Blockquote,

@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import React from 'react';
 
+import styles from '../../scss/markdown.module.scss';
+
 const MIN_HEADING_LEVEL = 1;
 const MAX_HEADING_LEVEL = 6;
 
@@ -9,7 +11,7 @@ export const getHeadingComponent: (level: number) => React.FC = (level) => {
     throw new Error(`Only heading levels ${MIN_HEADING_LEVEL}-${MAX_HEADING_LEVEL} allowed. Got level = ${level}`);
   }
   const type = `h${level}`;
-  const component: React.FC = ({ children }): JSX.Element => React.createElement(type, { className: `md-${type}` }, children);
+  const component: React.FC = ({ children }): JSX.Element => React.createElement(type, { className: styles[type] }, children);
   component.displayName = type;
   return component;
 };

@@ -1,6 +1,6 @@
-@use 'common';
+@use 'common.module.scss';
 
-.Home {
+.container {
   text-align: center;
   display: grid;
   height: 100%;
@@ -8,7 +8,7 @@
   grid-template-columns: auto;
 }
 
-.Home-header {
+.header {
   background-color: common.$index-background-color;
   font-size: calc(1rem + 2vmin);
   color: common.$index-foreground-color;
@@ -18,7 +18,7 @@
   justify-content: flex-end;
 }
 
-.Home-body {
+.body {
   background-color: common.$index-background-color;
   color: common.$index-foreground-color;
   display: flex;
@@ -30,7 +30,7 @@
   height: fit-content;
 }
 
-.Home-h1 {
+.h1 {
   @extend %unselectable;
   font-size: 6rem;
   font-weight: lighter;

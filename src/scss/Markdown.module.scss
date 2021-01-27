@@ -1,49 +1,49 @@
-@use 'common';
+@use 'common.module.scss';
 
-.md-heading {
+.heading {
   font-weight: 200;
   text-align: left;
   margin: 0 0;
 }
 
-.md-h1 {
-  @extend .md-heading;
+.h1 {
+  @extend .heading;
   font-size: 4rem;
 }
 
-.md-h2 {
-  @extend .md-heading;
+.h2 {
+  @extend .heading;
   font-size: 3.5rem;
 }
 
-.md-h3 {
-  @extend .md-heading;
+.h3 {
+  @extend .heading;
   font-size: 3rem;
 }
 
-.md-h4 {
-  @extend .md-heading;
+.h4 {
+  @extend .heading;
   font-size: 2.5rem;
 }
 
-.md-inline-code {
+.inline-code {
   word-wrap: break-word;
   background-color: rgb(43, 43, 43);
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 
-.md-img {
+.img {
   max-width: 100%;
 }
 
-.md-link {
+.link {
   color: common.$link-color;
   text-decoration: none;
   border-bottom: 0.1rem common.$link-color solid;
 }
 
-.md-blockquote {
+.blockquote {
   margin-left: 2rem;
   margin-right: 2rem;
   margin-inline-start: 2rem;
@@ -53,11 +53,11 @@
   color: #ccc;
 }
 
-.md-blockquote > .md-blockquote {
+.blockquote > .blockquote {
   margin: 0.5rem 0;
 }
 
-.md-hr {
+.hr {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }

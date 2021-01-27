@@ -1,6 +1,6 @@
-@use 'common';
+@use 'common.module.scss';
 
-.Blog-text {
+.text {
   color: common.$index-foreground-color;
   padding: 2rem 1rem;
   font-size: 2rem;
@@ -9,30 +9,30 @@
   justify-content: center;
 }
 
-.Blog-text > article {
+.text > article {
   max-width: 90vw;
   text-align: justify;
 }
 
 @media screen and (min-width: 760px) {
-  .Blog-text > article {
+  .text > article {
     max-width: 68rem;
     width: auto !important;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .Blog-text > article {
+  .text > article {
     max-width: 85rem;
     width: auto !important;
   }
 }
 
-.Blog-date {
+.date {
   font-size: 1.5rem;
 }
 
-.Blog-title {
+.title {
   font-size: 4rem;
   font-weight: 100;
   margin: 0;

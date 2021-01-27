@@ -95,7 +95,7 @@ find inhere/ -size 1033c -type f '!' -executable -exec cat '{}' +
 
 The command searches for files that satisfy all of these criteria:
 *   non-executable — `'!' -executable`
-*   size = $1033$ bytes — `-size 1033c`
+*   size = 1033 bytes — `-size 1033c`
 *   regular files (not directories) — `-type f`
 
 Then it `cat`s each of these files using `-exec cat '{}' +`.
@@ -181,9 +181,9 @@ tr 'a-zA-Z' 'n-za-mN-ZA-M' < ./data.txt
 ```
 
 This causes letters in the range `a-z` to be mapped to the characters `n-z` and `a-m` respectively. We do the same
-for capital letters. This causes a $13$ place shift, equivalent to the ROT13 cipher. This will give you the password.
+for capital letters. This causes a 13 place shift, equivalent to the ROT13 cipher. This will give you the password.
 An interesting thing to note here is that applying ROT13 twice on any string English string will return the string
-itself. This happens because the English alphabet contains $26$ characters.
+itself. This happens because the English alphabet contains 26 characters.
 
 ### Bandit 12
 
@@ -193,7 +193,7 @@ This one is not so easy. If you don't understand any of the commands, look up it
 
 To begin with, follow the instructions in the prompt and create a temporary directory. You
 can use `mktemp -d` to create one for you. Now, we first need to convert the hexdump to a usable format. We can use
-`cut` to extract columns $2$ to $9$ (delimited by spaces) and then use `xxd` to convert the hexdump back to binary.
+`cut` to extract columns 2 to 9 (delimited by spaces) and then use `xxd` to convert the hexdump back to binary.
 From the raw hexdump, we see that the first two bytes are `0x1f8b`. Time to check Wikipedia's [list of magic numbers](https://en.wikipedia.org/wiki/List_of_file_signatures).
 Therefore, the file is gzipped. We can use `gzip -d` to decompress it. Take the dump using `xxd` and see what we get.
 
@@ -324,7 +324,7 @@ Password: `GbKksEFF4yrVs6il55v6gwY5aVje5f0j`
 To complete this challenge, you need to run your own `netcat` to listen to the requests. The given binary connects
 to the `netcat` daemon on a provided port. Once connected, paste the password in the `netcat` session to get the password.
 
-Run `nc -t -l -p 50000 localhost` in one tab of your terminal. Here I'm using $50000$ as a random port. If someone else
+Run `nc -t -l -p 50000 localhost` in one tab of your terminal. Here I'm using 50000 as a random port. If someone else
 is using that port, try something else. Note that the maximum port number is $2^{16} - 1 = 65535$, and your applications
 cannot bind to ports $\lt 1024$ without superuser permissions. In another tab, run `./suconnect 50000`. Follow the
 instructions above to get the password to the next level in your `nc` session.
@@ -421,7 +421,7 @@ Run this script and wait for a few minutes until you get the password to the nex
 
 Password: `uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG`
 
-This was really hard. I tried `export MORE='--d -1'` to make more always use a line size of $1$ but that didn't work,
+This was really hard. I tried `export MORE='--d -1'` to make more always use a line size of 1 but that didn't work,
 possibly because `sshd` was not configured to accept the variable `MORE`. Resizing the terminal window so that it
 displays just one line did work. I got a hint by running `ssh` with `-vvv`. Whenever the terminal size changes, the
 `ssh` client sends a terminal size changed signal to the server. Once `more` is paused, hit the `v` key to start `vim`.

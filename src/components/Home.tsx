@@ -3,7 +3,7 @@ import { BigButton } from './BigButton';
 import { Footer } from './Footer';
 import { author } from '../../package.json';
 
-import '../scss/Home.scss';
+import styles from '../scss/Home.module.scss';
 import { Seo } from './Seo';
 
 const links = [
@@ -27,13 +27,13 @@ export const Home: React.FC = () => {
   return (
     <>
       <Seo/>
-      <div className="Home">
-        <div className="Home-header">
-          <h1 className='Home-h1'>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <h1 className={styles.h1}>
             {author.name}
           </h1>
         </div>
-        <div className="Home-body">
+        <div className={styles.body}>
           {buttons}
         </div>
         <Footer/>

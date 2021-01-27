@@ -1,18 +1,20 @@
-@use 'common';
+@use 'common.module.scss';
 
-$md-code-color: #fff;
+$code-color: #fff;
 
-.code-container {
+.container {
   margin: 0 0 0.5rem;
   padding: 0.25rem 1rem 0.5rem;
   background-color: rgb(43, 43, 43);
+  border: 0;
+  border-radius: 1rem;
 }
 
-.code-btn {
+.btn {
   @extend %unselectable;
   margin-bottom: 1rem;
   padding: 1rem 1rem;
-  color: $md-code-color;
+  color: $code-color;
   background-color: transparent;
   outline: none;
   box-shadow: none;
@@ -24,8 +26,8 @@ $md-code-color: #fff;
   font-weight: 100;
 }
 
-.code-btn:hover,
-.code-btn:active {
+.btn:hover,
+.btn:active {
   color: rgb(43, 43, 43);
-  background-color: $md-code-color;
+  background-color: $code-color;
 }

@@ -36,3 +36,8 @@ declare module '@mdx-js/react' {
   }
   export class MDXProvider extends React.Component<MDXProviderProps> { }
 }
+
+declare module '*.module.scss' {
+  const style: Record<string, string | undefined>;
+  export default style;
+}

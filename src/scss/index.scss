@@ -1,4 +1,4 @@
-@use 'common';
+@use 'common.module.scss';
 
 html {
   font-size: 62.5%;
@@ -23,6 +23,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: common.$index-background-color;
   height: 100%;
+  font-weight: 100;
 }
 
 code {

@@ -1,6 +1,6 @@
-@use 'common';
+@use 'common.module.scss';
 
-.BigButton {
+.btn {
   @extend %unselectable;
   background-color: common.$index-background-color;
   border-color: #fff;
@@ -18,7 +18,7 @@
   text-decoration: none;
 }
 
-.BigButton:hover {
+.btn:hover {
   background-color: common.$index-foreground-color;
   color: common.$index-background-color;
   font-size: 2.5rem;

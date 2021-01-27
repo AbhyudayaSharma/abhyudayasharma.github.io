@@ -1,6 +1,6 @@
-@use 'common';
+@use 'common.module.scss';
 
-.Footer {
+.container {
   color: common.$index-foreground-color;
   text-align: center;
   padding-bottom: 1rem;
@@ -8,7 +8,7 @@
   font-size: 1.4rem;
 }
 
-.Footer-link {
+.link {
   @extend %selectable;
   color: common.$link-color;
   text-decoration: none;
