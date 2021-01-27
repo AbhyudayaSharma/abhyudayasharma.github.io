@@ -81,6 +81,7 @@ const gatsbyConfig: GatsbyConfig = {
     'gatsby-plugin-sass',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-nprogress',
+    'gatsby-plugin-remove-trailing-slashes',
   ],
 };
 

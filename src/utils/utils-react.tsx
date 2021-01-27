@@ -9,7 +9,6 @@ import styles from '../scss/utils.module.scss';
  * Wraps a top-level component between the header and the footer.
  */
 export const wrapContent = (props: PageProps, element: JSX.Element | JSX.Element[], divClassName: string | undefined = undefined): JSX.Element => {
-  console.log(styles);
   return (
     <div className={styles.wrapContainer}>
       <Header {...props}>

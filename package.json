@@ -71,6 +71,7 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-standard": "^5.0.0",
     "gatsby-plugin-mdx": "^1.7.0",
+    "gatsby-plugin-remove-trailing-slashes": "^2.9.0",
     "gatsby-plugin-ts": "^2.7.1",
     "gatsby-remark-images": "^3.8.0",
     "jest-environment-jsdom-sixteen": "^1.0.3",
