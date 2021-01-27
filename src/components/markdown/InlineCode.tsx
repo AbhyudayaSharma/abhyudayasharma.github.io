@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from '../../scss/markdown.module.scss';
+import styles from '../../scss/Markdown.module.scss';
 
 export const InlineCode: React.FC<{}> = ({ children }) => {
   return (

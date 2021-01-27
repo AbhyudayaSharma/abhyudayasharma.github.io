@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 
-import styles from '../../scss/markdown.module.scss';
+import styles from '../../scss/Markdown.module.scss';
 
 const MIN_HEADING_LEVEL = 1;
 const MAX_HEADING_LEVEL = 6;
