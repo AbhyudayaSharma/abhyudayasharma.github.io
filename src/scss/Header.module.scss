@@ -33,25 +33,19 @@
   text-decoration: none;
   transition: 0.2s;
   color: common.$index-foreground-color;
+  font-size: 2.5rem;
 }
 
 .title {
   font-size: 4rem;
   padding: 1.2rem 1rem;
-}
-
-.item {
-  font-size: 2.5rem;
+  flex-grow: 1;
+  text-align: center;
 }
 
 .title:hover,
 .item:hover {
   color: common.$link-color;
-}
-
-.title {
-  flex-grow: 1;
-  text-align: center;
 }
 
 .links {
