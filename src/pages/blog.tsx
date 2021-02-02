@@ -7,6 +7,7 @@ import { BlogFrontmatterQueryResult } from '../common/BlogFrontmatterQueryResult
 import { BlogList } from '../components/BlogList';
 
 import { author } from '../../package.json';
+import { getPageUrl } from '../utils/utils-common';
 
 const pageTitle = `${author.name}'s Blog`;
 
@@ -32,8 +33,14 @@ const BlogListRoute: React.FC<PageProps> = (props) => {
 
   return (
     <>
-      <Seo title={pageTitle} />
-      {wrapContent(props, <BlogList header='Recent Articles' blogs={data.edges.map(({ node }) => node.frontmatter)} publicOnly={true} />)}
+      <Seo title={pageTitle} url={getPageUrl(props)} />
+      {wrapContent(props, (
+        <BlogList
+          publicOnly={true}
+          header='Recent Articles'
+          blogs={data.edges.map(({ node }) => node.frontmatter)}
+        />
+      ))}
     </>
   );
 };

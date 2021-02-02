@@ -1,10 +1,15 @@
 import React from 'react';
-import { BigButton } from './BigButton';
+
+import { Seo } from './Seo';
 import { Footer } from './Footer';
+import { BigButton } from './BigButton';
 import { author } from '../../package.json';
 
 import styles from '../scss/Home.module.scss';
-import { Seo } from './Seo';
+
+export interface HomeProps {
+  readonly pageUrl: URL;
+}
 
 const links = [
   {
@@ -23,10 +28,10 @@ const links = [
 
 const buttons = links.map((link, index) => <BigButton key={index} {...link} />);
 
-export const Home: React.FC = () => {
+export const Home: React.FC<HomeProps> = ({ pageUrl }) => {
   return (
     <>
-      <Seo/>
+      <Seo url={pageUrl} />
       <div className={styles.container}>
         <div className={styles.header}>
           <h1 className={styles.h1}>
@@ -36,7 +41,7 @@ export const Home: React.FC = () => {
         <div className={styles.body}>
           {buttons}
         </div>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );

@@ -4,9 +4,9 @@ import { PageProps } from 'gatsby';
 import { Seo } from '../components/Seo';
 import { author } from '../../package.json';
 import { Markdown } from '../components/Markdown';
-import { formatDate } from '../utils/utils-common';
 import { wrapContent } from '../utils/utils-react';
 import { BlogContent } from '../common/BlogContent';
+import { formatDate, getPageUrl } from '../utils/utils-common';
 
 import styles from '../scss/blogTemplate.module.scss';
 
@@ -18,7 +18,11 @@ const BlogTemplate: React.FC<Props> = (props) => {
   const { body, frontmatter } = props.pageContext;
   return wrapContent(props,
     <>
-      <Seo title={`${frontmatter.title} - ${author.name}'s blog`} metaDescription={frontmatter.description} />
+      <Seo
+        pageType='article'
+        url={getPageUrl(props)}
+        title={`${frontmatter.title} - ${author.name}'s blog`}
+        metaDescription={frontmatter.description} />
       <article>
         <h1 className={styles.title}>
           {frontmatter.title}

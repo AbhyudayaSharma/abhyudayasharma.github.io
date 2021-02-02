@@ -1,4 +1,7 @@
+import { PageProps } from 'gatsby';
 import { BlogFrontmatter } from '../common/BlogFrontmatter';
+
+import { homepage } from '../../package.json';
 
 /**
  * Receives an arbitrary object and checks if it is a non-blank string.
@@ -68,4 +71,8 @@ export const formatDate = (date: Date | string): string => {
     date = new Date(date);
   }
   return date.toLocaleDateString('en-us', dateOptions);
+};
+
+export const getPageUrl: (pageProps: PageProps) => URL = (pageProps) => {
+  return new URL(pageProps.uri, homepage);
 };
