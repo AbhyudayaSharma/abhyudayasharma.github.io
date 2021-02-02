@@ -63,6 +63,23 @@ export const Seo: React.FC<PartialSeoProps> = (partialProps) => {
       name: 'og:url',
       content: props.url.href,
     },
+    {
+      name: 'og:description',
+      content: props.metaDescription,
+    },
+    // Twitter cards: https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started
+    {
+      name: 'twitter:card',
+      content: 'summary',
+    },
+    {
+      name: 'twitter:description',
+      content: props.metaDescription,
+    },
+    {
+      name: 'twitter:title',
+      content: props.title,
+    },
   ];
 
   const nameSplit = author.name.split(/\s+/);
