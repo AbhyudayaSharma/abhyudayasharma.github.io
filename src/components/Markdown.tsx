@@ -4,18 +4,18 @@ import React from 'react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 
-import Code from './Code';
 import { MdLink } from './markdown/MdLink';
 import { getHeadingComponent } from './markdown/Heading';
 import { InlineCode } from './markdown/InlineCode';
 import { Blockquote } from './markdown/Blockquote';
 import { ThematicBreak } from './markdown/ThematicBreak';
+import Loadable from '@loadable/component';
 
 // TODO remove `any` by creating type definitions
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const components: Record<string, React.ComponentType<any>> = {
   a: MdLink,
-  code: Code,
+  code: Loadable(() => import('./Code'), { fallback: <div>Loading...</div> }),
   pre: ({ children }) => <>{children}</>,
   inlineCode: InlineCode,
   blockquote: Blockquote,

@@ -51,12 +51,6 @@ const gatsbyConfig: GatsbyConfig = {
         path: path.join(__dirname, '..', 'src', 'blog'),
       },
     },
-    {
-      resolve: 'gatsby-plugin-ts',
-      options: {
-        codegen: false,
-      },
-    },
     'gatsby-remark-images',
     {
       resolve: 'gatsby-plugin-mdx',
@@ -74,6 +68,7 @@ const gatsbyConfig: GatsbyConfig = {
         remarkPlugins: [],
       },
     },
+    'gatsby-plugin-typescript',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-react-helmet',

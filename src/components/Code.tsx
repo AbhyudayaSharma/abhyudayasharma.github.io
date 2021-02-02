@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 
 import 'highlight.js/styles/darcula.css';
 import styles from '../scss/Code.module.scss';
@@ -20,7 +20,7 @@ enum CopyButtonState {
   ACTIVE,
 }
 
-class Code extends Component<CodeProps, CodeState> {
+export default class Code extends Component<CodeProps, CodeState> {
   private static readonly COPY_BUTTON_WAITING_TEXT = 'Copy to Clipboard';
   private static readonly COPY_BUTTON_ACTIVE_TEXT = 'Copied!';
   private static readonly COPY_TIMEOUT = 2 * 1000; // milliseconds
@@ -82,5 +82,3 @@ class Code extends Component<CodeProps, CodeState> {
     );
   }
 }
-
-export default Code;
