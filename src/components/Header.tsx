@@ -21,9 +21,11 @@ const headerLinks = [
 
 export const Header: FunctionComponent<PageProps> = () => (
   <div className={styles.container}>
-    <Link to='/' className={styles.title}>
-      {author.name}
-    </Link>
+    <div className={styles.title}>
+      <Link to='/'>
+        {author.name}
+      </Link>
+    </div>
     <div className={styles.links}>
       {headerLinks.map((link, index) => (
         <Link to={link.url} key={index} activeClassName={styles.itemActive} className={styles.item}>
