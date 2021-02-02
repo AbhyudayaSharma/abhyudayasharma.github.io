@@ -75,7 +75,7 @@
     "gatsby-plugin-ts": "^2.7.1",
     "gatsby-remark-images": "^3.8.0",
     "jest-environment-jsdom-sixteen": "^1.0.3",
-    "npm": "^7.5.0",
+    "npm": "^7.5.1",
     "react-git-info": "^2.0.0",
     "react-test-renderer": "^17.0.1",
     "remark-cli": "^9.0.0",
