@@ -75,7 +75,7 @@
     "gatsby-plugin-mdx": "^1.7.0",
     "gatsby-plugin-remove-trailing-slashes": "^2.10.0",
     "gatsby-plugin-typescript": "^2.11.0",
-    "gatsby-remark-images": "^3.8.0",
+    "gatsby-remark-images": "^3.11.0",
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "npm": "^7.5.2",
     "react-git-info": "^2.0.0",
