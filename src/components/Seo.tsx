@@ -8,6 +8,7 @@ type SeoProps = Readonly<{
   title: string;
   image: URL;
   pageType: 'website' | 'article';
+  isCanonical: boolean;
   url?: URL;
 }>
 
@@ -24,6 +25,7 @@ const defaultProps: SeoProps = {
   title: defaultTitle,
   image: new URL('/logo512.png', homepage),
   pageType: 'website',
+  isCanonical: true,
 };
 
 export const Seo: React.FC<PartialSeoProps> = (partialProps) => {
@@ -39,6 +41,7 @@ export const Seo: React.FC<PartialSeoProps> = (partialProps) => {
     pageType: partialProps.pageType || defaultProps.pageType,
     image: partialProps.image || defaultProps.image,
     url: partialProps.url,
+    isCanonical: partialProps.isCanonical || defaultProps.isCanonical,
   };
 
   let meta: JSX.IntrinsicElements['meta'][] = [
@@ -98,12 +101,11 @@ export const Seo: React.FC<PartialSeoProps> = (partialProps) => {
 
   return (
     <Helmet
-      link={[
-        {
+      link={props.isCanonical
+        ? [{
           rel: 'canonical',
           href: props.url.href,
-        },
-      ]}
+        }] : undefined}
       meta={meta}
       defer={false}
       title={props.title}

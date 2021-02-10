@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { darcula as codeTheme } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
-import 'highlight.js/styles/darcula.css';
 import styles from '../scss/Code.module.scss';
 
 interface CodeProps {
@@ -72,7 +72,7 @@ export default class Code extends Component<CodeProps, CodeState> {
     const code = this.props.children.trimEnd();
     return (
       <div className={styles.container}>
-        <SyntaxHighlighter language={language || 'text'} useInlineStyles={false}>
+        <SyntaxHighlighter language={language || 'plaintext'} style={codeTheme}>
           {code}
         </SyntaxHighlighter>
         <button className={styles.btn} onClick={this.copyButtonClicked.bind(this)}>
