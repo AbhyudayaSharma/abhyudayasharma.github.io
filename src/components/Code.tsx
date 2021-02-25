@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PrismAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { darcula as codeTheme } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import styles from '../scss/Code.module.scss';
@@ -62,17 +62,16 @@ export default class Code extends Component<CodeProps, CodeState> {
 
   render(): React.ReactNode {
     // Gatsby returns language as classname e.g.: language-python
-    const split = this.props.className.split('-');
-    split.shift();
-    const language = (split.join('-').trim() || 'text');
+    const language = this.props.className.replace(/^language-/, '');
 
     if (typeof this.props.children !== 'string') {
       throw Error('`children` of Code should be a string.');
     }
+
     const code = this.props.children.trimEnd();
     return (
       <div className={styles.container}>
-        <SyntaxHighlighter language={language || 'plaintext'} style={codeTheme}>
+        <SyntaxHighlighter language={language} style={codeTheme}>
           {code}
         </SyntaxHighlighter>
         <button className={styles.btn} onClick={this.copyButtonClicked.bind(this)}>

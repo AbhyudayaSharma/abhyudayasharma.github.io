@@ -9,13 +9,13 @@ import { getHeadingComponent } from './markdown/Heading';
 import { InlineCode } from './markdown/InlineCode';
 import { Blockquote } from './markdown/Blockquote';
 import { ThematicBreak } from './markdown/ThematicBreak';
-import Loadable from '@loadable/component';
+import Code from './Code';
 
 // TODO remove `any` by creating type definitions
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const components: Record<string, React.ComponentType<any>> = {
   a: MdLink,
-  code: Loadable(() => import('./Code'), { fallback: <div>Loading...</div> }),
+  code: Code,
   pre: ({ children }) => <>{children}</>,
   inlineCode: InlineCode,
   blockquote: Blockquote,
