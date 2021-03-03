@@ -10,7 +10,7 @@ type SeoProps = Readonly<{
   pageType: 'website' | 'article';
   isCanonical: boolean;
   url?: URL;
-}>
+}>;
 
 interface PartialSeoProps extends Partial<SeoProps> {
   readonly url: URL;
@@ -103,9 +103,10 @@ export const Seo: React.FC<PartialSeoProps> = (partialProps) => {
     <Helmet
       link={props.isCanonical
         ? [{
-          rel: 'canonical',
-          href: props.url.href,
-        }] : undefined}
+            rel: 'canonical',
+            href: props.url.href,
+          }]
+        : undefined}
       meta={meta}
       defer={false}
       title={props.title}

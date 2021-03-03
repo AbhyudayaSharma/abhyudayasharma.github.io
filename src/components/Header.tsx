@@ -16,7 +16,7 @@ const headerLinks = [
   {
     title: 'About Me',
     url: '/about',
-  }
+  },
 ];
 
 export const Header: FunctionComponent<PageProps> = () => (

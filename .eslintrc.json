@@ -27,20 +27,45 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "space-before-function-paren": ["error", {
-      "anonymous": "never",
-      "named": "never",
-      "asyncArrow": "always"
-    }],
-    "semi": ["error", "always"],
-    "comma-dangle": ["error", {
-      "arrays": "only-multiline",
-      "objects": "only-multiline",
-      "imports": "only-multiline",
-      "exports": "only-multiline",
-      "functions": "never"
-    }],
-    "react/prop-types": 0  // don't need proptypes because we use TypeScript
+    // https://stackoverflow.com/a/64024916/6306974
+    "no-use-before-define": "off",
+    "space-before-function-paren": "off",
+    "@typescript-eslint/space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "never",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "semi": "off",
+    "@typescript-eslint/semi": [
+      "error",
+      "always"
+    ],
+    "comma-dangle": "off",
+    "@typescript-eslint/comma-dangle": [
+      "error",
+      {
+        "enums": "always-multiline",
+        "arrays": "always-multiline",
+        "tuples": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "generics": "never",
+        "functions": "never"
+      }
+    ],
+    "react/prop-types": 0, // don't need proptypes because we use TypeScript
+    "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowHigherOrderFunctions": false,
+        "allowDirectConstAssertionInArrowFunctions": false
+      }
+    ]
   },
   "settings": {
     "react": {
