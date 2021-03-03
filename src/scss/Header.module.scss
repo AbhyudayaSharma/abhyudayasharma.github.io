@@ -1,5 +1,7 @@
 @use 'common.module.scss';
 
+$box-shadow-color: #326c61;
+
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -18,37 +20,61 @@
 }
 
 .item {
-  margin: 0 0;
-  padding: 0 0;
+  margin: 0 0.4rem;
   align-items: center;
   text-align: center;
   word-break: keep-all;
   font-size: 2.5rem;
+  padding: 1rem;
+}
+
+.item:focus {
+  box-shadow: 0 0 0 0.1rem $box-shadow-color;
+}
+
+.item-active {
+  border-color: common.$link-color !important;
+}
+
+.item-active:focus {
+  box-shadow: 0 0 0 0.2rem $box-shadow-color;
 }
 
 .item,
 .title > a {
   @extend %unselectable;
   font-weight: 100;
-  margin: 0 0;
+  outline: none;
   text-decoration: none;
   transition: 0.2s;
   color: common.$index-foreground-color;
+  border-style: solid;
+  border-radius: 1rem;
+  border-width: thin;
+  border-color: transparent;
   cursor: pointer;
 }
 
 .title {
   margin: 0 0;
   font-size: 4rem;
-  padding: 1.2rem 1rem;
   flex-grow: 1;
   text-decoration: none;
   text-align: center;
 }
 
+.title > a {
+  margin: 0 0;
+  padding: 0.75rem 1rem;
+}
+
 .title > a:hover,
 .item:hover {
   color: common.$link-color;
+}
+
+.title > a:focus {
+  box-shadow: 0 0 0 0.1rem $box-shadow-color;
 }
 
 .links {
@@ -65,10 +91,3 @@
   padding-right: 0.7rem;
 }
 
-.item-active {
-  padding: 1rem;
-  border-style: solid;
-  border-color: common.$link-color;
-  border-radius: 1rem;
-  border-width: thin;
-}

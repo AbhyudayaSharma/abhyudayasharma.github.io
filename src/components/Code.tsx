@@ -71,10 +71,10 @@ export default class Code extends Component<CodeProps, CodeState> {
     const code = this.props.children.trimEnd();
     return (
       <div className={styles.container}>
-        <SyntaxHighlighter language={language} style={codeTheme}>
+        <SyntaxHighlighter language={language} style={codeTheme} tabIndex={0}>
           {code}
         </SyntaxHighlighter>
-        <button className={styles.btn} onClick={this.copyButtonClicked.bind(this)}>
+        <button className={styles.btn} onClick={this.copyButtonClicked.bind(this)} tabIndex={0}>
           {this.state.copyButtonText}
         </button>
       </div>

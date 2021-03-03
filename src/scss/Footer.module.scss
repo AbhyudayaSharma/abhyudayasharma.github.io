@@ -3,8 +3,7 @@
 .container {
   color: common.$index-foreground-color;
   text-align: center;
-  padding-bottom: 1rem;
-  padding-top: 2rem;
+  padding: 1rem 0 0.5rem;
   font-size: 1.4rem;
 }
 
@@ -12,4 +11,8 @@
   @extend %selectable;
   color: common.$link-color;
   text-decoration: none;
+}
+
+.link:hover {
+  border-bottom: thin common.$link-color solid;
 }

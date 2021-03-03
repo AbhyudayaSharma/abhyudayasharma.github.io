@@ -35,3 +35,7 @@ $code-color: #fff;
   color: rgb(43, 43, 43);
   background-color: $code-color;
 }
+
+.btn:focus {
+  box-shadow: 0 0 0 0.2rem gray;
+}

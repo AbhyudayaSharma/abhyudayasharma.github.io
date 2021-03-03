@@ -31,7 +31,7 @@ export const BlogListEntry: React.FC<BlogFrontmatter> = (props) => {
         <div className={styles.tagContainer}>
           {props.tags.map((tag, index) => <div className={styles.tag} key={index}>{tag}</div>)}
         </div>
-        <p>
+        <p className={styles.description}>
           {props.description}
         </p>
       </div>
