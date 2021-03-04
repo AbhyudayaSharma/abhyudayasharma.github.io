@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 
 import { h1, h2, h3, h4, h5, h6 } from '../../scss/Markdown.module.scss';
@@ -17,6 +16,6 @@ export const getHeadingComponent: (level: number) => React.FC = (level) => {
     }
   })();
 
-  const component: React.FC = ({ children }): JSX.Element => React.createElement(`h${level}`, { className: className }, children);
+  const component: React.FC = ({ children }) => React.createElement(`h${level}`, { className: className }, children);
   return component;
 };

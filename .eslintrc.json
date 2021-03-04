@@ -29,6 +29,7 @@
   "rules": {
     // https://stackoverflow.com/a/64024916/6306974
     "no-use-before-define": "off",
+    // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/space-before-function-paren.md
     "space-before-function-paren": "off",
     "@typescript-eslint/space-before-function-paren": [
       "error",
@@ -38,11 +39,13 @@
         "asyncArrow": "always"
       }
     ],
+    // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/semi.md
     "semi": "off",
     "@typescript-eslint/semi": [
       "error",
       "always"
     ],
+    // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/comma-dangle.md
     "comma-dangle": "off",
     "@typescript-eslint/comma-dangle": [
       "error",
@@ -58,13 +61,20 @@
       }
     ],
     "react/prop-types": 0, // don't need proptypes because we use TypeScript
+    // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/naming-convention.md
     "@typescript-eslint/naming-convention": "off",
+    // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md
     "@typescript-eslint/explicit-function-return-type": [
       "error",
       {
         "allowHigherOrderFunctions": false,
         "allowDirectConstAssertionInArrowFunctions": false
       }
+    ],
+    // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-unused-vars.md
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error"
     ]
   },
   "settings": {
