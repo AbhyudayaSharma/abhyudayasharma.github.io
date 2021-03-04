@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { Link, PageProps } from 'gatsby';
-import { author } from '../../package.json';
+import packageJson from '../../package.json';
 
-import styles from '../scss/Header.module.scss';
+import * as styles from '../scss/Header.module.scss';
 
 const headerLinks = [
   {
@@ -23,7 +23,7 @@ export const Header: FunctionComponent<PageProps> = () => (
   <div className={styles.container}>
     <div className={styles.title}>
       <Link to='/'>
-        {author.name}
+        {packageJson.author.name}
       </Link>
     </div>
     <div className={styles.links}>

@@ -1,7 +1,7 @@
 import { PageProps } from 'gatsby';
 import { BlogFrontmatter } from '../common/BlogFrontmatter';
 
-import { homepage } from '../../package.json';
+import packageJson from '../../package.json';
 
 /**
  * Receives an arbitrary object and checks if it is a non-blank string.
@@ -74,5 +74,5 @@ export const formatDate = (date: Date | string): string => {
 };
 
 export const getPageUrl: (pageProps: PageProps) => URL = (pageProps) => {
-  return new URL(pageProps.uri, homepage);
+  return new URL(pageProps.uri, packageJson.homepage);
 };

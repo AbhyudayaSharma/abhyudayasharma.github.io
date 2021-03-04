@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { darcula as codeTheme } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
-import styles from '../scss/Code.module.scss';
+import * as styles from '../scss/Code.module.scss';
 
 interface CodeProps {
   className: string;

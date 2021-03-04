@@ -1,10 +1,10 @@
 import React from 'react';
 
-import styles from '../../scss/Markdown.module.scss';
+import { blockquote } from '../../scss/Markdown.module.scss';
 
 export const Blockquote: React.FC = ({ children }) => {
   return (
-    <blockquote className={styles.blockquote}>
+    <blockquote className={blockquote}>
       {children}
     </blockquote>
   );

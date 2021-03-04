@@ -1,10 +1,11 @@
 import path from 'path';
-import { homepage } from '../package.json';
+import packageJson from '../package.json';
+
 import { GatsbyConfig } from 'gatsby';
 
 const gatsbyConfig: GatsbyConfig = {
   siteMetadata: {
-    siteUrl: homepage,
+    siteUrl: packageJson.homepage,
   },
   plugins: [
     {

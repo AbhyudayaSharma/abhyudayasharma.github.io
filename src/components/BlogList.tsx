@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import { BlogFrontmatter } from '../common/BlogFrontmatter';
 import { formatDate, validateBlogFrontmatter } from '../utils/utils-common';
 
-import styles from '../scss/BlogList.module.scss';
+import * as styles from '../scss/BlogList.module.scss';
 
 export interface BlogListHeaderProps {
   value: string;

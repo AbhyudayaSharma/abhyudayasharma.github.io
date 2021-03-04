@@ -1,6 +1,6 @@
 import { Link } from 'gatsby';
 import React, { SyntheticEvent, AnchorHTMLAttributes } from 'react';
-import styles from '../scss/BigButton.module.scss';
+import * as styles from '../scss/BigButton.module.scss';
 
 interface Props {
   url: string;

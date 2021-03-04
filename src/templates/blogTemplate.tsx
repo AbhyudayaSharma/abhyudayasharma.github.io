@@ -2,13 +2,13 @@ import React from 'react';
 import { PageProps } from 'gatsby';
 
 import { Seo } from '../components/Seo';
-import { author } from '../../package.json';
+import packageJson from '../../package.json';
 import { Markdown } from '../components/Markdown';
 import { wrapContent } from '../utils/utils-react';
 import { BlogContent } from '../common/BlogContent';
 import { formatDate, getPageUrl } from '../utils/utils-common';
 
-import styles from '../scss/blogTemplate.module.scss';
+import * as styles from '../scss/blogTemplate.module.scss';
 
 interface Props extends PageProps {
   pageContext: BlogContent;
@@ -21,7 +21,7 @@ const BlogTemplate: React.FC<Props> = (props) => {
       <Seo
         pageType='article'
         url={getPageUrl(props)}
-        title={`${frontmatter.title} - ${author.name}'s blog`}
+        title={`${frontmatter.title} - ${packageJson.author.name}'s blog`}
         metaDescription={frontmatter.description} />
       <article>
         <h1 className={styles.title}>
