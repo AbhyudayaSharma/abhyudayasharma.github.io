@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from 'react';
-import { Link, PageProps } from 'gatsby';
+import React from 'react';
 import packageJson from '../../package.json';
 
-import * as styles from '../scss/Header.module.scss';
+import { Link, PageProps } from 'gatsby';
+import { container, title, links, itemActive, item } from '../scss/Header.module.scss';
 
 const headerLinks = [
   {
@@ -19,16 +19,16 @@ const headerLinks = [
   },
 ];
 
-export const Header: FunctionComponent<PageProps> = () => (
-  <div className={styles.container}>
-    <div className={styles.title}>
+export const Header: React.FC<PageProps> = () => (
+  <div className={container}>
+    <div className={title}>
       <Link to='/'>
         {packageJson.author.name}
       </Link>
     </div>
-    <div className={styles.links}>
+    <div className={links}>
       {headerLinks.map((link, index) => (
-        <Link to={link.url} key={index} activeClassName={styles.itemActive} className={styles.item}>
+        <Link to={link.url} key={index} activeClassName={itemActive} className={item}>
           {link.title}
         </Link>
       ))}

@@ -1,9 +1,10 @@
 import React from 'react';
+
 import { Link } from 'gatsby';
 import { BlogFrontmatter } from '../common/BlogFrontmatter';
 import { formatDate, validateBlogFrontmatter } from '../utils/utils-common';
 
-import * as styles from '../scss/BlogList.module.scss';
+import { content, entry, title, header, tag as tagClass, tagContainer, date, description } from '../scss/BlogList.module.scss';
 
 export interface BlogListHeaderProps {
   value: string;
@@ -17,21 +18,21 @@ export interface BlogListProps {
 
 export const BlogListEntry: React.FC<BlogFrontmatter> = (props) => {
   return (
-    <div className={styles.entry}>
-      <div className={styles.content}>
-        <Link to={props.url} className={styles.title}>
+    <div className={entry}>
+      <div className={content}>
+        <Link to={props.url} className={title}>
           {props.title}
         </Link>
-        <div className={styles.date}>
+        <div className={date}>
           <span role='img' aria-label='date'>📅</span>&nbsp;
           <time>
             {formatDate(props.date)}
           </time>
         </div>
-        <div className={styles.tagContainer}>
-          {props.tags.map((tag, index) => <div className={styles.tag} key={index}>{tag}</div>)}
+        <div className={tagContainer}>
+          {props.tags.map((tag, index) => <div className={tagClass} key={index}>{tag}</div>)}
         </div>
-        <p className={styles.description}>
+        <p className={description}>
           {props.description}
         </p>
       </div>
@@ -41,7 +42,7 @@ export const BlogListEntry: React.FC<BlogFrontmatter> = (props) => {
 
 export const BlogListHeader: React.FC<BlogListHeaderProps> = ({ value }) => {
   return (
-    <div className={styles.header}>
+    <div className={header}>
       <h1>
         {value}
       </h1>
@@ -55,7 +56,7 @@ export const BlogList: React.FC<BlogListProps> = ({ header, blogs, publicOnly })
 
   return (
     <>
-      {header && <BlogListHeader value={header}/>}
+      {header && <BlogListHeader value={header} />}
       {displayable.map(
         (frontmatter, index) => <BlogListEntry {...frontmatter} key={index} />
       )}

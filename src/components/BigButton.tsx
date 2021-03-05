@@ -1,6 +1,7 @@
-import { Link } from 'gatsby';
 import React, { SyntheticEvent, AnchorHTMLAttributes } from 'react';
-import * as styles from '../scss/BigButton.module.scss';
+
+import { Link } from 'gatsby';
+import { btn } from '../scss/BigButton.module.scss';
 
 interface Props {
   url: string;
@@ -10,7 +11,7 @@ interface Props {
 const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
   draggable: false,
   onDragStart: (e: SyntheticEvent): void => e.preventDefault(),
-  className: styles.btn,
+  className: btn,
   tabIndex: 0,
 };
 

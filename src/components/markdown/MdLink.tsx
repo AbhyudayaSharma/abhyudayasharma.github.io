@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'gatsby';
 
+import { Link } from 'gatsby';
 import { link as className } from '../../scss/Markdown.module.scss';
 
 interface MdLinkProps {
