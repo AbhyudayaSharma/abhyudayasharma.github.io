@@ -27,8 +27,11 @@
     "@typescript-eslint"
   ],
   "rules": {
-    // https://stackoverflow.com/a/64024916/6306974
+    // https://stackoverflow.com/a/64024916/6306974 and https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md
     "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "error"
+    ],
     // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/space-before-function-paren.md
     "space-before-function-paren": "off",
     "@typescript-eslint/space-before-function-paren": [
@@ -75,6 +78,12 @@
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
       "error"
+    ],
+    // https://github.com/typescript-eslint/typescript-eslint/blob/9323eaea81467e51ba99915f8b5d4dc8834e2784/packages/eslint-plugin/docs/rules/quotes.md
+    "quotes": "off",
+    "@typescript-eslint/quotes": [
+      "error",
+      "single"
     ]
   },
   "settings": {
