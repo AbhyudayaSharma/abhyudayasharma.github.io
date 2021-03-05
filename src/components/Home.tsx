@@ -3,9 +3,9 @@ import React from 'react';
 import { Seo } from './Seo';
 import { Footer } from './Footer';
 import { BigButton } from './BigButton';
-import { author } from '../../package.json';
+import packageJson from '../../package.json';
 
-import styles from '../scss/Home.module.scss';
+import { container, header, h1, body } from '../scss/Home.module.scss';
 
 export interface HomeProps {
   readonly pageUrl: URL;
@@ -32,13 +32,13 @@ export const Home: React.FC<HomeProps> = ({ pageUrl }) => {
   return (
     <>
       <Seo url={pageUrl} />
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <h1 className={styles.h1}>
-            {author.name}
+      <div className={container}>
+        <div className={header}>
+          <h1 className={h1}>
+            {packageJson.author.name}
           </h1>
         </div>
-        <div className={styles.body}>
+        <div className={body}>
           {buttons}
         </div>
         <Footer />

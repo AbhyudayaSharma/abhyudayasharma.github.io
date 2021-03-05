@@ -1,22 +1,22 @@
 import path from 'path';
-import { homepage } from '../package.json';
+import packageJson from '../package.json';
+
 import { GatsbyConfig } from 'gatsby';
 
 const gatsbyConfig: GatsbyConfig = {
   siteMetadata: {
-    siteUrl: homepage,
+    siteUrl: packageJson.homepage,
   },
   plugins: [
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: path.join(__dirname, '..', 'src', 'images')
-      }
+        path: path.join(__dirname, '..', 'src', 'images'),
+      },
     },
     {
       resolve: 'gatsby-plugin-manifest',
-      /* eslint-disable @typescript-eslint/camelcase */
       options: {
         short_name: 'Abhyudaya Sharma\'s Website and Blog',
         name: 'Abhyudaya Sharma\'s Website and Blog',
@@ -24,25 +24,24 @@ const gatsbyConfig: GatsbyConfig = {
           {
             src: 'favicon.ico',
             sizes: '64x64 32x32 24x24 16x16',
-            type: 'image/x-icon'
+            type: 'image/x-icon',
           },
           {
             src: 'logo192.png',
             type: 'image/png',
-            sizes: '192x192'
+            sizes: '192x192',
           },
           {
             src: 'logo512.png',
             type: 'image/png',
-            sizes: '512x512'
-          }
+            sizes: '512x512',
+          },
         ],
         start_url: '/',
         display: 'standalone',
         theme_color: '#000000',
         background_color: '#ffffff',
       },
-      /* eslint-enable @typescript-eslint/camelcase */
     },
     {
       resolve: 'gatsby-source-filesystem',
@@ -68,16 +67,25 @@ const gatsbyConfig: GatsbyConfig = {
         remarkPlugins: [],
       },
     },
+    {
+      resolve: 'gatsby-plugin-sass',
+      options: {
+        sourceMap: true,
+        implementation: require('sass'),
+        cssLoaderOptions: {
+          modules: true,
+          esModule: true,
+        },
+      },
+    },
     'gatsby-plugin-typescript',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-image',
-    'gatsby-plugin-sass',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-nprogress',
     'gatsby-plugin-remove-trailing-slashes',
-    'gatsby-plugin-split-css',
   ],
 };
 

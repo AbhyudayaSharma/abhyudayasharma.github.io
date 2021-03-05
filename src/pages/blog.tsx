@@ -6,10 +6,10 @@ import { wrapContent } from '../utils/utils-react';
 import { BlogFrontmatterQueryResult } from '../common/BlogFrontmatterQueryResult';
 import { BlogList } from '../components/BlogList';
 
-import { author } from '../../package.json';
+import packageJson from '../../package.json';
 import { getPageUrl } from '../utils/utils-common';
 
-const pageTitle = `${author.name}'s Blog`;
+const pageTitle = `${packageJson.author.name}'s Blog`;
 
 const BlogListRoute: React.FC<PageProps> = (props) => {
   const data = useStaticQuery(graphql`

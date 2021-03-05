@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { author, homepage } from '../../package.json';
+
+import packageJson from '../../package.json';
 
 type SeoProps = Readonly<{
   metaDescription: string;
@@ -10,20 +11,20 @@ type SeoProps = Readonly<{
   pageType: 'website' | 'article';
   isCanonical: boolean;
   url?: URL;
-}>
+}>;
 
 interface PartialSeoProps extends Partial<SeoProps> {
   readonly url: URL;
 }
 
-const defaultTitle = `${author.name}'s Personal Website and Blog`;
+const defaultTitle = `${packageJson.author.name}'s Personal Website and Blog`;
 const maxTitleLength = 60; // https://moz.com/learn/seo/title-tag
 const maxDescriptionLength = 160; // https://moz.com/learn/seo/meta-description
 
 const defaultProps: SeoProps = {
   metaDescription: defaultTitle,
   title: defaultTitle,
-  image: new URL('/logo512.png', homepage),
+  image: new URL('/logo512.png', packageJson.homepage),
   pageType: 'website',
   isCanonical: true,
 };
@@ -85,7 +86,7 @@ export const Seo: React.FC<PartialSeoProps> = (partialProps) => {
     },
   ];
 
-  const nameSplit = author.name.split(/\s+/);
+  const nameSplit = packageJson.author.name.split(/\s+/);
   if (props.pageType === 'article') {
     meta = meta.concat([
       {
@@ -103,9 +104,10 @@ export const Seo: React.FC<PartialSeoProps> = (partialProps) => {
     <Helmet
       link={props.isCanonical
         ? [{
-          rel: 'canonical',
-          href: props.url.href,
-        }] : undefined}
+            rel: 'canonical',
+            href: props.url.href,
+          }]
+        : undefined}
       meta={meta}
       defer={false}
       title={props.title}

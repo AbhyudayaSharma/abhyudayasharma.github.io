@@ -26,6 +26,16 @@
   font-size: 2.5rem;
 }
 
+.h5 {
+  @extend .heading;
+  font-size: 2.25rem;
+}
+
+.h6 {
+  @extend .heading;
+  font-size: 2rem;
+}
+
 .inline-code {
   word-wrap: break-word;
   background-color: rgb(43, 43, 43);

@@ -1,2 +1,2 @@
-import { createPages as _createPages } from './lib/createPages';
-export const createPages = _createPages;
+export * from './lib/createPages';
+export * from './lib/onCreateWebpackConfig';
