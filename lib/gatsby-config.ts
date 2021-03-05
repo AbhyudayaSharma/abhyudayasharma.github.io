@@ -67,12 +67,22 @@ const gatsbyConfig: GatsbyConfig = {
         remarkPlugins: [],
       },
     },
+    {
+      resolve: 'gatsby-plugin-sass',
+      options: {
+        sourceMap: true,
+        implementation: require('sass'),
+        cssLoaderOptions: {
+          modules: true,
+          esModule: true,
+        },
+      },
+    },
     'gatsby-plugin-typescript',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-image',
-    'gatsby-plugin-sass',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-nprogress',
     'gatsby-plugin-remove-trailing-slashes',
