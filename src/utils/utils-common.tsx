@@ -74,5 +74,5 @@ export const formatDate = (date: Date | string): string => {
 };
 
 export const getPageUrl: (pageProps: PageProps) => URL = (pageProps) => {
-  return new URL(pageProps.uri, packageJson.homepage);
+  return new URL(pageProps.location.pathname, packageJson.homepage);
 };

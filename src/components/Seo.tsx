@@ -32,17 +32,17 @@ const defaultProps: SeoProps = {
 export const Seo: React.FC<PartialSeoProps> = (partialProps) => {
   const props: Required<SeoProps> = {
     title: _.truncate(
-      partialProps.title || defaultProps.title,
+      partialProps.title ?? defaultProps.title,
       { length: maxTitleLength, omission: '…' }
     ),
     metaDescription: _.truncate(
-      partialProps.metaDescription || defaultProps.metaDescription,
+      partialProps.metaDescription ?? defaultProps.metaDescription,
       { length: maxDescriptionLength, omission: '…' }
     ),
-    pageType: partialProps.pageType || defaultProps.pageType,
-    image: partialProps.image || defaultProps.image,
+    pageType: partialProps.pageType ?? defaultProps.pageType,
+    image: partialProps.image ?? defaultProps.image,
     url: partialProps.url,
-    isCanonical: partialProps.isCanonical || defaultProps.isCanonical,
+    isCanonical: partialProps.isCanonical ?? defaultProps.isCanonical,
   };
 
   let meta: JSX.IntrinsicElements['meta'][] = [
