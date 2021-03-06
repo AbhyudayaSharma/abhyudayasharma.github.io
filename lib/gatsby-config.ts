@@ -67,17 +67,7 @@ const gatsbyConfig: GatsbyConfig = {
         remarkPlugins: [],
       },
     },
-    {
-      resolve: 'gatsby-plugin-sass',
-      options: {
-        sourceMap: true,
-        implementation: require('sass'),
-        cssLoaderOptions: {
-          modules: true,
-          esModule: true,
-        },
-      },
-    },
+    'gatsby-plugin-sass',
     'gatsby-plugin-typescript',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
