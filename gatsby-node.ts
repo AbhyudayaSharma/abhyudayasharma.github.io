@@ -1,2 +1,1 @@
-export * from './lib/createPages';
-export * from './lib/onCreateWebpackConfig';
+export { createPages } from './lib/createPages';

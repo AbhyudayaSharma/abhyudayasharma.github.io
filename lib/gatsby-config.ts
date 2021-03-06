@@ -86,6 +86,7 @@ const gatsbyConfig: GatsbyConfig = {
     'gatsby-plugin-sitemap',
     'gatsby-plugin-nprogress',
     'gatsby-plugin-remove-trailing-slashes',
+    'gatsby-plugin-split-css',
   ],
 };
 
