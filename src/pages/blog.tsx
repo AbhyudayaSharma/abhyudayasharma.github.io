@@ -1,13 +1,20 @@
 import React from 'react';
-import { PageProps, useStaticQuery, graphql } from 'gatsby';
+import packageJson from '../../package.json';
+
+import { graphql, PageProps, useStaticQuery } from 'gatsby';
 
 import { Seo } from '../components/Seo';
 import { wrapContent } from '../utils/utils-react';
-import { BlogFrontmatterQueryResult } from '../common/BlogFrontmatterQueryResult';
 import { BlogList } from '../components/BlogList';
 
-import packageJson from '../../package.json';
 import { getPageUrl } from '../utils/utils-common';
+import { RawBlog, toValidBlog } from '../common/Blog';
+
+interface BlogFrontmatterQueryResult {
+  readonly edges: {
+    readonly node: RawBlog;
+  }[];
+}
 
 const pageTitle = `${packageJson.author.name}'s Blog`;
 
@@ -17,8 +24,8 @@ const BlogListRoute: React.FC<PageProps> = (props) => {
       allMdx(sort: {fields: frontmatter___date, order: DESC}) {
         edges {
           node {
+            slug
             frontmatter {
-              slug
               title
               date
               tags
@@ -28,17 +35,16 @@ const BlogListRoute: React.FC<PageProps> = (props) => {
           }
         }
       }
-    }`
-  ).allMdx as BlogFrontmatterQueryResult;
+    }`).allMdx as BlogFrontmatterQueryResult;
 
   return (
     <>
-      <Seo title={pageTitle} url={getPageUrl(props)} />
+      <Seo title={pageTitle} url={getPageUrl(props)}/>
       {wrapContent(props, (
         <BlogList
           publicOnly={true}
           header='Recent Articles'
-          blogs={data.edges.map(({ node }) => node.frontmatter)}
+          blogs={data.edges.map(({ node }) => toValidBlog(node))}
         />
       ))}
     </>

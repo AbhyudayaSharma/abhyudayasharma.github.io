@@ -1,17 +1,11 @@
 import path from 'path';
-
 import { GatsbyNode } from 'gatsby';
-import { BlogContent } from '../src/common/BlogContent';
-import { BlogFrontmatter } from '../src/common/BlogFrontmatter';
-import { validateBlogFrontmatter } from '../src/utils/utils-common';
+import { Blog, RawBlog, toValidBlog } from '../src/common/Blog';
 
-interface BlogContentQueryData {
+interface BlogContentQueryResult {
   allMdx: {
     edges: {
-      node: {
-        body: string;
-        frontmatter: BlogFrontmatter;
-      };
+      readonly node: RawBlog;
     }[];
   };
 }
@@ -23,7 +17,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql,
         edges {
           node {
             frontmatter {
-              slug
               title
               date(formatString: "YYYY-MM-DD")
               tags
@@ -31,6 +24,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql,
               description
             }
             body
+            slug
           }
         }
       }
@@ -43,18 +37,24 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql,
   }
 
   const { createPage } = actions;
-  const data = result.data as BlogContentQueryData;
-  const blogTemplate = path.resolve('./src/templates/blogTemplate.tsx');
-  data.allMdx.edges.forEach(({ node }) => {
-    const context: BlogContent = {
-      frontmatter: validateBlogFrontmatter(node.frontmatter),
-      body: node.body,
-    };
-    createPage({
-      component: blogTemplate,
-      path: context.frontmatter.url,
-      context,
+  const data = result.data as BlogContentQueryResult;
+  const component = path.resolve('./src/templates/blogTemplate.tsx');
+
+  data.allMdx.edges
+    .map(edge => edge.node)
+    .map(toValidBlog)
+    .forEach(blog => {
+      if (blog.body === undefined) {
+        throw new Error('Empty body. Looks like an error in the GraphQL query.');
+      }
+
+      const context: Required<Blog> = { ...blog, body: blog.body ?? '' };
+      createPage<Required<Blog>>({
+        context,
+        component,
+        path: blog.url,
+      });
     });
-  });
+
   return Promise.resolve();
 };

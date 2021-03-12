@@ -1,10 +1,19 @@
 import React from 'react';
 
 import { Link } from 'gatsby';
-import { BlogFrontmatter } from '../common/BlogFrontmatter';
-import { formatDate, validateBlogFrontmatter } from '../utils/utils-common';
+import { Blog } from '../common/Blog';
 
-import { content, entry, title, header, tag as tagClass, tagContainer, date, description } from '../scss/BlogList.module.scss';
+import {
+  content,
+  date,
+  description,
+  entry,
+  header,
+  tag as tagClass,
+  tagContainer,
+  title,
+} from '../scss/BlogList.module.scss';
+import { DateComponent } from '../utils/utils-react';
 
 export interface BlogListHeaderProps {
   value: string;
@@ -13,27 +22,26 @@ export interface BlogListHeaderProps {
 export interface BlogListProps {
   header?: string;
   publicOnly: boolean;
-  blogs: Array<Partial<BlogFrontmatter>>;
+  blogs: Array<Blog>;
 }
 
-export const BlogListEntry: React.FC<BlogFrontmatter> = (props) => {
+export const BlogListEntry: React.FC<Blog> = (props) => {
+  const { frontmatter, url } = props;
   return (
     <div className={entry}>
       <div className={content}>
-        <Link to={props.url} className={title}>
-          {props.title}
+        <Link to={url} className={title}>
+          {frontmatter.title}
         </Link>
         <div className={date}>
           <span role='img' aria-label='date'>📅</span>&nbsp;
-          <time>
-            {formatDate(props.date)}
-          </time>
+          <DateComponent date={frontmatter.date}/>
         </div>
         <div className={tagContainer}>
-          {props.tags.map((tag, index) => <div className={tagClass} key={index}>{tag}</div>)}
+          {frontmatter.tags.map((tag, index) => <div className={tagClass} key={index}>{tag}</div>)}
         </div>
         <p className={description}>
-          {props.description}
+          {frontmatter.description}
         </p>
       </div>
     </div>
@@ -51,14 +59,13 @@ export const BlogListHeader: React.FC<BlogListHeaderProps> = ({ value }) => {
 };
 
 export const BlogList: React.FC<BlogListProps> = ({ header, blogs, publicOnly }) => {
-  const validated = blogs.map(frontmatter => validateBlogFrontmatter(frontmatter));
-  const displayable = publicOnly ? validated.filter(frontmatter => frontmatter.isPublic) : validated;
+  const displayable = publicOnly ? blogs.filter(blog => blog.frontmatter.isPublic) : blogs;
 
   return (
     <>
-      {header && <BlogListHeader value={header} />}
+      {header && <BlogListHeader value={header}/>}
       {displayable.map(
-        (frontmatter, index) => <BlogListEntry {...frontmatter} key={index} />
+        (blog, index) => <BlogListEntry {...blog} key={index}/>
       )}
     </>
   );

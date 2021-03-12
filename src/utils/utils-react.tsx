@@ -21,3 +21,36 @@ export const wrapContent = (props: PageProps, element: JSX.Element | JSX.Element
     </div>
   );
 };
+
+const dateOptions: Intl.DateTimeFormatOptions = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
+
+/**
+ * Converts a @link Date} to a string of date format `YYYY-MM-dd`.
+ * @param date date to convert to string
+ * @return date string of the format `YYYY-MM-dd`
+ */
+const toYyyyMmDd = (date: Date): string => {
+  if (isNaN(date.getDate())) {
+    throw new Error(`Invalid date: ${date}`);
+  }
+
+  let day = date.getDate().toString();
+  let month = (date.getMonth() + 1).toString(); // months are 0-indexed (January is 0)
+  const year = date.getFullYear().toString();
+  day = day.length === 1 ? `0${day}` : month;
+  month = month.length === 1 ? `0${month}` : month;
+  return `${year}-${month}-${day}`;
+};
+
+export const DateComponent: React.FC<{ date: Date }> = ({ date }) => {
+  return (
+    <time dateTime={toYyyyMmDd(date)}>
+      {date.toLocaleDateString('en-us', dateOptions)}
+    </time>
+  );
+};
