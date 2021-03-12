@@ -42,7 +42,7 @@ const toYyyyMmDd = (date: Date): string => {
   let day = date.getDate().toString();
   let month = (date.getMonth() + 1).toString(); // months are 0-indexed (January is 0)
   const year = date.getFullYear().toString();
-  day = day.length === 1 ? `0${day}` : month;
+  day = day.length === 1 ? `0${day}` : day;
   month = month.length === 1 ? `0${month}` : month;
   return `${year}-${month}-${day}`;
 };
