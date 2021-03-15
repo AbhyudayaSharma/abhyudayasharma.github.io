@@ -24,7 +24,7 @@ solutions`. You will find countless other solutions, but please don't go through
 things yourself. Please note that the passwords and private keys were correct at the time of writing and may change in
 the future.
 
-### Bandit 0
+## Bandit 0
 
 Password: `bandit0`
 
@@ -42,7 +42,7 @@ and ssh is exposed to the internet at port `2220`. Once you're in the server, us
 directory of `bandit0`. You'll see that there is a file called `readme`. `cat` the file to get the password to the
 next level.
 
-### Bandit 1
+## Bandit 1
 
 Password: `boJ9jbbUNNfktd78OOpsqOltutMc3MY1`
 
@@ -52,7 +52,7 @@ to either pass the absolute path to the file to `cat` (current directory can be 
 we can use `cat ./-`. This is quite an interesting observation. We should always use `./*` when
 globbing, or we could inadvertently set some flag in a command.
 
-### Bandit 2
+## Bandit 2
 
 Password: `CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9`
 
@@ -65,14 +65,14 @@ when using the variable, use quotes to avoid interpolation, handle spaces and av
 globbing. For example: `FOO='spaces in the filename'; cat $FOO` doesn't work; `cat "$FOO"`
 does.
 
-### Bandit 3
+## Bandit 3
 
 Password: `UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK`
 
 In UNIX-like operating systems, files that start with `.` are hidden. To list hidden
 files, use `ls` with `-a` flag. Read `ls --help` to know more.
 
-### Bandit 4
+## Bandit 4
 
 Password: `pIwrPrtPN36QITSp3EQaw936yaFoFgAB`
 
@@ -81,7 +81,7 @@ in the directory. `reset` your shell if it is messed up. The content of the only
 gibberish is the password to the next level. Since the files start with `-`, remember to use what you learnt in
 Bandit 2.
 
-### Bandit 5
+## Bandit 5
 
 Password `koReBOKuIDDepwhWk7jZC0RTdopnAYKh`
 
@@ -99,7 +99,7 @@ The command searches for files that satisfy all of these criteria:
 
 Then it `cat`s each of these files using `-exec cat '{}' +`.
 
-### Bandit 6
+## Bandit 6
 
 Password: `DXjZPULLxYr17uwoI01bNLQbtFemEgo7`
 
@@ -116,7 +116,7 @@ files and directories where you won't have the permission to read. However,
 there will be one file whose contents look like the passwords we have had.
 That is the password to the next level.
 
-### Bandit 7
+## Bandit 7
 
 Password: `HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs`
 
@@ -129,7 +129,7 @@ grep millionth data.txt
 `grep` can search for [regular expressions](https://en.wikipedia.org/wiki/Regular_expression) in a list of files and
 prints out their occurrences. Again, `man grep` is the best way to learn about grep.
 
-### Bandit 8
+## Bandit 8
 
 Password: `cvX2JJa4CFALtqS87jk27qwqGhBM9plV`
 
@@ -147,7 +147,7 @@ sort data.txt | uniq -u
 The `-u` flag makes `uniq` print only unique strings. So the command above gives the
 password to the next level.
 
-### Bandit 9
+## Bandit 9
 
 Password: `UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR`
 
@@ -162,13 +162,13 @@ The `-E` flag is necessary to enable extended regular expressions in `grep`. The
 that contain one or more `=`s. This will give a few false positives, but you'll still be easily able to figure out
 the password to the next level.
 
-### Bandit 10
+## Bandit 10
 
 Password: `truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk`
 
 You can use `base64 -d data.txt` to decode the file. This will give you the password.
 
-### Bandit 11
+## Bandit 11
 
 Password: `IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR`
 
@@ -184,7 +184,7 @@ for capital letters. This causes a 13 place shift, equivalent to the ROT13 ciphe
 An interesting thing to note here is that applying ROT13 twice on any string English string will return the string
 itself. This happens because the English alphabet contains 26 characters.
 
-### Bandit 12
+## Bandit 12
 
 Password: `5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu`
 
@@ -226,7 +226,7 @@ tar -xjf data6.bin
 zcat data8.bin
 ```
 
-### Bandit 13
+## Bandit 13
 
 Password: `8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL`
 
@@ -239,14 +239,14 @@ ssh bandit14@localhost -i ./sshkey.private 'cat /etc/bandit_pass/bandit14'
 
 This one-liner will login as `bandit14` and run `cat /etc/bandit_pass/bandit14`, giving you the password to the next level.
 
-### Bandit 14
+## Bandit 14
 
 Password:  `4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e`
 
 Read the links in the question prompt. This is a simple challenge (if you understand [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol)).
 Simply `telnet localhost 30000` and paste the password to get the password for the next level.
 
-### Bandit 15
+## Bandit 15
 
 Password: `BfMYroe26WYalil77FoDi9qh59eK5xNr`
 
@@ -256,7 +256,7 @@ calculations manually and read and write binary. Looks complicated? It is, but O
 Run `openssl s_client -connect localhost:30001` and paste the password of this level. You will get the password to
 the next level.
 
-### Bandit 16
+## Bandit 16
 
 Password: `cluFn7wTiGryunymYOu4RcffSxQluehd`
 
@@ -271,7 +271,7 @@ You'll get a list of open ports. See the `SERVICE` column. The ones using SSL wi
 services will be `ssl/unknown`. Connect to the corresponding port using OpenSSL's `s_client` like in Bandit 15.
 This will give you a private key which you can use to log into the next level.
 
-### Bandit 17
+## Bandit 17
 
 Private key: [download](https://gist.github.com/AbhyudayaSharma/51600f6cda75ee2396341d35498279dd)
 
@@ -296,7 +296,7 @@ index ce82611..b63678b 100644
  TVzFbgWpqUPE4fwAJPCz4rT7GemAZUjz
 ```
 
-### Bandit 18
+## Bandit 18
 
 Password: `kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd`
 
@@ -306,7 +306,7 @@ This is very easy. We have already used this technique in Bandit 13.
 ssh bandit18@bandit.labs.overthewire.org -p 2220 'cat ~/readme'
 ```
 
-### Bandit 19
+## Bandit 19
 
 Password: `IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x`
 
@@ -316,7 +316,7 @@ Read the Wikipedia article to learn more about `setuid`. Then, run the given bin
 ./bandit20-do cat /etc/bandit_pass/bandit20
 ```
 
-### Bandit 20
+## Bandit 20
 
 Password: `GbKksEFF4yrVs6il55v6gwY5aVje5f0j`
 
@@ -330,7 +330,7 @@ instructions above to get the password to the next level in your `nc` session.
 
 **Note**: Don't use `nc -C`, the binary doesn't work with CRLF.
 
-### Bandit 21
+## Bandit 21
 
 Password: `gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr`
 
@@ -341,7 +341,7 @@ will be executed every minute. `cat`ing `/usr/bin/cronjob_bandit22.sh`, we find 
 written to `/tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv`. Also, everyone gets read permissions to the file.
 We can therefore `cat` this file to get the password to the next level.
 
-### Bandit 22
+## Bandit 22
 
 Password: `Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI`
 
@@ -363,7 +363,7 @@ following command:
 mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
 ```
 
-### Bandit 23
+## Bandit 23
 
 Password: `jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n`
 
@@ -384,7 +384,7 @@ owned by `bandit24` and `bandit23` will not have read permissions.
 
 Wait for a few seconds for the cron job to fire after which the `log` file in the temp directory will contain the password.
 
-### Bandit 24
+## Bandit 24
 
 Password: `UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ`
 
@@ -416,7 +416,7 @@ for i in range(10000):
 Take care that the passcode is 4-digit. So numbers like `25` need to be padded with `0`s to obtain `0025`.
 Run this script and wait for a few minutes until you get the password to the next level.
 
-### Bandit 25
+## Bandit 25
 
 Password: `uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG`
 
@@ -429,7 +429,7 @@ Then set the `shell` option using `set shell=/bin/bash`. Then, run a command fro
 can easily `cat` the password in `/etc/bandit_pass/bandit26`. The thing to note here is that `more` should never be used
 in a shell script, otherwise the user can perform arbitrary code injection.
 
-### Bandit 26
+## Bandit 26
 
 Password: `5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z`
 
@@ -440,7 +440,7 @@ of `setuid`.
 ./bandit27-do cat /etc/bandit_pass/bandit27
 ```
 
-### Bandit 27
+## Bandit 27
 
 Password: `3ba3118a22e93127a4ed485be72ef5ea`
 
@@ -453,7 +453,7 @@ cd repo
 cat README
 ```
 
-### Bandit 28
+## Bandit 28
 
 Password: `0ef186ac70e04ea33b4c1853d2526fa2`
 
@@ -483,7 +483,7 @@ index 3f7cee8..5c6457b 100644
 +- password: xxxxxxxxxx
 ```
 
-### Bandit 29
+## Bandit 29
 
 Password: `bbc96594b4e001778eee9975372716b2`
 
@@ -518,7 +518,7 @@ Some notes for bandit30 of bandit.
 
 There's the password.
 
-### Bandit 30
+## Bandit 30
 
 Password: `5b90576bedb2cc04c86a9e924ce42faf`
 
@@ -540,7 +540,7 @@ bandit0@bandit:/tmp/tmp.fDJRcU0jUF/repo$ git show f17132340e8ee6c159e0a4a6bc6f80
 >
 > For tags, it shows the tag message and the referenced objects.
 
-### Bandit 31
+## Bandit 31
 
 Password: `47e603bb428404d265f59c42920d81e5`
 
@@ -587,7 +587,7 @@ To ssh://localhost/home/bandit31-git/repo
 error: failed to push some refs to 'ssh://bandit31-git@localhost/home/bandit31-git/repo'
 ```
 
-### Bandit 32
+## Bandit 32
 
 Password: `56a9bf19c63d650ce78e6ec0354ee45e`
 
@@ -605,7 +605,7 @@ flag. From `man sh`, when `-c` is used, `$0` will contain the command name, like
 by simply writing `$0` into the shell, we invoke `sh` 🎊. If you want, you can then run `bash`. It turns out that we are
 now `bandit33`! Getting the password for bandit33 is as simple as `cat`ing `/etc/bandit_pass/bandit33`.
 
-### Bandit 33
+## Bandit 33
 
 Password: `c9c3199ddf4121b10cf581a98d51caee`
 

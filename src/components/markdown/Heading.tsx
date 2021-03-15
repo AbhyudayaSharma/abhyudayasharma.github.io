@@ -1,6 +1,27 @@
 import React from 'react';
 
+import { kebabCase, isString, isNumber, isObject } from 'lodash';
 import { h1, h2, h3, h4, h5, h6 } from '../../scss/Markdown.module.scss';
+
+function getText(children: React.ReactNode | undefined | null): string {
+  if (!children) {
+    return '';
+  }
+
+  if (Array.isArray(children)) {
+    return children.map(getText).reduce((prev, current) => prev + current, '');
+  }
+
+  if (isString(children) || isNumber(children)) {
+    return children.toString();
+  }
+
+  if (isObject(children)) {
+    return getText((children as React.ReactElement).props?.children);
+  }
+
+  throw new Error(`Unsupported children type: ${typeof children}; Children = ${children}`);
+}
 
 export const getHeadingComponent: (level: number) => React.FC = (level) => {
   const className = ((): string => {
@@ -16,6 +37,14 @@ export const getHeadingComponent: (level: number) => React.FC = (level) => {
     }
   })();
 
-  const component: React.FC = ({ children }) => React.createElement(`h${level}`, { className: className }, children);
+  const component: React.FC = ({ children }) => {
+    const id = kebabCase(getText(children));
+    return React.createElement(`h${level}`, { className, id, href: `#${id}` }, (
+      <a href={`#${id}`}>
+        {children}
+      </a>
+    ));
+  };
+
   return component;
 };

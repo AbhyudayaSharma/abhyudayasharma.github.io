@@ -1,5 +1,8 @@
 @use 'common.module.scss';
 
+$scrollbar-thumb-color: rgba(255, 255, 255, 0.4);
+$scrollbar-track-color: transparent;
+
 html {
   font-size: 62.5%;
   height: 100%;
@@ -35,10 +38,17 @@ code {
   height: 100%;
 }
 
+// Firefox scrollbars
+:root {
+  scrollbar-width: thin;
+  scrollbar-color: $scrollbar-thumb-color $scrollbar-track-color;
+}
+
+// Webkit and Chromium scrollbars
 ::-webkit-scrollbar {
   background-color: transparent;
-  height: 1.25rem;
-  width: 1.25rem;
+  height: 0.5rem;
+  width: 0.5rem;
 }
 
 ::-webkit-scrollbar-corner {
@@ -51,8 +61,17 @@ code {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.4);
-  border-radius: 1rem;
+  background-color: $scrollbar-thumb-color;
+  border-radius: 0.5rem;
+  transition: 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: adjust-color($color: $scrollbar-thumb-color, $alpha: -0.1);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: adjust-color($color: $scrollbar-thumb-color, $alpha: -0.2);
 }
 
 // removes a border outside button text on Firefox

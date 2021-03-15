@@ -1,9 +1,34 @@
 @use 'common.module.scss';
 
+$heading-transition: 0.2s ease;
+
 .heading {
   font-weight: 200;
   text-align: left;
-  margin: 0 0;
+  margin: 1rem 0;
+  transition: $heading-transition;
+  pointer-events: none;
+}
+
+.heading > a {
+  color: inherit;
+  transition: $heading-transition;
+  text-decoration: none;
+  pointer-events: auto; // https://stackoverflow.com/a/39380631/6306974
+}
+
+.heading > a:hover {
+  color: common.$link-color;
+}
+
+.h1,
+.h2 {
+  border-bottom: 0.1rem solid darkslategray;
+  padding-bottom: 1rem;
+}
+
+:is(.h1, .h2):hover {
+  border-bottom-color: common.$link-color;
 }
 
 .h1 {

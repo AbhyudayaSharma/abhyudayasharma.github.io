@@ -8,7 +8,7 @@ import {
   date,
   description,
   entry,
-  header,
+  header as headerClass,
   tag as tagClass,
   tagContainer,
   title,
@@ -50,7 +50,7 @@ export const BlogListEntry: React.FC<Blog> = (props) => {
 
 export const BlogListHeader: React.FC<BlogListHeaderProps> = ({ value }) => {
   return (
-    <div className={header}>
+    <div className={headerClass}>
       <h1>
         {value}
       </h1>
