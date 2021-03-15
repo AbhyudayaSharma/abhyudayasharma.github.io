@@ -39,7 +39,7 @@ export const getHeadingComponent: (level: number) => React.FC = (level) => {
 
   const component: React.FC = ({ children }) => {
     const id = kebabCase(getText(children));
-    return React.createElement(`h${level}`, { className, id, href: `#${id}` }, (
+    return React.createElement(`h${level}`, { className, id }, (
       <a href={`#${id}`}>
         {children}
       </a>
