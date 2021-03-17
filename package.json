@@ -76,7 +76,7 @@
     "gatsby-remark-images": "^4.0.0",
     "gatsby-source-filesystem": "^3.0.0",
     "gatsby-transformer-remark": "^3.1.0",
-    "gatsby-transformer-sharp": "^3.0.0",
+    "gatsby-transformer-sharp": "^3.1.0",
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "npm": "^7.6.3",
     "react-git-info": "^2.0.0",
