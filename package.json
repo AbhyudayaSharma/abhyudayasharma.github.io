@@ -81,7 +81,7 @@
     "npm": "^7.6.3",
     "react-git-info": "^2.0.0",
     "react-syntax-highlighter": "^15.4.3",
-    "react-test-renderer": "^17.0.1",
+    "react-test-renderer": "^17.0.2",
     "remark-cli": "^9.0.0",
     "remark-html-katex": "^3.0.0",
     "remark-lint-no-dead-urls": "^1.1.0",
