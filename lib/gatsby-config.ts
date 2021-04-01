@@ -63,6 +63,12 @@ const gatsbyConfig: GatsbyConfig = {
               linkImagesToOriginal: true,
             },
           },
+          {
+            resolve: 'gatsby-remark-prismjs',
+            options: {
+              languagePrefix: 'language-', // set by mdx: https://mdxjs.com/guides/syntax-highlighting
+            },
+          },
         ],
         remarkPlugins: [],
       },

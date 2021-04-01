@@ -1,5 +1,6 @@
 import React from 'react';
 import { PageProps } from 'gatsby';
+import { isString, isNumber, isObject } from 'lodash';
 
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
@@ -54,3 +55,23 @@ export const DateComponent: React.FC<{ date: Date }> = ({ date }) => {
     </time>
   );
 };
+
+export function innerText(children: React.ReactNode | undefined | null): string {
+  if (!children) {
+    return '';
+  }
+
+  if (Array.isArray(children)) {
+    return children.map(innerText).reduce((prev, current) => prev + current, '');
+  }
+
+  if (isString(children) || isNumber(children)) {
+    return children.toString();
+  }
+
+  if (isObject(children)) {
+    return innerText((children as React.ReactElement).props?.children);
+  }
+
+  throw new Error(`Unsupported children type: ${typeof children}; Children = ${children}`);
+}
