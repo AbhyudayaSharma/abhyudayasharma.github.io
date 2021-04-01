@@ -29,8 +29,12 @@ body {
   font-weight: 100;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+// Inline code should not overflow
+// language- comes from MDX
+:not(pre) > code[class*="language-"] {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 #gatsby-focus-wrapper,
