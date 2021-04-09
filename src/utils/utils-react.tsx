@@ -11,15 +11,17 @@ import { wrapContainer } from '../scss/utils.module.scss';
  */
 export const wrapContent = (props: PageProps, element: JSX.Element | JSX.Element[], divClassName: string | undefined = undefined): JSX.Element => {
   return (
-    <div className={wrapContainer}>
-      <Header {...props}>
-        {undefined}
-      </Header>
-      <div className={divClassName}>
-        {element}
+    <React.StrictMode>
+      <div className={wrapContainer}>
+        <Header {...props}>
+          {undefined}
+        </Header>
+        <div className={divClassName}>
+          {element}
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </React.StrictMode>
   );
 };
 

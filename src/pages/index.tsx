@@ -5,7 +5,9 @@ import { getPageUrl } from '../utils/utils-common';
 
 const IndexRoute: React.FC<PageProps> = (props) => {
   return (
-    <Home pageUrl={getPageUrl(props)} />
+    <React.StrictMode>
+      <Home pageUrl={getPageUrl(props)} />
+    </React.StrictMode>
   );
 };
 
