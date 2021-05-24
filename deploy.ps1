@@ -4,7 +4,7 @@ Set-StrictMode -Version Latest
 $SSH_USER = 'deploy-bot'
 $SSH_HOST = 'abhyudaya.dev'
 $SSH_DIRECTORY = '~/.ssh'
-$KEY_FILE = Join-Path $SSH_DIRECTORY 'id_25519'
+$KEY_FILE = Join-Path $SSH_DIRECTORY 'id_ed25519'
 $KNOWN_HOSTS_FILE = Join-Path $SSH_DIRECTORY 'known_hosts'
 $BUILD_DIRECTORY = './build'
 
@@ -21,7 +21,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Compress-Archive -Path $BUILD_DIRECTORY -DestinationPath ./build.zip -CompressionLevel Optimal -Verbose
-scp ./build.zip "${SSH_USER}@${SSH_HOST}:~/build.zip"
+scp -i $KEY_FILE ./build.zip "${SSH_USER}@${SSH_HOST}:~/build.zip"
 if ($LASTEXITCODE -ne 0) {
   throw 'scp failed'
 }
