@@ -54,4 +54,4 @@ jobs:
           name: build
       - name: ls
         run: |
-          ls build/
+          ls
