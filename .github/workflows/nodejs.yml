@@ -54,7 +54,7 @@ jobs:
         with:
           name: build
           path: build/
-      - name: ls
+      - name: Copy artifacts to VM
         shell: pwsh
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
