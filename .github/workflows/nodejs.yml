@@ -52,7 +52,11 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: build
+          path: build/
       - name: ls
+        shell: pwsh
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: |
-          pwd
-          ls
+          ./deploy.ps1
