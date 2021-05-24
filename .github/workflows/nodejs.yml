@@ -54,4 +54,5 @@ jobs:
           name: build
       - name: ls
         run: |
+          pwd
           ls
