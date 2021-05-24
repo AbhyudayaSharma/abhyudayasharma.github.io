@@ -21,7 +21,9 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Compress-Archive -Path $BUILD_DIRECTORY -DestinationPath ./build.zip -CompressionLevel Optimal -Verbose
-scp -i $KEY_FILE ./build.zip "${SSH_USER}@${SSH_HOST}:~/build.zip"
+scp -i $KEY_FILE -o 'StrictHostKeyChecking=yes' ./build.zip "${SSH_USER}@${SSH_HOST}:~/build.zip"
 if ($LASTEXITCODE -ne 0) {
   throw 'scp failed'
 }
+
+Write-Output 'Copied build artifacts successfully!'
