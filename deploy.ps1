@@ -31,7 +31,6 @@ try {
   Invoke-Command -Session $session -ScriptBlock {
     $ErrorActionPreference = 'Stop'
     Set-StrictMode -Version Latest
-    Set-PSDebug -Trace 1
 
     Expand-Archive -Path $Using:REMOTE_ZIPPED_ARCHIVE -DestinationPath . -Force
     chmod -R +r $Using:BUILD_DIRECTORY
@@ -52,7 +51,7 @@ try {
       throw 'Restarting nginx failed'
     }
 
-    # Remove-Item -Recurse -Force $Using:BUILD_DIRECTORY, $Using:REMOTE_ZIPPED_ARCHIVE
+    Remove-Item -Recurse -Force $Using:BUILD_DIRECTORY, $Using:REMOTE_ZIPPED_ARCHIVE
   }
 
   Invoke-WebRequest -Uri 'https://abhyudaya.dev/' -MaximumRetryCount 1 -MaximumRedirection 0
