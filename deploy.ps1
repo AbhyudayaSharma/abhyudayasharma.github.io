@@ -7,6 +7,8 @@ $SSH_DIRECTORY = '~/.ssh'
 $KEY_FILE = Join-Path $SSH_DIRECTORY 'id_ed25519'
 $KNOWN_HOSTS_FILE = Join-Path $SSH_DIRECTORY 'known_hosts'
 $BUILD_DIRECTORY = './build'
+$ZIPPED_ARCHIVE = './build.zip'
+$REMOTE_ZIPPED_ARCHIVE = '~/build.zip'
 
 if ([string]::IsNullOrWhiteSpace($env:SSH_KEY) -or [string]::IsNullOrWhiteSpace($env:SSH_KNOWN_HOSTS)) {
   throw 'Environment variables SSH_KEY or SSH_KNOWN_HOSTS not set'
@@ -20,10 +22,13 @@ if ($LASTEXITCODE -ne 0) {
   throw 'chmod private key failed'
 }
 
-Compress-Archive -Path $BUILD_DIRECTORY -DestinationPath ./build.zip -CompressionLevel Optimal -Verbose
-scp -i $KEY_FILE -o 'StrictHostKeyChecking=yes' ./build.zip "${SSH_USER}@${SSH_HOST}:~/build.zip"
-if ($LASTEXITCODE -ne 0) {
-  throw 'scp failed'
+Compress-Archive -Path $BUILD_DIRECTORY -DestinationPath $ZIPPED_ARCHIVE -CompressionLevel Optimal
+$session = New-PSSession -HostName $SSH_HOST -UserName $SSH_USER -UseSSHTransport -KeyFilePath $KEY_FILE -SSHTransport
+try {
+  Copy-Item -Path $ZIPPED_ARCHIVE -Destination $REMOTE_ZIPPED_ARCHIVE -ToSession $session
+  Write-Output 'Copied build artifacts successfully!'
+} catch {
+  throw $_
+} finally {
+  Remove-PSSession $session
 }
-
-Write-Output 'Copied build artifacts successfully!'
