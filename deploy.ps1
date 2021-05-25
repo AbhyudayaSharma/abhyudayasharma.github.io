@@ -8,7 +8,7 @@ $KEY_FILE = Join-Path $SSH_DIRECTORY 'id_ed25519'
 $KNOWN_HOSTS_FILE = Join-Path $SSH_DIRECTORY 'known_hosts'
 $BUILD_DIRECTORY = './build'
 $ZIPPED_ARCHIVE = './build.zip'
-$REMOTE_ZIPPED_ARCHIVE = '~/build.zip'
+$REMOTE_ZIPPED_ARCHIVE = "/home/$SSH_USER/build.zip"
 
 if ([string]::IsNullOrWhiteSpace($env:SSH_KEY) -or [string]::IsNullOrWhiteSpace($env:SSH_KNOWN_HOSTS)) {
   throw 'Environment variables SSH_KEY or SSH_KNOWN_HOSTS not set'
