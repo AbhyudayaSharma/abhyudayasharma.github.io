@@ -1,0 +1,62 @@
+server {
+  server_name abhyudaya.dev;
+  listen [::]:80;
+  listen 80;
+
+  return 301 https://abhyudaya.dev$request_uri;
+}
+
+server {
+  server_name abhyudaya.dev;
+
+  root /var/www/abhyudaya.dev;
+  index index.html;
+  error_page 404 /404.html;
+
+  # Permanent redirect /index.html to /
+  location = /index.html {
+    return 301 $scheme://$host/;
+  }
+
+  # Trim trailing slashes or trailing index.html from URIs
+  # For example: http://example.com/foo/index.html and http://example.com/foo//
+  # get 301 redirected to http://example.com/foo/index.html
+  rewrite ^(.+)/+(?:index\.html)?$ $1 permanent;
+
+  location /ip {
+    if ($request_method !~ ^(?:GET|HEAD)$) {
+      # Headers get overwritten whenever add_header is used.
+      include /etc/nginx/snippets/common-headers.conf;
+
+      # Needed for 405 responses according to RFC2616
+      # WONTFIX for nginx: https://trac.nginx.org/nginx/ticket/1161
+      add_header Allow 'GET, HEAD' always;
+      return 405;
+    }
+
+    # Headers get overwritten whenever add_header is used.
+    include /etc/nginx/snippets/common-headers.conf;
+
+    # Instruct browsers to never cache this page
+    add_header Cache-Control no-store;
+
+    default_type 'text/plain; charset=utf-8';
+    return 200 "$remote_addr\r\n$server_protocol $ssl_protocol $ssl_cipher $ssl_session_reused\r\n$http_user_agent\r\n$time_iso8601\r\n";
+  }
+
+  location / {
+    try_files $uri $uri/index.html =404;
+  }
+
+  listen 443 ssl http2;
+  listen [::]:443 ssl http2;
+
+  ssl_certificate /etc/letsencrypt/live/www.abhyudaya.dev/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/www.abhyudaya.dev/privkey.pem;
+  include /etc/letsencrypt/options-ssl-nginx.conf;
+  ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+  ssl_stapling on;
+  ssl_stapling_verify on;
+  ssl_trusted_certificate /etc/letsencrypt/live/www.abhyudaya.dev/fullchain.pem;
+}
