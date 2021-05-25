@@ -55,7 +55,7 @@ try {
   }
 
   Invoke-WebRequest -Uri 'https://abhyudaya.dev/' -MaximumRetryCount 1 -MaximumRedirection 0
-  Write-Host "Successfully deployed revision $(git rev-parse HEAD)!"
+  Write-Output "Successfully deployed revision $(git rev-parse HEAD)!"
 } catch {
   throw $_
 } finally {
