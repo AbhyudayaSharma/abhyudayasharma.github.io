@@ -22,11 +22,14 @@ if ($LASTEXITCODE -ne 0) {
   throw 'chmod private key failed'
 }
 
-Compress-Archive -Path $BUILD_DIRECTORY -DestinationPath $ZIPPED_ARCHIVE -CompressionLevel Optimal
+Compress-Archive -Path "$BUILD_DIRECTORY/*" -DestinationPath $ZIPPED_ARCHIVE -CompressionLevel Optimal
 $session = New-PSSession -HostName $SSH_HOST -UserName $SSH_USER -SSHTransport -KeyFilePath $KEY_FILE
 try {
   Copy-Item -Path $ZIPPED_ARCHIVE -Destination $REMOTE_ZIPPED_ARCHIVE -ToSession $session
   Write-Output 'Copied build artifacts successfully!'
+  Invoke-Command -Session $session -ScriptBlock {
+    Expand-Archive -Path $using:REMOTE_ZIPPED_ARCHIVE -DestinationPath $using:BUILD_DIRECTORY
+  }
 } catch {
   throw $_
 } finally {
