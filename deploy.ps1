@@ -23,7 +23,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Compress-Archive -Path $BUILD_DIRECTORY -DestinationPath $ZIPPED_ARCHIVE -CompressionLevel Optimal
-$session = New-PSSession -HostName $SSH_HOST -UserName $SSH_USER -UseSSHTransport -KeyFilePath $KEY_FILE -SSHTransport
+$session = New-PSSession -HostName $SSH_HOST -UserName $SSH_USER -SSHTransport -KeyFilePath $KEY_FILE
 try {
   Copy-Item -Path $ZIPPED_ARCHIVE -Destination $REMOTE_ZIPPED_ARCHIVE -ToSession $session
   Write-Output 'Copied build artifacts successfully!'
