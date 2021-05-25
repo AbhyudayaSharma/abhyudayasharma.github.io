@@ -54,7 +54,7 @@ jobs:
         with:
           name: build
           path: build/
-      - name: Copy artifacts to VM
+      - name: Deploy to Nginx
         shell: pwsh
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}

@@ -9,6 +9,7 @@ $KNOWN_HOSTS_FILE = Join-Path $SSH_DIRECTORY 'known_hosts'
 $BUILD_DIRECTORY = './build'
 $ZIPPED_ARCHIVE = './build.zip'
 $REMOTE_ZIPPED_ARCHIVE = "/home/$SSH_USER/build.zip"
+$REMOTE_NGINX_ROOT = "/home/$SSH_USER/abhyudaya.dev"
 
 if ([string]::IsNullOrWhiteSpace($env:SSH_KEY) -or [string]::IsNullOrWhiteSpace($env:SSH_KNOWN_HOSTS)) {
   throw 'Environment variables SSH_KEY or SSH_KNOWN_HOSTS not set'
@@ -28,8 +29,28 @@ try {
   Copy-Item -Path $ZIPPED_ARCHIVE -Destination $REMOTE_ZIPPED_ARCHIVE -ToSession $session
   Write-Output 'Copied build artifacts successfully!'
   Invoke-Command -Session $session -ScriptBlock {
-    Expand-Archive -Path $using:REMOTE_ZIPPED_ARCHIVE -DestinationPath $using:BUILD_DIRECTORY
+    $ErrorActionPreference = 'Stop'
+    Set-StrictMode -Version Latest
+
+    Expand-Archive -Path $Using:REMOTE_ZIPPED_ARCHIVE -DestinationPath $Using:BUILD_DIRECTORY
+    chmod -R a+r $Using:BUILD_DIRECTORY
+    Get-Command 'exchange' | Out-Null # exchange: https://github.com/AbhyudayaSharma/exchange
+    exchange $Using:BUILD_DIRECTORY $using:REMOTE_NGINX_ROOT
+    if ($LASTEXITCODE -ne 0) {
+      throw 'Directory exchange failed'
+    }
+
+    # Nginx restart is necessary for clearing file descriptor cache
+    sudo service nginx restart
+    if ($LASTEXITCODE -ne 0) {
+      throw 'Restarting nginx failed'
+    }
+
+    Remove-Item -Recurse -Force $Using:BUILD_DIRECTORY, $Using:REMOTE_ZIPPED_ARCHIVE
   }
+
+  Invoke-WebRequest -Uri 'https://abhyudaya.dev/' -MaximumRetryCount 1 -MaximumRedirection 0
+  Write-Host "Successfully deployed revision $(git rev-parse HEAD)!"
 } catch {
   throw $_
 } finally {
