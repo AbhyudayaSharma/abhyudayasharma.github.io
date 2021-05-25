@@ -23,7 +23,7 @@ if ($LASTEXITCODE -ne 0) {
   throw 'chmod private key failed'
 }
 
-Compress-Archive -Path "$BUILD_DIRECTORY/*" -DestinationPath $ZIPPED_ARCHIVE -CompressionLevel Optimal
+Compress-Archive -Path $BUILD_DIRECTORY -DestinationPath $ZIPPED_ARCHIVE -CompressionLevel Optimal
 $session = New-PSSession -HostName $SSH_HOST -UserName $SSH_USER -SSHTransport -KeyFilePath $KEY_FILE
 try {
   Copy-Item -Path $ZIPPED_ARCHIVE -Destination $REMOTE_ZIPPED_ARCHIVE -ToSession $session
@@ -31,9 +31,11 @@ try {
   Invoke-Command -Session $session -ScriptBlock {
     $ErrorActionPreference = 'Stop'
     Set-StrictMode -Version Latest
+    Set-PSDebug -Trace 1
 
-    Expand-Archive -Path $Using:REMOTE_ZIPPED_ARCHIVE -DestinationPath $Using:BUILD_DIRECTORY -Force
+    Expand-Archive -Path $Using:REMOTE_ZIPPED_ARCHIVE -DestinationPath . -Force
     chmod -R +r $Using:BUILD_DIRECTORY
+    stat $Using:BUILD_DIRECTORY
     if ($LASTEXITCODE -ne 0) {
       throw 'chmod of unzipped directory failed'
     }
@@ -50,7 +52,7 @@ try {
       throw 'Restarting nginx failed'
     }
 
-    Remove-Item -Recurse -Force $Using:BUILD_DIRECTORY, $Using:REMOTE_ZIPPED_ARCHIVE
+    # Remove-Item -Recurse -Force $Using:BUILD_DIRECTORY, $Using:REMOTE_ZIPPED_ARCHIVE
   }
 
   Invoke-WebRequest -Uri 'https://abhyudaya.dev/' -MaximumRetryCount 1 -MaximumRedirection 0
