@@ -32,8 +32,12 @@ try {
     $ErrorActionPreference = 'Stop'
     Set-StrictMode -Version Latest
 
-    Expand-Archive -Path $Using:REMOTE_ZIPPED_ARCHIVE -DestinationPath $Using:BUILD_DIRECTORY
-    chmod -R a+r $Using:BUILD_DIRECTORY
+    Expand-Archive -Path $Using:REMOTE_ZIPPED_ARCHIVE -DestinationPath $Using:BUILD_DIRECTORY -Force
+    chmod -R +r $Using:BUILD_DIRECTORY
+    if ($LASTEXITCODE -ne 0) {
+      throw 'chmod of unzipped directory failed'
+    }
+
     Get-Command 'exchange' | Out-Null # exchange: https://github.com/AbhyudayaSharma/exchange
     exchange $Using:BUILD_DIRECTORY $using:REMOTE_NGINX_ROOT
     if ($LASTEXITCODE -ne 0) {
