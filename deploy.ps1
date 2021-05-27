@@ -47,7 +47,7 @@ try {
       throw 'Restarting nginx failed'
     }
 
-    Remove-Item -Recurse -Force $Using:BUILD_DIRECTORY, $Using:REMOTE_ZIPPED_ARCHIVE
+    Remove-Item -Recurse -Force $Using:BUILD_DIRECTORY
   }
 
   Invoke-WebRequest -Uri 'https://abhyudaya.dev/' -MaximumRetryCount 1 -MaximumRedirection 0
