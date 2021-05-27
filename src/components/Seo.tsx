@@ -1,5 +1,5 @@
-import _ from 'lodash';
 import React from 'react';
+import { truncate } from 'lodash';
 import { Helmet } from 'react-helmet';
 
 import packageJson from '../../package.json';
@@ -31,11 +31,11 @@ const defaultProps: SeoProps = {
 
 export const Seo: React.FC<PartialSeoProps> = (partialProps) => {
   const props: Required<SeoProps> = {
-    title: _.truncate(
+    title: truncate(
       partialProps.title ?? defaultProps.title,
       { length: maxTitleLength, omission: '…' }
     ),
-    metaDescription: _.truncate(
+    metaDescription: truncate(
       partialProps.metaDescription ?? defaultProps.metaDescription,
       { length: maxDescriptionLength, omission: '…' }
     ),

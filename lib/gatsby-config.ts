@@ -1,11 +1,14 @@
 import path from 'path';
 import packageJson from '../package.json';
 
+import { serializeFeed, feedQuery, feedUrl } from './createFeed';
 import { GatsbyConfig } from 'gatsby';
 
 const gatsbyConfig: GatsbyConfig = {
   siteMetadata: {
+    title: packageJson.description,
     siteUrl: packageJson.homepage,
+    description: packageJson.description,
   },
   plugins: [
     {
@@ -71,6 +74,24 @@ const gatsbyConfig: GatsbyConfig = {
           },
         ],
         remarkPlugins: [],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-feed',
+      options: {
+        feeds: [
+          {
+            language: 'en',
+            match: '^/blog$',
+            query: feedQuery,
+            title: feedUrl.host,
+            output: feedUrl.pathname,
+            serialize: serializeFeed,
+            description: `${packageJson.author.name}'s Blog`,
+            site_url: new URL('/blog', packageJson.homepage).href,
+            feed_url: feedUrl.href,
+          },
+        ],
       },
     },
     'gatsby-plugin-sass',

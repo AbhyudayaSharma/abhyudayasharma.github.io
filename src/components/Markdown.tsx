@@ -1,5 +1,5 @@
-import _ from 'lodash';
 import React from 'react';
+import { range } from 'lodash';
 
 import 'prism-themes/themes/prism-atom-dark.css';
 
@@ -20,7 +20,7 @@ const components: Record<string, React.ComponentType<any>> = {
   hr: ThematicBreak,
 };
 
-_.range(1, 6 + 1).forEach(i => { components[`h${i}`] = getHeadingComponent(i); });
+range(1, 6 + 1).forEach(i => { components[`h${i}`] = getHeadingComponent(i); });
 
 export interface MarkdownProps {
   markdown: string;

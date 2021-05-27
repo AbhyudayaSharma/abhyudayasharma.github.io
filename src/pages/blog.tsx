@@ -6,15 +6,10 @@ import { graphql, PageProps, useStaticQuery } from 'gatsby';
 import { Seo } from '../components/Seo';
 import { wrapContent } from '../utils/utils-react';
 import { BlogList } from '../components/BlogList';
+import { BlogFrontmatterQueryResult } from '../common/BlogFrontmatterQueryResult';
 
 import { getPageUrl } from '../utils/utils-common';
-import { RawBlog, toValidBlog } from '../common/Blog';
-
-interface BlogFrontmatterQueryResult {
-  readonly edges: {
-    readonly node: RawBlog;
-  }[];
-}
+import { toValidBlog } from '../common/Blog';
 
 const pageTitle = `${packageJson.author.name}'s Blog`;
 

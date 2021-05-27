@@ -3,13 +3,12 @@ Set-StrictMode -Version Latest
 
 $SSH_USER = 'deploy-bot'
 $SSH_HOST = 'abhyudaya.dev'
-$SSH_DIRECTORY = '~/.ssh'
+$SSH_DIRECTORY = Join-Path $env:HOMEPATH '.ssh'
 $KEY_FILE = Join-Path $SSH_DIRECTORY 'id_ed25519'
 $KNOWN_HOSTS_FILE = Join-Path $SSH_DIRECTORY 'known_hosts'
-$BUILD_DIRECTORY = './build'
-$ZIPPED_ARCHIVE = './build.zip'
-$REMOTE_ZIPPED_ARCHIVE = "/home/$SSH_USER/build.zip"
-$REMOTE_NGINX_ROOT = "/home/$SSH_USER/abhyudaya.dev"
+$BUILD_DIRECTORY = 'build'
+$REMOTE_BUILD_DIRECTORY = Join-Path '/' 'home' $Using:SSH_USER, $Using:BUILD_DIRECTORY
+$REMOTE_NGINX_ROOT = Join-Path '/' 'home' $Using:SSH_USER, $SSH_HOST
 
 if ([string]::IsNullOrWhiteSpace($env:SSH_KEY) -or [string]::IsNullOrWhiteSpace($env:SSH_KNOWN_HOSTS)) {
   throw 'Environment variables SSH_KEY or SSH_KNOWN_HOSTS not set'
@@ -23,18 +22,15 @@ if ($LASTEXITCODE -ne 0) {
   throw 'chmod private key failed'
 }
 
-Compress-Archive -Path $BUILD_DIRECTORY -DestinationPath $ZIPPED_ARCHIVE -CompressionLevel Optimal
 $session = New-PSSession -HostName $SSH_HOST -UserName $SSH_USER -SSHTransport -KeyFilePath $KEY_FILE
 try {
-  Copy-Item -Path $ZIPPED_ARCHIVE -Destination $REMOTE_ZIPPED_ARCHIVE -ToSession $session
+  Copy-Item -Recurse -Path $BUILD_DIRECTORY -Destination $REMOTE_BUILD_DIRECTORY -ToSession $session
   Write-Output 'Copied build artifacts successfully!'
   Invoke-Command -Session $session -ScriptBlock {
     $ErrorActionPreference = 'Stop'
     Set-StrictMode -Version Latest
 
-    Expand-Archive -Path $Using:REMOTE_ZIPPED_ARCHIVE -DestinationPath . -Force
-    chmod -R +r $Using:BUILD_DIRECTORY
-    stat $Using:BUILD_DIRECTORY
+    chmod -R +r $Using:REMOTE_BUILD_DIRECTORY
     if ($LASTEXITCODE -ne 0) {
       throw 'chmod of unzipped directory failed'
     }

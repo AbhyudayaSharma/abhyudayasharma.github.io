@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Link } from 'gatsby';
 import { Blog } from '../common/Blog';
+import { feedUrl } from '../../lib/createFeed';
+import { DateComponent } from '../utils/utils-react';
 
 import {
   content,
@@ -12,8 +14,9 @@ import {
   tag as tagClass,
   tagContainer,
   title,
+  feedIcon,
+  feedIconLink,
 } from '../scss/BlogList.module.scss';
-import { DateComponent } from '../utils/utils-react';
 
 export interface BlogListHeaderProps {
   value: string;
@@ -52,7 +55,12 @@ export const BlogListHeader: React.FC<BlogListHeaderProps> = ({ value }) => {
   return (
     <div className={headerClass}>
       <h1>
-        {value}
+        <span>
+          {value}
+        </span>
+        <a href={feedUrl.pathname} className={feedIconLink} draggable={false}>
+          <img src='/feed-icon.svg' alt='Feed icon' className={feedIcon} draggable={false}/>
+        </a>
       </h1>
     </div>
   );
