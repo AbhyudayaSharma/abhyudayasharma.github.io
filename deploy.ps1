@@ -7,8 +7,8 @@ $SSH_DIRECTORY = Join-Path $env:HOME '.ssh'
 $KEY_FILE = Join-Path $SSH_DIRECTORY 'id_ed25519'
 $KNOWN_HOSTS_FILE = Join-Path $SSH_DIRECTORY 'known_hosts'
 $BUILD_DIRECTORY = 'build'
-$REMOTE_BUILD_DIRECTORY = Join-Path -Path '/' -ChildPath 'home' -AdditionalChildPath $Using:SSH_USER, $Using:BUILD_DIRECTORY
-$REMOTE_NGINX_ROOT = Join-Path -Path '/' -ChildPath 'home' -AdditionalChildPath $Using:SSH_USER, $SSH_HOST
+$REMOTE_BUILD_DIRECTORY = Join-Path -Path '/' -ChildPath 'home' -AdditionalChildPath $SSH_USER, $BUILD_DIRECTORY
+$REMOTE_NGINX_ROOT = Join-Path -Path '/' -ChildPath 'home' -AdditionalChildPath $SSH_USER, $SSH_HOST
 
 if ([string]::IsNullOrWhiteSpace($env:SSH_KEY) -or [string]::IsNullOrWhiteSpace($env:SSH_KNOWN_HOSTS)) {
   throw 'Environment variables SSH_KEY or SSH_KNOWN_HOSTS not set'
