@@ -4,7 +4,6 @@ $text-color: #eee;
 $max-width: 68rem;
 
 .entry {
-  background-color: common.$index-background-color;
   color: common.$index-foreground-color;
   font-size: 1.5rem;
   display: flex;
@@ -12,17 +11,20 @@ $max-width: 68rem;
   justify-content: center;
 }
 
-.content {
-  margin: 0 1rem 1rem;
-  padding: 0.5rem 1rem;
+.entry > * {
   max-width: $max-width;
   flex-grow: 1;
+  margin: 0 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.content {
+  margin-bottom: 1rem;
   display: block;
   border-style: solid;
   border-radius: 1rem;
   border-color: #326c61;
   border-width: 1px;
-  height: fit-content;
 }
 
 .title {
@@ -30,14 +32,11 @@ $max-width: 68rem;
   display: inline-block;
   font-size: 2.5rem;
   font-weight: 100;
-  padding: 0.5rem 0;
+  padding: 0.25rem 0;
   transition: 0.2s;
   text-decoration: none;
   color: $text-color;
   outline: none;
-  border-style: solid;
-  border-radius: 1rem;
-  border-color: transparent;
   cursor: pointer;
 }
 
@@ -46,10 +45,7 @@ $max-width: 68rem;
 }
 
 .title:focus {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  margin: 0.25rem 0;
-  box-shadow: 0 0 0 0.1rem common.$link-color;
+  text-shadow: 0 0rem 0.3rem #eee;
 }
 
 .tag-container {
@@ -61,7 +57,8 @@ $max-width: 68rem;
 
 .tag {
   @extend %unselectable;
-  padding: 0.5rem 0.5rem;
+  margin: 0.2rem 0;
+  padding: 0.5rem;
   border-style: solid;
   background-color: #326c61;
   border-radius: 0.6rem;
@@ -77,17 +74,18 @@ $max-width: 68rem;
 
 .description {
   margin: 0;
-  padding: 0.5rem 0;
+  padding: 0 0 0.4rem;
 }
 
 .header {
   @extend %unselectable;
   background-color: common.$index-background-color;
   color: common.$index-foreground-color;
-  display: flex;
+  display: grid;
+  max-width: $max-width;
+  grid-template-columns: 1fr auto;
+  column-gap: 1rem;
   justify-content: center;
-  padding: 0.5rem;
-  margin: 0 1rem;
 }
 
 .header > h1 {
@@ -100,16 +98,20 @@ $max-width: 68rem;
   padding: 0.5rem 0;
 }
 
-.header > h1 > span {
-  margin-right: 1rem; // to separate from .feed-icon
+.feed-icon,
+.feed-icon-link {
+  outline: none;
 }
 
-.feed-icon-link > .feed-icon {
+.feed-icon {
   @extend %unselectable;
   height: 1.75rem;
   cursor: pointer;
+  border: 0px solid;
+  margin: 1.65rem 0 0.2rem;
+  border-radius: 0.4rem; // matches borders of svg
 }
 
 .feed-icon-link:focus > .feed-icon {
-  box-shadow: 0 0 0.5rem #eee;
+  box-shadow: 0 0 0.5rem;
 }

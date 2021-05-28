@@ -53,15 +53,15 @@ export const BlogListEntry: React.FC<Blog> = (props) => {
 
 export const BlogListHeader: React.FC<BlogListHeaderProps> = ({ value }) => {
   return (
-    <div className={headerClass}>
-      <h1>
-        <span>
+    <div className={entry}>
+      <div className={headerClass}>
+        <h1>
           {value}
-        </span>
+        </h1>
         <a href={feedUrl.pathname} className={feedIconLink} draggable={false}>
-          <img src='/feed-icon.svg' alt='Feed icon' className={feedIcon} draggable={false}/>
+          <img src='/feed-icon.svg' alt='Feed icon' className={feedIcon} draggable={false} />
         </a>
-      </h1>
+      </div>
     </div>
   );
 };
@@ -71,9 +71,9 @@ export const BlogList: React.FC<BlogListProps> = ({ header, blogs, publicOnly })
 
   return (
     <>
-      {header && <BlogListHeader value={header}/>}
+      {header && <BlogListHeader value={header} />}
       {displayable.map(
-        (blog, index) => <BlogListEntry {...blog} key={index}/>
+        (blog, index) => <BlogListEntry {...blog} key={index} />
       )}
     </>
   );
