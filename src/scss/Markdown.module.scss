@@ -71,6 +71,11 @@ $heading-transition: 0.2s ease;
   border-bottom: 0.1rem common.$link-color solid;
 }
 
+.link > code {
+  color: common.$link-color !important;
+  border: none;
+}
+
 .blockquote {
   margin-left: 2rem;
   margin-right: 2rem;

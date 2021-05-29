@@ -41,7 +41,7 @@ export const BlogListEntry: React.FC<Blog> = (props) => {
           <DateComponent date={frontmatter.date}/>
         </div>
         <div className={tagContainer}>
-          {frontmatter.tags.map((tag, index) => <div className={tagClass} key={index}>{tag}</div>)}
+          {frontmatter.tags.sort().map((tag, index) => <div className={tagClass} key={index}>{tag}</div>)}
         </div>
         <p className={description}>
           {frontmatter.description}
