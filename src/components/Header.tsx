@@ -21,16 +21,16 @@ const headerLinks = [
 
 export const Header: React.FC<PageProps> = () => (
   <div className={container}>
-    <div className={title}>
+    <header className={title}>
       <Link to='/'>
         {packageJson.author.name}
       </Link>
-    </div>
-    <div className={links}>
+    </header>
+    <nav className={links}>
       {headerLinks.map((link, index) => (
         <Link to={link.url} key={index} activeClassName={itemActive} className={item}>
           {link.title}
         </Link>
       ))}
-    </div>
+    </nav>
   </div>);

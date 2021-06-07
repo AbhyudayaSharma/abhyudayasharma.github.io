@@ -5,7 +5,7 @@ import { Footer } from './Footer';
 import { BigButton } from './BigButton';
 import packageJson from '../../package.json';
 
-import { container, header, h1, body } from '../scss/Home.module.scss';
+import { container, header, h1, navbar } from '../scss/Home.module.scss';
 
 export interface HomeProps {
   readonly pageUrl: URL;
@@ -38,9 +38,9 @@ export const Home: React.FC<HomeProps> = ({ pageUrl }) => {
             {packageJson.author.name}
           </h1>
         </div>
-        <div className={body}>
+        <nav className={navbar}>
           {buttons}
-        </div>
+        </nav>
         <Footer />
       </div>
     </>

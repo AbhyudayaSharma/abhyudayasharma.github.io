@@ -9,9 +9,10 @@
 }
 
 .link {
-  @extend %selectable;
+  @extend %unselectable;
   color: common.$link-color;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .link:hover {

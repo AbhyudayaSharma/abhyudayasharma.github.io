@@ -58,7 +58,7 @@ export const BlogListHeader: React.FC<BlogListHeaderProps> = ({ value }) => {
         <h1>
           {value}
         </h1>
-        <a href={feedUrl.pathname} className={feedIconLink} draggable={false}>
+        <a href={feedUrl.pathname} className={feedIconLink}>
           <img src='/feed-icon.svg' alt='Feed icon' className={feedIcon} draggable={false} />
         </a>
       </div>

@@ -27,14 +27,10 @@ const BlogTemplate: React.FC<PropsType> = (props) => {
         <h1 className={titleClass}>
           {frontmatter.title}
         </h1>
-        <section>
-          <p className={dateClass}>
-            <DateComponent date={frontmatter.date}/>
-          </p>
-        </section>
-        <section>
-          <Markdown markdown={props.pageContext.body}/>
-        </section>
+        <p className={dateClass}>
+          <DateComponent date={frontmatter.date} />
+        </p>
+        <Markdown markdown={props.pageContext.body} />
       </article>
     </>, textClass);
 };
