@@ -60,7 +60,7 @@
     "gatsby-plugin-manifest": "^3.8.0",
     "gatsby-plugin-mdx": "^2.8.0",
     "gatsby-plugin-nprogress": "^3.7.1",
-    "gatsby-plugin-react-helmet": "^4.7.1",
+    "gatsby-plugin-react-helmet": "^4.8.0",
     "gatsby-plugin-remove-trailing-slashes": "^3.7.1",
     "gatsby-plugin-sass": "^4.8.0",
     "gatsby-plugin-sharp": "^3.7.1",
