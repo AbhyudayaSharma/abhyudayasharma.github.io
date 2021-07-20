@@ -73,7 +73,7 @@
     "gatsby-transformer-remark": "^4.6.0",
     "gatsby-transformer-sharp": "^3.9.0",
     "npm": "^7.20.0",
-    "prism-themes": "^1.7.0",
+    "prism-themes": "^1.8.0",
     "prismjs": "^1.24.1",
     "react-git-info": "^2.0.0",
     "react-syntax-highlighter": "^15.4.3",
