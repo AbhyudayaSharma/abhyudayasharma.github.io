@@ -55,7 +55,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react": "^7.24.0",
-    "gatsby-plugin-feed": "^3.9.0",
+    "gatsby-plugin-feed": "^3.10.0",
     "gatsby-plugin-image": "^1.10.0",
     "gatsby-plugin-manifest": "^3.10.0",
     "gatsby-plugin-mdx": "^2.9.0",
