@@ -24,9 +24,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: common.$index-foreground-color;
   background-color: common.$index-background-color;
   height: 100%;
   font-weight: 100;
+  font-size: 1.8rem;
 }
 
 // Inline code should not overflow
@@ -46,6 +48,10 @@ body {
 :root {
   scrollbar-width: thin;
   scrollbar-color: $scrollbar-thumb-color $scrollbar-track-color;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 // Webkit and Chromium scrollbars

@@ -25,3 +25,13 @@ $link-color: #add8e6;
 .unselectable {
   @extend %unselectable;
 }
+
+.link {
+  color: $link-color;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link:hover {
+  border-bottom: thin $link-color solid;
+}

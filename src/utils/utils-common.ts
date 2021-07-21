@@ -32,3 +32,12 @@ export type Jsonify<T> =
       [k in keyof T]: Jsonify<T[k]>
     }
     : T;
+
+/**
+ * Shorthand to join multiple css classes.
+ * @param classes CSS classes
+ * @returns a string joining css classes
+ */
+export function c(...classes: string[]): string {
+  return classes.join(' ');
+}
