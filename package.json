@@ -71,7 +71,7 @@
     "gatsby-remark-prismjs": "^5.7.0",
     "gatsby-source-filesystem": "^3.10.0",
     "gatsby-transformer-remark": "^4.7.0",
-    "gatsby-transformer-sharp": "^3.9.0",
+    "gatsby-transformer-sharp": "^3.10.0",
     "npm": "^7.20.0",
     "prism-themes": "^1.8.0",
     "prismjs": "^1.24.1",
