@@ -72,7 +72,7 @@
     "gatsby-source-filesystem": "^3.10.0",
     "gatsby-transformer-remark": "^4.7.0",
     "gatsby-transformer-sharp": "^3.10.0",
-    "npm": "^7.20.0",
+    "npm": "^7.20.1",
     "prism-themes": "^1.8.0",
     "prismjs": "^1.24.1",
     "react-git-info": "^2.0.0",
