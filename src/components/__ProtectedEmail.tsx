@@ -1,4 +1,4 @@
-import React, { FC, SyntheticEvent, useEffect, useState, KeyboardEvent } from 'react';
+import React, { FC, SyntheticEvent, useState, KeyboardEvent, HTMLAttributes } from 'react';
 import FocusLock from 'react-focus-lock';
 
 // eslint-disable-next-line camelcase
@@ -50,13 +50,12 @@ const VerificationModal: FC<VerificationModalProps> = (props) => {
     e.stopPropagation();
   };
 
-  const answerInputRef = React.createRef<HTMLInputElement>();
+  const answerInputHtmlId = 'responseInput';
+  const answerInputPlaceholder = 'Answer';
   const answerInput = <input type='number' min={0} max={randomBytes.length * 10}
-    id='responseInput' className={responseInput} placeholder='Answer' ref={answerInputRef}
-    onChange={(e): void => setUserInput(e.target.value)} value={userInput}
-    aria-required={true} />;
-
-  useEffect(() => answerInputRef.current?.focus());
+    id={answerInputHtmlId} className={responseInput} placeholder={answerInputPlaceholder}
+    onChange={(e): void => setUserInput(e.target.value)} value={userInput} aria-required={true}
+    size={Math.max(userInput ? userInput.length : 0, answerInputPlaceholder.length)} data-autoFocus />;
 
   const formSubmitted = (e: SyntheticEvent): void => {
     e.preventDefault(); // do not send a POST
@@ -73,38 +72,41 @@ const VerificationModal: FC<VerificationModalProps> = (props) => {
     });
   };
 
-  // tabIndex needed to gain access to keyDown events https://stackoverflow.com/a/44434971/6306974
-  return <FocusLock>
-    <div className={modalContainer} onClick={props.onFailure} onKeyDown={keyPressHandler} tabIndex={-1}>
-      <div className={modal} role='dialog' aria-modal='true' onClick={(e): void => e.stopPropagation()}>
-        {showWrongAnswerWarning && <div className={incorrectAnswerPrompt} role='alert'>
-          <span>
-            Incorrect Answer! Please try again.
-          </span>
-          <button role='button' aria-label='Close wrong answer warning'
-            onClick={(): void => setShowWrongAnswerWarning(false)} className={closeWarningButton}>
-            ❌
-          </button>
-        </div>}
-        <p className={questionPrompt}>
-          Please verify that you are a human by solving this problem.
-        </p>
-        <form onSubmit={formSubmitted} autoComplete='off' autoCapitalize='off' autoCorrect='off'>
-          <div>
-            <label htmlFor='responseInput' className={formLabel}>
-              What is the sum of {randomBytes.slice(0, randomBytes.length - 1).join(', ')}, and {
-                randomBytes[randomBytes.length - 1]}?
-            </label>
-          </div>
-          <div>
-            {answerInput}
-          </div>
-          <div>
-            <button type='submit' className={c(modalButton, modalButtonPrimary)} disabled={!isUserInputValid()}>Submit</button>
-            <button type='button' className={modalButton} onClick={props.onFailure}>Cancel</button>
-          </div>
-        </form>
-      </div>
+  const focusLockProps: HTMLAttributes<HTMLDivElement> = {
+    onClick: props.onFailure,
+    onKeyDown: keyPressHandler,
+    tabIndex: -1, // tabIndex needed to gain access to keyDown events https://stackoverflow.com/a/44434971/6306974
+  };
+
+  return <FocusLock className={modalContainer} as='div' lockProps={focusLockProps}>
+    <div className={modal} role='dialog' aria-modal='true' onClick={(e): void => e.stopPropagation()}>
+      {showWrongAnswerWarning && <div className={incorrectAnswerPrompt} role='alert'>
+        <span>
+          Incorrect Answer! Please try again.
+        </span>
+        <button role='button' aria-label='Close wrong answer warning'
+          onClick={(): void => setShowWrongAnswerWarning(false)} className={closeWarningButton}>
+          ❌
+        </button>
+      </div>}
+      <p className={questionPrompt}>
+        Please verify that you are a human by solving this problem.
+      </p>
+      <form onSubmit={formSubmitted} autoComplete='off' autoCapitalize='off' autoCorrect='off'>
+        <div>
+          <label htmlFor={answerInputHtmlId} className={formLabel}>
+            What is the sum of {randomBytes.slice(0, randomBytes.length - 1).join(', ')}, and {
+              randomBytes[randomBytes.length - 1]}?
+          </label>
+        </div>
+        <div>
+          {answerInput}
+        </div>
+        <div>
+          <button type='submit' className={c(modalButton, modalButtonPrimary)} disabled={!isUserInputValid()}>Submit</button>
+          <button type='button' className={modalButton} onClick={props.onFailure}>Cancel</button>
+        </div>
+      </form>
     </div>
   </FocusLock>;
 };
