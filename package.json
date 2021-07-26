@@ -76,7 +76,7 @@
     "prism-themes": "^1.8.0",
     "prismjs": "^1.24.1",
     "react-git-info": "^2.0.0",
-    "react-syntax-highlighter": "^15.4.3",
+    "react-syntax-highlighter": "^15.4.4",
     "remark-cli": "^9.0.0",
     "remark-lint-no-dead-urls": "^1.1.0",
     "remark-lint-no-duplicate-headings": "^2.0.1",
