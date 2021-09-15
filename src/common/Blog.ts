@@ -2,6 +2,8 @@ import { escapeRegExp } from 'lodash';
 import { trimOrThrowIfBlank } from '../utils/utils-common';
 import { BlogFrontmatter, isRawBlogFrontmatter, RawBlogFrontmatter, toValidBlogFrontmatter } from './BlogFrontmatter';
 
+export const BLOG_PREFIX = '/blog';
+
 export interface Blog {
   // cannot be window.URL because Blog is converted to JSON and passed to blogTemplate.tsx
   readonly url: string;
@@ -32,6 +34,6 @@ export function toValidBlog(rawBlog: RawBlog): Blog {
   return {
     body,
     frontmatter,
-    url: `/blog/${slug}`,
+    url: `${BLOG_PREFIX}/${slug}`,
   };
 }

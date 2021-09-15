@@ -1,13 +1,21 @@
-import React, { FC, SyntheticEvent, useState, KeyboardEvent, HTMLAttributes } from 'react';
+import React, { FC, HTMLAttributes, KeyboardEvent, SyntheticEvent, useState } from 'react';
 import FocusLock from 'react-focus-lock';
+import { RemoveScroll } from 'react-remove-scroll';
 
 // eslint-disable-next-line camelcase
 import { unstable_batchedUpdates } from 'react-dom';
 
 import { c } from '../utils/utils-common';
 import {
-  modalContainer, modal, responseInput, questionPrompt, formLabel,
-  incorrectAnswerPrompt, modalButton, modalButtonPrimary, closeWarningButton,
+  closeWarningButton,
+  formLabel,
+  incorrectAnswerPrompt,
+  modal,
+  modalButton,
+  modalButtonPrimary,
+  modalContainer,
+  questionPrompt,
+  responseInput,
 } from '../scss/ProtectedEmail.module.scss';
 
 enum EmailState {
@@ -39,7 +47,7 @@ const VerificationModal: FC<VerificationModalProps> = (props) => {
   const [showWrongAnswerWarning, setShowWrongAnswerWarning] = useState(false);
 
   const isUserInputValid = (): boolean => {
-    return !!userInput.match(/^\d{1,}$/) && !Number.isNaN(Number.parseInt(userInput, 10));
+    return !!userInput.match(/^\d+$/) && !Number.isNaN(Number.parseInt(userInput, 10));
   };
 
   // closes the modal when the escape key is pressed
@@ -52,10 +60,10 @@ const VerificationModal: FC<VerificationModalProps> = (props) => {
 
   const answerInputHtmlId = 'responseInput';
   const answerInputPlaceholder = 'Answer';
-  const answerInput = <input type='number' min={0} max={randomBytes.length * 10}
-    id={answerInputHtmlId} className={responseInput} placeholder={answerInputPlaceholder}
-    onChange={(e): void => setUserInput(e.target.value)} value={userInput} aria-required={true}
-    size={Math.max(userInput ? userInput.length : 0, answerInputPlaceholder.length)} data-autoFocus />;
+  const answerInput = <input type="number" min={0} max={randomBytes.length * 10} value={userInput} aria-required={true}
+                             id={answerInputHtmlId} className={responseInput} placeholder={answerInputPlaceholder}
+                             size={Math.max(userInput ? userInput.length : 0, answerInputPlaceholder.length)}
+                             onChange={(e): void => setUserInput(e.target.value)} data-autofocus={true}/>;
 
   const formSubmitted = (e: SyntheticEvent): void => {
     e.preventDefault(); // do not send a POST
@@ -78,37 +86,41 @@ const VerificationModal: FC<VerificationModalProps> = (props) => {
     tabIndex: -1, // tabIndex needed to gain access to keyDown events https://stackoverflow.com/a/44434971/6306974
   };
 
-  return <FocusLock className={modalContainer} as='div' lockProps={focusLockProps}>
-    <div className={modal} role='dialog' aria-modal='true' onClick={(e): void => e.stopPropagation()}>
-      {showWrongAnswerWarning && <div className={incorrectAnswerPrompt} role='alert'>
+  return (<RemoveScroll allowPinchZoom={true}>
+    <FocusLock className={modalContainer} as="div" lockProps={focusLockProps}>
+      <div className={modal} role="dialog" aria-modal="true" onClick={(e): void => e.stopPropagation()}>
+        {showWrongAnswerWarning && <div className={incorrectAnswerPrompt} role="alert">
         <span>
           Incorrect Answer! Please try again.
         </span>
-        <button role='button' aria-label='Close wrong answer warning'
-          onClick={(): void => setShowWrongAnswerWarning(false)} className={closeWarningButton}>
-          ❌
-        </button>
-      </div>}
-      <p className={questionPrompt}>
-        Please verify that you are a human by solving this problem.
-      </p>
-      <form onSubmit={formSubmitted} autoComplete='off' autoCapitalize='off' autoCorrect='off'>
-        <div>
-          <label htmlFor={answerInputHtmlId} className={formLabel}>
-            What is the sum of {randomBytes.slice(0, randomBytes.length - 1).join(', ')}, and {
+          <button role="button" aria-label="Close wrong answer warning" className={closeWarningButton}
+                  onClick={(): void => setShowWrongAnswerWarning(false)}>
+            ❌
+          </button>
+        </div>}
+        <p className={questionPrompt}>
+          Please verify that you are a human by solving this problem.
+        </p>
+        <form onSubmit={formSubmitted} autoComplete="off" autoCapitalize="off" autoCorrect="off">
+          <div>
+            <label htmlFor={answerInputHtmlId} className={formLabel}>
+              What is the sum of {randomBytes.slice(0, randomBytes.length - 1).join(', ')}, and {
               randomBytes[randomBytes.length - 1]}?
-          </label>
-        </div>
-        <div>
-          {answerInput}
-        </div>
-        <div>
-          <button type='submit' className={c(modalButton, modalButtonPrimary)} disabled={!isUserInputValid()}>Submit</button>
-          <button type='button' className={modalButton} onClick={props.onFailure}>Cancel</button>
-        </div>
-      </form>
-    </div>
-  </FocusLock>;
+            </label>
+          </div>
+          <div>
+            {answerInput}
+          </div>
+          <div>
+            <button type="submit" className={c(modalButton, modalButtonPrimary)}
+                    disabled={!isUserInputValid()}>Submit
+            </button>
+            <button type="button" className={modalButton} onClick={props.onFailure}>Cancel</button>
+          </div>
+        </form>
+      </div>
+    </FocusLock>
+  </RemoveScroll>);
 };
 
 const obfuscatedEmail: Readonly<Int16Array> = new Int16Array([
@@ -127,7 +139,7 @@ const __ProtectedEmail: FC = () => {
 
   switch (emailState) {
     case EmailState.EmailHidden:
-      return <button onClick={buttonOnClick}>Click to reveal email</button >;
+      return <button onClick={buttonOnClick}>Click to reveal email</button>;
     case EmailState.EmailVisible: {
       const base64Chars: Array<string> = [];
       obfuscatedEmail.slice().reverse().map((x, idx) => ((~x ^ idx) - 0x3b74a))
@@ -139,7 +151,7 @@ const __ProtectedEmail: FC = () => {
       return <>
         <p>[Verification Pending]</p>
         <VerificationModal onSuccess={(): void => setEmailState(EmailState.EmailVisible)}
-          onFailure={(): void => setEmailState(EmailState.EmailHidden)} />
+                           onFailure={(): void => setEmailState(EmailState.EmailHidden)}/>
       </>;
     default:
       throw new Error(`Unknown state: ${emailState}`);

@@ -24,12 +24,12 @@ export const getPageUrl: (pageProps: PageProps) => URL = (pageProps) => {
  * Type of an object `x` after a round trip JSON serialization and deserialization: `JSON.parse(JSON.stringify(x))`.
  * @see https://effectivetypescript.com/2020/04/09/jsonify/
  */
-export type Jsonify<T> =
+export type Jsonified<T> =
   T extends { toJSON(): infer U }
     ? U
     : T extends object // eslint-disable-line @typescript-eslint/ban-types
     ? {
-      [k in keyof T]: Jsonify<T[k]>
+      [k in keyof T]: Jsonified<T[k]>
     }
     : T;
 
