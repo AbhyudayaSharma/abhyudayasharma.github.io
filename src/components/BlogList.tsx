@@ -33,7 +33,7 @@ export const BlogListEntry: React.FC<Blog> = (props) => {
   return (
     <div className={entry}>
       <div className={content}>
-        <Link to={url} className={title}>
+        <Link to={frontmatter.externalUrl ?? url} className={title}>
           {frontmatter.title}
         </Link>
         <div className={date}>

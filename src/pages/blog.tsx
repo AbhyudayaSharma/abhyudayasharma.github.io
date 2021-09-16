@@ -26,6 +26,7 @@ const BlogListRoute: React.FC<PageProps> = (props) => {
               tags
               description
               isPublic
+              externalUrl
             }
           }
         }

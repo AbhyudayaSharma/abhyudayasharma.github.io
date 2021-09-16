@@ -23,6 +23,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql,
               date(formatString: "YYYY-MM-DD")
               tags
               isPublic
+              externalUrl
               description
             }
             body
@@ -50,6 +51,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql,
   resolvedBlogs.forEach(blog => {
     if (blog.body === undefined) {
       throw new Error('Empty body. Looks like an error in the GraphQL query.');
+    }
+
+    if (blog.frontmatter.externalUrl) {
+      return;
     }
 
     const context: Required<Blog> = { ...blog, body: blog.body ?? '' };

@@ -16,6 +16,7 @@ export const feedQuery = /* GraphQL */ `{
           tags
           description
           isPublic
+          externalUrl
         }
       }
     }
@@ -25,7 +26,7 @@ export const feedQuery = /* GraphQL */ `{
 export function serializeFeed({ query }: { query: { allMdx: BlogFrontmatterQueryResult } }): ItemOptions[] {
   return query.allMdx.edges.map(({ node }) => toValidBlog(node)).map(({ frontmatter, url }) => {
     return { // https://www.npmjs.com/package/rss#itemoptions
-      url: new URL(url, packageJson.homepage).href,
+      url: (frontmatter.externalUrl ? new URL(frontmatter.externalUrl) : new URL(url, packageJson.homepage)).href,
       guid: url,
       date: frontmatter.date,
       title: frontmatter.title,

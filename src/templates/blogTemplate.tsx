@@ -15,6 +15,9 @@ type PropsType = PageProps<Record<string, unknown>, Jsonified<Required<Blog>>>;
 
 const BlogTemplate: React.FC<PropsType> = (props) => {
   const frontmatter = toValidBlogFrontmatter(props.pageContext.frontmatter);
+  if (frontmatter.externalUrl) {
+    throw new Error(`Trying to generate blog with non-null externalUrl: ${frontmatter.externalUrl}`);
+  }
 
   return wrapContent(props, <>
     <Seo
