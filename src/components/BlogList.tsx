@@ -4,6 +4,7 @@ import { Link } from 'gatsby';
 import { Blog } from '../common/Blog';
 import { feedUrl } from '../../lib/createFeed';
 import { DateComponent } from '../utils/utils-react';
+import { getBlogTagUrl } from '../utils/utils-common';
 
 import {
   content,
@@ -41,7 +42,11 @@ export const BlogListEntry: React.FC<Blog> = (props) => {
           <DateComponent date={frontmatter.date}/>
         </div>
         <div className={tagContainer}>
-          {frontmatter.tags.sort().map((tag, index) => <div className={tagClass} key={index}>{tag}</div>)}
+          {frontmatter.tags.sort().map((tag, index) =>
+            <Link to={getBlogTagUrl(tag)} key={index} className={tagClass}>
+              {tag}
+            </Link>
+          )}
         </div>
         <p className={description}>
           {frontmatter.description}

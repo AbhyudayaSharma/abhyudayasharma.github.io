@@ -2,6 +2,7 @@ import { isString } from 'lodash';
 import { PageProps } from 'gatsby';
 
 import packageJson from '../../package.json';
+import { BLOG_PREFIX } from '../common/Blog';
 
 /**
  * Receives an arbitrary object and checks if it is a non-blank string.
@@ -40,4 +41,10 @@ export type Jsonified<T> =
  */
 export function c(...classes: string[]): string {
   return classes.join(' ');
+}
+
+export type GatsbyTemplateProps<T> = PageProps<Record<string, unknown>, Jsonified<T>>;
+
+export function getBlogTagUrl(tag: string): string {
+  return `${BLOG_PREFIX}/tag/${tag}`;
 }

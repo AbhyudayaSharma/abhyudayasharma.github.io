@@ -1,6 +1,8 @@
 import path from 'path';
 import { GatsbyNode } from 'gatsby';
 import { Blog, BLOG_PREFIX, RawBlog, toValidBlog } from '../src/common/Blog';
+import { BlogListTemplateProps } from '../src/common/BlogListTemplateProps';
+import { getBlogTagUrl } from '../src/utils/utils-common';
 
 interface BlogContentQueryResult {
   allMdx: {
@@ -9,8 +11,6 @@ interface BlogContentQueryResult {
     }[];
   };
 }
-
-type BlogListTemplateProps = { blogs: Blog[]; year: number };
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql, reporter }): Promise<void> => {
   const result = await graphql(/* GraphQL */ `
@@ -67,22 +67,36 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql,
 
   // populate yearly blog lists (like /blog/20xx)
   const blogYearMap: Map<number, Blog[]> = new Map();
+
+  // categorize blogs by tags
+  const blogTagMap: Map<string, Blog[]> = new Map();
+
   resolvedBlogs.forEach(blog => {
     const year = blog.frontmatter.date.getFullYear();
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const existingBlogs = blogYearMap.has(year) ? blogYearMap.get(year)! : [];
+
+    const existingBlogs = blogYearMap.get(year) ?? [];
     existingBlogs.push(blog);
     blogYearMap.set(year, existingBlogs);
+
+    blog.frontmatter.tags.forEach(tag => {
+      const tagBlogs = blogTagMap.get(tag) ?? [];
+      tagBlogs.push(blog);
+      blogTagMap.set(tag, tagBlogs);
+    });
   });
 
   const blogListTemplateComponent = path.resolve('./src/templates/BlogListTemplate.tsx');
-  blogYearMap.forEach((blogs, year) => {
-    createPage<BlogListTemplateProps>({
-      path: `${BLOG_PREFIX}/${year}`,
-      context: { blogs, year },
-      component: blogListTemplateComponent,
-    });
-  });
+  blogYearMap.forEach((blogs, year) => createPage<BlogListTemplateProps>({
+    path: `${BLOG_PREFIX}/${year}`,
+    context: { blogs, title: `Blogs written in ${year}` },
+    component: blogListTemplateComponent,
+  }));
+
+  blogTagMap.forEach((blogs, tag) => createPage<BlogListTemplateProps>({
+    path: getBlogTagUrl(tag),
+    context: { blogs, title: `Blogs tagged ‘${tag}’` },
+    component: blogListTemplateComponent,
+  }));
 
   return Promise.resolve();
 };

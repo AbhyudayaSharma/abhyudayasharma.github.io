@@ -1,25 +1,22 @@
 import React from 'react';
 import { BlogList } from '../components/BlogList';
-import { PageProps } from 'gatsby';
-import { getPageUrl, Jsonified } from '../utils/utils-common';
-import { Blog } from '../common/Blog';
+import { GatsbyTemplateProps, getPageUrl } from '../utils/utils-common';
 import { toValidBlogFrontmatter } from '../common/BlogFrontmatter';
 import { wrapContent } from '../utils/utils-react';
 import { Seo } from '../components/Seo';
+import { BlogListTemplateProps } from '../common/BlogListTemplateProps';
 
-type PropsType = PageProps<Record<string, unknown>, Jsonified<{ blogs: Blog[]; year: number }>>;
-
-const BlogListTemplate: React.FC<PropsType> = (props) => {
+const BlogListTemplate: React.FC<GatsbyTemplateProps<BlogListTemplateProps>> = (props) => {
   // sort blogs chronologically
   const blogs = props.pageContext.blogs.map(blog => ({
     ...blog,
     frontmatter: toValidBlogFrontmatter(blog.frontmatter),
   })).sort((a, b) => a.frontmatter.date.getTime() - b.frontmatter.date.getTime());
 
-  const pageTitle = `Blogs written in ${props.pageContext.year}`;
+  const title = props.pageContext.title;
   return wrapContent(props, (<>
-    <Seo title={pageTitle} url={getPageUrl(props)}/>
-    <BlogList publicOnly header={pageTitle} blogs={blogs}/>;
+    <Seo title={title} url={getPageUrl(props)}/>
+    <BlogList publicOnly header={title} blogs={blogs}/>
   </>));
 };
 

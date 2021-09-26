@@ -1,7 +1,9 @@
+@use 'sass:color';
 @use 'common.module.scss';
 
 $text-color: #eee;
 $max-width: 68rem;
+$tag-background-color: #326c61;
 
 .entry {
   color: common.$index-foreground-color;
@@ -56,15 +58,37 @@ $max-width: 68rem;
 }
 
 .tag {
-  @extend %unselectable;
-  margin: 0.2rem 0;
+  display: block;
+  outline: none;
+  margin: 0.2rem 0.25rem;
   padding: 0.5rem;
   border-style: solid;
-  background-color: #326c61;
+  background-color: $tag-background-color;
   border-radius: 0.6rem;
   border-width: 0;
-  margin-right: 0.5rem;
   font-size: 1.2rem;
+  text-decoration: none;
+  color: common.$index-foreground-color;
+}
+
+.tag:hover {
+  background-color: color.scale($tag-background-color, $lightness: -25%);
+}
+
+.tag:focus {
+  box-shadow: 0 0 0 0.1rem #fff;
+}
+
+.tag:first-of-type {
+  margin-left: 0;
+}
+
+.tag:last-of-type {
+  margin-right: 0;
+}
+
+.tag:hover:active {
+  background-color: color.scale($tag-background-color, $lightness: -35%);
 }
 
 .date {
@@ -107,7 +131,7 @@ $max-width: 68rem;
   @extend %unselectable;
   height: 1.75rem;
   cursor: pointer;
-  border: 0px solid;
+  border: 0 solid;
   margin: 1.65rem 0 0.2rem;
   border-radius: 0.4rem; // matches borders of svg
 }
