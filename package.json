@@ -24,7 +24,8 @@
     "lint-md": "remark --quiet README.md",
     "type-check": "tsc --noEmit",
     "pretype-check": "npm run tsm:generate",
-    "prebuild": "npm run type-check"
+    "prebuild": "npm run type-check",
+    "test": "echo no tests yet"
   },
   "eslintConfig": {
     "extends": "react-app"
