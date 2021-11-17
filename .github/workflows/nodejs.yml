@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: |
-          npm update -g npm
+          npm install -g npm@latest
       - name: npm install, build and test
         run: |
           npm install
