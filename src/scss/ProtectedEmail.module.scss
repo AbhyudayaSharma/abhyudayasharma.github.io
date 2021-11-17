@@ -51,7 +51,7 @@
 .form-label {
   @extend %unselectable;
   padding-bottom: 0.5rem;
-  margin: .5rem 0 1rem;
+  margin: 0.5rem 0 1rem;
 }
 
 .incorrect-answer-prompt {
@@ -70,7 +70,7 @@
   font-weight: inherit;
   font-size: 1.5rem;
   padding: 1rem;
-  margin: .5rem .6rem 0 0;
+  margin: 0.5rem 0.6rem 0 0;
   border: thin solid white;
   border-radius: 1rem;
   background: transparent;

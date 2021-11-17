@@ -29,10 +29,6 @@ $box-shadow-color: #326c61;
   padding: 0.5rem;
 }
 
-.item:focus {
-  box-shadow: 0 0 0 0.1rem $box-shadow-color;
-}
-
 .item-active {
   border-color: common.$link-color !important;
 }
@@ -77,6 +73,10 @@ $box-shadow-color: #326c61;
 }
 
 .title:focus-within > a:focus {
+  box-shadow: 0 0 0 0.1rem $box-shadow-color;
+}
+
+.item:focus {
   box-shadow: 0 0 0 0.1rem $box-shadow-color;
 }
 

@@ -44,12 +44,6 @@ body {
   height: 100%;
 }
 
-// Firefox scrollbars
-:root {
-  scrollbar-width: thin;
-  scrollbar-color: $scrollbar-thumb-color $scrollbar-track-color;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
@@ -87,4 +81,10 @@ code {
 // removes a border outside button text on Firefox
 ::-moz-focus-inner {
   border: 0;
+}
+
+// Firefox scrollbars
+:root {
+  scrollbar-width: thin;
+  scrollbar-color: $scrollbar-thumb-color $scrollbar-track-color;
 }
