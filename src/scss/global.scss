@@ -83,8 +83,11 @@ code {
   border: 0;
 }
 
-// Firefox scrollbars
 :root {
+  // Firefox scrollbars
   scrollbar-width: thin;
   scrollbar-color: $scrollbar-thumb-color $scrollbar-track-color;
+  
+  // https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
+  color-scheme: dark;
 }
