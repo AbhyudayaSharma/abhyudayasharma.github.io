@@ -29,14 +29,14 @@ jobs:
           npm run lint-md
           npm test -- --verbose
       - name: Code coverage
-        if: false && contains(matrix.os, 'ubuntu') && contains(matrix.node-version, '14') # TODO: enable when tests is ready
+        if: false && contains(matrix.os, 'ubuntu') && contains(matrix.node-version, '16') # TODO: enable when tests is ready
         run: |
           npm test -- --coverage --verbose
           bash <(curl -Ls https://coverage.codacy.com/get.sh) report --coverage-reports coverage/lcov.info
         env:
           CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
       - name: Archive build
-        if: contains(matrix.os, 'ubuntu') && contains(matrix.node-version, '14')
+        if: contains(matrix.os, 'ubuntu') && contains(matrix.node-version, '16')
         uses: actions/upload-artifact@v2
         with:
           name: build
