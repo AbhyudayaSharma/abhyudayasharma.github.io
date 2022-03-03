@@ -37,7 +37,7 @@ jobs:
           CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
       - name: Archive build
         if: contains(matrix.os, 'ubuntu') && contains(matrix.node-version, '16')
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: build
           path: public/
