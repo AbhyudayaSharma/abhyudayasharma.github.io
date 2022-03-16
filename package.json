@@ -9,7 +9,7 @@
   "dependencies": {
     "@loadable/component": "5.15.2",
     "gatsby": "4.9.3",
-    "postcss": "8.4.11",
+    "postcss": "8.4.12",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-focus-lock": "2.8.1",
