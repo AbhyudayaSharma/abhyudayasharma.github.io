@@ -36,3 +36,8 @@ declare module '@mdx-js/react' {
   }
   export class MDXProvider extends React.Component<MDXProviderProps> { }
 }
+
+declare interface ExtendedHTMLDialogElement extends HTMLDialogElement{
+  open: undefined | boolean;
+  showModal: undefined | (() => void);
+}

@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, KeyboardEvent, SyntheticEvent, useState } from 'react';
+import React, { FC, HTMLAttributes, KeyboardEvent, SyntheticEvent, useEffect, useState } from 'react';
 import FocusLock from 'react-focus-lock';
 import { RemoveScroll } from 'react-remove-scroll';
 
@@ -38,6 +38,7 @@ const getRandomDigits = (count: number): Uint8Array => {
 interface VerificationModalProps {
   onSuccess: () => void;
   onFailure: () => void;
+  dialogRef: React.Ref<ExtendedHTMLDialogElement>;
 }
 
 const VerificationModal: FC<VerificationModalProps> = (props) => {
@@ -62,8 +63,8 @@ const VerificationModal: FC<VerificationModalProps> = (props) => {
   const answerInputPlaceholder = 'Answer';
   const answerInput = <input type="number" min={0} max={randomBytes.length * 10} value={userInput} aria-required={true}
                              id={answerInputHtmlId} className={responseInput} placeholder={answerInputPlaceholder}
-                             size={Math.max(userInput ? userInput.length : 0, answerInputPlaceholder.length)}
-                             onChange={(e): void => setUserInput(e.target.value)} data-autofocus={true}/>;
+                             size={answerInputPlaceholder.length} onChange={(e): void => setUserInput(e.target.value)}
+                             data-autofocus={true}/>;
 
   const formSubmitted = (e: SyntheticEvent): void => {
     e.preventDefault(); // do not send a POST
@@ -86,41 +87,55 @@ const VerificationModal: FC<VerificationModalProps> = (props) => {
     tabIndex: -1, // tabIndex needed to gain access to keyDown events https://stackoverflow.com/a/44434971/6306974
   };
 
-  return (<RemoveScroll allowPinchZoom={true}>
-    <FocusLock className={modalContainer} as="div" lockProps={focusLockProps}>
-      <div className={modal} role="dialog" aria-modal="true" onClick={(e): void => e.stopPropagation()}>
-        {showWrongAnswerWarning && <div className={incorrectAnswerPrompt} role="alert">
+  const dialogContent = <>
+    {showWrongAnswerWarning && <div className={incorrectAnswerPrompt} role="alert">
         <span>
           Incorrect Answer! Please try again.
         </span>
-          <button role="button" aria-label="Close wrong answer warning" className={closeWarningButton}
-                  onClick={(): void => setShowWrongAnswerWarning(false)}>
-            ❌
-          </button>
-        </div>}
-        <p className={questionPrompt}>
-          Please verify that you are a human by solving this problem.
-        </p>
-        <form onSubmit={formSubmitted} autoComplete="off" autoCapitalize="off" autoCorrect="off">
-          <div>
-            <label htmlFor={answerInputHtmlId} className={formLabel}>
-              What is the sum of {randomBytes.slice(0, randomBytes.length - 1).join(', ')}, and {
-              randomBytes[randomBytes.length - 1]}?
-            </label>
-          </div>
-          <div>
-            {answerInput}
-          </div>
-          <div>
-            <button type="submit" className={c(modalButton, modalButtonPrimary)}
-                    disabled={!isUserInputValid()}>Submit
-            </button>
-            <button type="button" className={modalButton} onClick={props.onFailure}>Cancel</button>
-          </div>
-        </form>
+      <button role="button" aria-label="Close wrong answer warning" className={closeWarningButton}
+              onClick={(): void => setShowWrongAnswerWarning(false)}>
+        ❌
+      </button>
+    </div>}
+    <p className={questionPrompt}>
+      Please verify that you are a human by solving this problem.
+    </p>
+    <form onSubmit={formSubmitted} autoComplete="off" autoCapitalize="off" autoCorrect="off">
+      <div>
+        <label htmlFor={answerInputHtmlId} className={formLabel}>
+          What is the sum of {randomBytes.slice(0, randomBytes.length - 1).join(', ')}, and {
+          randomBytes[randomBytes.length - 1]}?
+        </label>
       </div>
-    </FocusLock>
-  </RemoveScroll>);
+      <div>
+        {answerInput}
+      </div>
+      <div>
+        <button type="submit" className={c(modalButton, modalButtonPrimary)}
+                disabled={!isUserInputValid()}>Submit
+        </button>
+        <button type="button" className={modalButton} onClick={props.onFailure}>Cancel</button>
+      </div>
+    </form>
+  </>;
+
+  // TODO: when <dialog> is widely supported, remove react-focus-lock
+  if ((typeof (document.createElement('dialog') as ExtendedHTMLDialogElement).showModal) !== 'function') {
+    return (<RemoveScroll allowPinchZoom={true}>
+        <FocusLock className={modalContainer} as="div" lockProps={focusLockProps}>
+          <div className={modal} role="dialog" aria-modal="true" onClick={(e): void => e.stopPropagation()}>
+            {dialogContent}
+          </div>
+        </FocusLock>
+      </RemoveScroll>
+    );
+  }
+
+  return (
+    <dialog className={modal} ref={props.dialogRef}>
+      {dialogContent}
+    </dialog>
+  );
 };
 
 const obfuscatedEmail: Readonly<Int16Array> = new Int16Array([
@@ -132,6 +147,14 @@ const obfuscatedEmail: Readonly<Int16Array> = new Int16Array([
 // Do not use this component directly; use ProtectedEmail.
 const __ProtectedEmail: FC = () => {
   const [emailState, setEmailState] = useState(EmailState.EmailHidden);
+  const [dialogRef] = useState(React.createRef<ExtendedHTMLDialogElement>());
+
+  useEffect(() => {
+    const { current } = dialogRef;
+    if (emailState === EmailState.ModalVisible && current && !current.open && current.showModal) {
+      current.showModal();
+    }
+  }, [emailState]);
 
   const buttonOnClick = (): void => {
     setEmailState(EmailState.ModalVisible);
@@ -145,13 +168,14 @@ const __ProtectedEmail: FC = () => {
       obfuscatedEmail.slice().reverse().map((x, idx) => ((~x ^ idx) - 0x3b74a))
         .forEach(x => base64Chars.push(String.fromCharCode(x)));
       const email = atob(base64Chars.join(''));
-      return <a href={`mailto:${email}`}>{email}</a>;
+      return <a href={`mailto:${email}`} aria-live='polite'>{email}</a>;
     }
     case EmailState.ModalVisible:
       return <>
         <p>[Verification Pending]</p>
-        <VerificationModal onSuccess={(): void => setEmailState(EmailState.EmailVisible)}
-                           onFailure={(): void => setEmailState(EmailState.EmailHidden)}/>
+        <VerificationModal dialogRef={dialogRef}
+          onSuccess={(): void => setEmailState(EmailState.EmailVisible)}
+          onFailure={(): void => setEmailState(EmailState.EmailHidden)}/>
       </>;
     default:
       throw new Error(`Unknown state: ${emailState}`);

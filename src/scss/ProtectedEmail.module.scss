@@ -1,10 +1,13 @@
 @use './common.module';
 
-.modal-container {
-  z-index: 99;
+.modal-container, .modal::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(0.2rem);
+}
+
+.modal-container {
   position: fixed;
+  z-index: 99;
   top: 0;
   left: 0;
   height: 100vh;
@@ -18,10 +21,14 @@
   background-color: common.$index-background-color;
   border: thin solid white;
   padding: 2rem;
-  margin: 1rem;
   border-radius: 1.5rem;
   max-width: 78rem;
   overflow-y: auto;
+  color: common.$index-foreground-color;
+}
+
+:not(dialog).modal {
+  margin: 1rem;
 }
 
 .question-prompt {
