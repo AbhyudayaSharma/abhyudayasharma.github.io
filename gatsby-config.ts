@@ -102,9 +102,9 @@ const gatsbyConfig: GatsbyConfig = {
     'gatsby-plugin-image',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-nprogress',
-    'gatsby-plugin-remove-trailing-slashes',
     'gatsby-plugin-split-css',
   ],
+  trailingSlash: 'never',
 };
 
 export default gatsbyConfig;
