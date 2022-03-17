@@ -1,7 +1,7 @@
 import path from 'path';
-import packageJson from '../package.json';
+import packageJson from './package.json';
 
-import { serializeFeed, feedQuery, feedUrl } from './createFeed';
+import { serializeFeed, feedQuery, feedUrl } from './lib/createFeed';
 import { GatsbyConfig } from 'gatsby';
 
 const gatsbyConfig: GatsbyConfig = {
@@ -15,7 +15,7 @@ const gatsbyConfig: GatsbyConfig = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: path.join(__dirname, '..', 'src', 'images'),
+        path: path.resolve('src', 'images'),
       },
     },
     {
@@ -50,7 +50,7 @@ const gatsbyConfig: GatsbyConfig = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'blog',
-        path: path.join(__dirname, '..', 'src', 'blog'),
+        path: path.resolve('src', 'blog'),
       },
     },
     'gatsby-remark-images',
@@ -103,7 +103,7 @@ const gatsbyConfig: GatsbyConfig = {
     'gatsby-plugin-sitemap',
     'gatsby-plugin-nprogress',
     'gatsby-plugin-remove-trailing-slashes',
-    // 'gatsby-plugin-split-css',
+    'gatsby-plugin-split-css',
   ],
 };
 

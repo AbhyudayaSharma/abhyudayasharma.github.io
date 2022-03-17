@@ -24,6 +24,9 @@
   "include": [
     "src",
     "lib",
+    "gatsby-config.ts",
+    "gatsby-node.ts",
+    "gatsby-browser.ts"
   ],
   "compileOnSave": true
 }
