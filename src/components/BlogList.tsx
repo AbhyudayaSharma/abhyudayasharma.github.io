@@ -34,9 +34,13 @@ export const BlogListEntry: React.FC<Blog> = (props) => {
   return (
     <div className={entry}>
       <div className={content}>
-        <Link to={frontmatter.externalUrl ?? url} className={title}>
-          {frontmatter.title}
-        </Link>
+        {frontmatter.externalUrl
+          ? <a href={frontmatter.externalUrl} className={title}>
+              {frontmatter.title}
+            </a>
+          : <Link to={url} className={title}>
+              {frontmatter.title}
+            </Link>}
         <div className={date}>
           <span role="img" aria-label="date">📅</span>&nbsp;
           <DateComponent date={frontmatter.date}/>
