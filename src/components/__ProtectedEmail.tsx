@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, KeyboardEvent, SyntheticEvent, useEffect, useState } from 'react';
+import React, { FC, HTMLAttributes, KeyboardEvent, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import FocusLock from 'react-focus-lock';
 import { RemoveScroll } from 'react-remove-scroll';
 
@@ -38,10 +38,9 @@ const getRandomDigits = (count: number): Uint8Array => {
 interface VerificationModalProps {
   onSuccess: () => void;
   onFailure: () => void;
-  dialogRef: React.Ref<ExtendedHTMLDialogElement>;
 }
 
-const VerificationModal: FC<VerificationModalProps> = (props) => {
+const VerificationModal = React.forwardRef<ExtendedHTMLDialogElement, VerificationModalProps>((props, ref) => {
   const digitCount = 3;
   const [userInput, setUserInput] = useState<string>('');
   const [randomBytes, setRandomBytes] = useState(getRandomDigits(digitCount));
@@ -80,6 +79,8 @@ const VerificationModal: FC<VerificationModalProps> = (props) => {
       setRandomBytes(getRandomDigits(digitCount));
     });
   };
+
+  VerificationModal.displayName = 'VerificationModal';
 
   const focusLockProps: HTMLAttributes<HTMLDivElement> = {
     onClick: props.onFailure,
@@ -132,11 +133,11 @@ const VerificationModal: FC<VerificationModalProps> = (props) => {
   }
 
   return (
-    <dialog className={modal} ref={props.dialogRef}>
+    <dialog className={modal} ref={ref}>
       {dialogContent}
     </dialog>
   );
-};
+});
 
 const obfuscatedEmail: Readonly<Int16Array> = new Int16Array([
   18523, 18522, 18501, 18547, 18464, 18553, 18517, 18549, 18521, 18515, 18503, 18500,
@@ -147,7 +148,7 @@ const obfuscatedEmail: Readonly<Int16Array> = new Int16Array([
 // Do not use this component directly; use ProtectedEmail.
 const __ProtectedEmail: FC = () => {
   const [emailState, setEmailState] = useState(EmailState.EmailHidden);
-  const [dialogRef] = useState(React.createRef<ExtendedHTMLDialogElement>());
+  const dialogRef = useRef<ExtendedHTMLDialogElement>(null);
 
   useEffect(() => {
     const { current } = dialogRef;
@@ -173,7 +174,7 @@ const __ProtectedEmail: FC = () => {
     case EmailState.ModalVisible:
       return <>
         <p>[Verification Pending]</p>
-        <VerificationModal dialogRef={dialogRef}
+        <VerificationModal ref={dialogRef}
           onSuccess={(): void => setEmailState(EmailState.EmailVisible)}
           onFailure={(): void => setEmailState(EmailState.EmailHidden)}/>
       </>;
