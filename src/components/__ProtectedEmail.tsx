@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, KeyboardEvent, SyntheticEvent, useEffect, useRef, useState } from 'react';
+import React, { FC, HTMLAttributes, KeyboardEvent, SyntheticEvent, ForwardedRef, useEffect, useRef, useState } from 'react';
 import FocusLock from 'react-focus-lock';
 import { RemoveScroll } from 'react-remove-scroll';
 
@@ -133,7 +133,7 @@ const VerificationModal = React.forwardRef<ExtendedHTMLDialogElement, Verificati
   }
 
   return (
-    <dialog className={modal} ref={ref}>
+    <dialog className={modal} ref={ref as ForwardedRef<HTMLDialogElement>}>
       {dialogContent}
     </dialog>
   );
