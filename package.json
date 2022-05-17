@@ -84,7 +84,7 @@
     "remark-lint-no-dead-urls": "1.1.0",
     "remark-lint-no-duplicate-headings": "3.1.1",
     "remark-preset-lint-recommended": "6.1.2",
-    "sass": "1.49.10",
+    "sass": "1.51.0",
     "stylelint": "14.6.1",
     "stylelint-config-standard": "25.0.0",
     "stylelint-scss": "4.2.0",
