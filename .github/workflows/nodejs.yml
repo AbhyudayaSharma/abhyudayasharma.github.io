@@ -41,6 +41,13 @@ jobs:
         with:
           name: build
           path: public/
+      - name: Build docker image
+        if: contains(matrix.os, 'ubuntu') && contains(matrix.node-version, '16') && github.ref == 'refs/heads/develop'
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: 'abhyudaya/abhyudaya.dev:${{ github.sha }}'
+          context: .
     env:
       CI: true
 

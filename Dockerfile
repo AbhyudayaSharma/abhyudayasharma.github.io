@@ -1,13 +1,13 @@
 FROM nginx:1.22.0
 
-ENV NGINX_ROOT=/usr/share/nginx/html
-ENV NGINX_CONFIG=/etc/nginx/nginx.conf
+ARG NGINX_ROOT=/var/www/abhyudaya.dev
+ARG NGINX_CONFIG_ROOT=/etc/nginx/
 
 COPY public ${NGINX_ROOT}
-COPY nginx.conf ${NGINX_CONFIG}
+COPY nginx ${NGINX_CONFIG_ROOT}
 
 # Verify the NGINX configuration
-RUN nginx -t -c ${NGINX_CONFIG}
+RUN nginx -t
 
 EXPOSE 80
 
