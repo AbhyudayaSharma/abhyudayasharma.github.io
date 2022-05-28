@@ -18,7 +18,7 @@ server {
   # get 301 redirected to http://example.com/foo/index.html
   rewrite ^(.+)/+(?:index\.html)?$ $1 permanent;
 
-  location /ip {
+  location = /ip {
     if ($request_method !~ ^(?:GET|HEAD)$) {
       # Headers get overwritten whenever add_header is used.
       include /etc/nginx/snippets/common-headers.conf;
@@ -36,7 +36,7 @@ server {
     add_header Cache-Control no-store;
 
     default_type 'text/plain; charset=utf-8';
-    return 200 "$remote_addr\r\n$server_protocol $ssl_protocol $ssl_cipher $ssl_session_reused\r\n$http_user_agent\r\n$time_iso8601\r\n";
+    return 200 "$http_x_real_ip\r\n$server_protocol $ssl_protocol $ssl_cipher $ssl_session_reused\r\n$http_user_agent\r\n$time_iso8601\r\n";
   }
 
   location / {
