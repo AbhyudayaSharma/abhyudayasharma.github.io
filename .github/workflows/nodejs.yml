@@ -41,6 +41,8 @@ jobs:
         with:
           name: build
           path: public/
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
       - name: Log into DockerHub
         if: contains(matrix.os, 'ubuntu') && contains(matrix.node-version, '16') && github.ref == 'refs/heads/develop'
         uses: docker/login-action@v2
@@ -54,6 +56,7 @@ jobs:
           push: true
           tags: 'abhyudaya/abhyudaya.dev:${{ github.sha }}'
           context: .
+          platform: linux/amd64, linux/arm64
     env:
       CI: true
 
