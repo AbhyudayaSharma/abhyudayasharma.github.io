@@ -1,0 +1,50 @@
+---
+title: A Gift for Dell IT
+description: A small parting gift to Dell IT
+date: 2022-06-05
+tags:
+  - linux
+  - fun
+isPublic: true
+---
+
+I'm leaving my job at Dell and I need to return the laptop they gave me. Time for some fun! This is what their IT
+department will see when they switch that laptop back on:
+
+<video src='/a-gift-for-dell-it.m4v' autoPlay={false} controls={true} height='400'
+       style={{display: 'block', margin: 'auto'}}/>
+
+I can only imagine an IT person helplessly trying to stop it while it plays on full volume.
+
+This is powered by [mpv](https://mpv.io/) and [Sway](https://mpv.io/) on Arch Linux. All key bindings have been disabled
+in the Sway config. mpv's keyboard controls are disabled, the video will loop forever, and the UI controls won't ever
+show. This will be UNSTOPPABLE!*
+
+## Moar Details
+
+Essentially, this is the sway config:
+
+```bash
+exec /bin/mpv /home/dell/video.mp4g --hwdec=auto --vo=gpu --volume=130 --loop --no-input-default-bindings --script--opts=osc-visibility=never --fullscreen
+```
+
+`agetty(8)` is [configured](https://wiki.archlinux.org/title/Getty#Automatic_login_to_virtual_console) to automatically
+log into a non-root user and starts `bash` which executes the commands in `~/.bash_profile`.
+
+```bash
+sleep 5
+
+if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+  exec sway
+fi
+```
+
+`sleep 5` is necessary otherwise mpv would start playing the video without sound. I did try to wait for `sound.target`
+and for `/dev/snd/` to be populated but that didn't help. I did not want to spend a lot of time on this so I used the
+__best__ tool to solve concurrency issues, `sleep`.
+
+---
+
+<small>
+  * Unless they power it off or learn how to switch to a different tty
+</small>
