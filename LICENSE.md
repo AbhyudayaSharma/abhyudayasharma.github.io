@@ -27,7 +27,7 @@ SOFTWARE.
 ```
 
 All text is Copyright (c) 2019-2022 Abhyudaya Sharma and is licensed under a
-a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
 License, unless indicated otherwise.
 
 ```text
