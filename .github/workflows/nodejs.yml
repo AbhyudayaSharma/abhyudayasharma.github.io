@@ -27,7 +27,6 @@ jobs:
           npm run build --if-present
           npm run lint
           npm run lint-md
-          npm test -- --verbose
       - name: Code coverage
         if: false && contains(matrix.os, 'ubuntu') && contains(matrix.node-version, '16') # TODO: enable when tests is ready
         run: |
