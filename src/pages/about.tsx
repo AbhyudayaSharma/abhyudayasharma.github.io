@@ -22,8 +22,8 @@ const AboutRoute: React.FC<PageProps> = (props) => {
     <>
       <Seo title={`About Me - ${packageJson.author.name}`} url={getPageUrl(props)} />
       <p>
-        Hi there! I&#39;m Abhyudaya, a student of Computer Science at <a href="https://snu.edu.in">Shiv Nadar University</a>.
-        I enjoy programming in C, Java, Python, and TypeScript. I have worked as a software engineer intern at Dell and Outfox AI. I was also
+        Hi there! I&#39;m Abhyudaya, a Computer Science Masters student at Brown University.
+        I enjoy programming in C, Java, Python, and TypeScript. I previously worked as a software engineer at Dell. I was also
         a Google Summer of Code student in 2019 with the Jenkins project and worked on improving the performance of the Role Strategy
         Plugin. Most software I write is open-source and is available on <a href='https://github.com/AbhyudayaSharma'>GitHub</a>.
       </p>
