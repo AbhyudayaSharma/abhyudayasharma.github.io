@@ -32,7 +32,9 @@ const BlogTemplate: React.FC<PropsType> = (props) => {
       <p className={dateClass}>
         <DateComponent date={frontmatter.date}/>
       </p>
-      <Markdown markdown={props.pageContext.body}/>
+      <Markdown>
+        {props.children}
+      </Markdown>
     </article>
   </>, textClass);
 };
