@@ -3,7 +3,6 @@ import { range } from 'lodash';
 
 import 'prism-themes/themes/prism-atom-dark.css';
 
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 
 import { MdLink } from './markdown/MdLink';
@@ -22,16 +21,10 @@ const components: Record<string, React.ComponentType<any>> = {
 
 range(1, 6 + 1).forEach(i => { components[`h${i}`] = getHeadingComponent(i); });
 
-export interface MarkdownProps {
-  markdown: string;
-}
-
-export const Markdown: React.FC<MarkdownProps> = ({ markdown }) => {
+export const Markdown: React.FC<{children: React.ReactNode}> = ({ children }) => {
   return (
     <MDXProvider components={components}>
-      <MDXRenderer>
-        {markdown}
-      </MDXRenderer>
+      {children}
     </MDXProvider>
   );
 };

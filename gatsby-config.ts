@@ -69,11 +69,14 @@ const gatsbyConfig: GatsbyConfig = {
           {
             resolve: 'gatsby-remark-prismjs',
             options: {
-              languagePrefix: 'language-', // set by mdx: https://mdxjs.com/guides/syntax-highlighting
+              languagePrefix: 'language-', // set by mdx: https://mdxjs.com/guides/syntax-highlighting,
+              noInlineHighlight: true, // FIXME:  workaround for https://github.com/gatsbyjs/gatsby/issues/37292
             },
           },
         ],
-        remarkPlugins: [],
+        mdxOptions: {
+          remarkPlugins: [],
+        },
       },
     },
     {

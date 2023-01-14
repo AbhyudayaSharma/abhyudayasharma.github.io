@@ -16,10 +16,9 @@ const pageTitle = `${packageJson.author.name}'s Blog`;
 const BlogListRoute: React.FC<PageProps> = (props) => {
   const data = useStaticQuery(graphql`
     query BlogFrontmatter {
-      allMdx(sort: {fields: frontmatter___date, order: DESC}) {
+      allMdx(sort: {frontmatter: {date: DESC}}) {
         edges {
           node {
-            slug
             frontmatter {
               title
               date
@@ -27,6 +26,7 @@ const BlogListRoute: React.FC<PageProps> = (props) => {
               description
               isPublic
               externalUrl
+              slug
             }
           }
         }

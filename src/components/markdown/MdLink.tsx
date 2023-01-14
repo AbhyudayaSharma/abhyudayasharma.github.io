@@ -5,6 +5,7 @@ import { link as className } from '../../scss/Markdown.module.scss';
 
 interface MdLinkProps {
   href: string;
+  children?: React.ReactNode;
 }
 
 export const MdLink: React.FC<MdLinkProps> = ({ href, children }) => {

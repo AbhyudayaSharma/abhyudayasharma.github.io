@@ -15,7 +15,7 @@ interface BlogContentQueryResult {
 export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql, reporter }): Promise<void> => {
   const result = await graphql(/* GraphQL */ `
     query BlogContentQuery {
-      allMdx(sort: {fields: frontmatter___date, order: DESC}) {
+      allMdx(sort: {frontmatter: {date: DESC}}) {
         edges {
           node {
             frontmatter {
@@ -25,9 +25,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql,
               isPublic
               externalUrl
               description
+              slug
+            }
+            internal {
+             contentFilePath
             }
             body
-            slug
           }
         }
       }
@@ -49,10 +52,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql,
     .map(toValidBlog);
 
   resolvedBlogs.forEach(blog => {
-    if (blog.body === undefined) {
-      throw new Error('Empty body. Looks like an error in the GraphQL query.');
-    }
-
     if (blog.frontmatter.externalUrl) {
       return;
     }
@@ -60,7 +59,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql,
     const context: Required<Blog> = { ...blog, body: blog.body ?? '' };
     createPage<Required<Blog>>({
       context,
-      component,
+      component: `${component}?__contentFilePath=${blog.internal.contentFilePath}`,
       path: blog.url,
     });
   });

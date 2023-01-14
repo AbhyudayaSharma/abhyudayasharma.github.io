@@ -8,6 +8,7 @@ export interface BlogFrontmatter {
   readonly isPublic: boolean;
   readonly description: string;
   readonly externalUrl?: string;
+  readonly slug: string;
 }
 
 export interface RawBlogFrontmatter extends Omit<BlogFrontmatter, 'date'> {
@@ -49,6 +50,7 @@ export function toValidBlogFrontmatter(frontmatter: RawBlogFrontmatter): BlogFro
   const description = trimOrThrowIfBlank(frontmatter.description);
   const isPublic = frontmatter.isPublic;
   const externalUrl = frontmatter.externalUrl ? frontmatter.externalUrl.trim() : undefined;
+  const slug = trimOrThrowIfBlank(frontmatter.slug);
 
   if (frontmatter.tags.length < 1) {
     throw Error(`${title}: tags should be an array of containing at least one string value.`);
@@ -63,5 +65,6 @@ export function toValidBlogFrontmatter(frontmatter: RawBlogFrontmatter): BlogFro
     date,
     tags,
     externalUrl,
+    slug,
   };
 }

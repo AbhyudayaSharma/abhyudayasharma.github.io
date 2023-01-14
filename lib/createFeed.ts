@@ -6,10 +6,9 @@ import { toValidBlog } from '../src/common/Blog';
 export const feedUrl = new URL('/blog/feed.rss', packageJson.homepage);
 
 export const feedQuery = /* GraphQL */ `{
-  allMdx(sort: {fields: frontmatter___date, order: DESC}) {
+  allMdx(sort: {frontmatter: {date: DESC}}) {
     edges {
       node {
-        slug
         frontmatter {
           title
           date
@@ -17,6 +16,7 @@ export const feedQuery = /* GraphQL */ `{
           description
           isPublic
           externalUrl
+          slug
         }
       }
     }
