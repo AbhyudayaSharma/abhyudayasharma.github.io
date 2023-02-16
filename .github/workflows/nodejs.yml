@@ -48,7 +48,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build docker image
         if: contains(matrix.os, 'ubuntu') && contains(matrix.node-version, '18') && github.ref == 'refs/heads/develop'
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           push: true
           tags: 'abhyudaya/abhyudaya.dev:${{ github.sha }}'
