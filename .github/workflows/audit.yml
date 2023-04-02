@@ -4,9 +4,10 @@ on:
   schedule:
     - cron: '0 0 * * 0' # run on every Sunday at UTC 0:00
 
+
 jobs:
   build:
-
+    if: false
     runs-on: ubuntu-latest
 
     strategy:
