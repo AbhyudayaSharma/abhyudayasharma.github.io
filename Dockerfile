@@ -1,4 +1,4 @@
-FROM nginx:1.29.5
+FROM nginx:1.31.2
 
 ARG NGINX_ROOT=/var/www/abhyudaya.dev
 ARG NGINX_CONFIG_ROOT=/etc/nginx/
